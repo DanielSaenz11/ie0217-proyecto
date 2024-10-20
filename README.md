@@ -3,7 +3,9 @@ Proyecto para el curso IE-0217 II-2024 correspondiente a un sistema de gestión 
 
 ## Fase 1: Investigación
 
-# Préstamos
+En esta sección se definen los conceptos, funcionamiento y caracteristicas de las partes de un sistema de gestión bancaria que serán las bases sobre las cuales se desarrollarán las distintas funcionalidades, implementaciones y diseño de nuestro programa. 
+
+## Préstamos
 
 Antes que nada es importante definir que es un préstamo garantizado y no garantizado:
 
@@ -92,7 +94,7 @@ $$C=\frac{P\cdot i_V\cdot (1+i_V)^n}{(1+i_V)^n-1}$$
 Todos lo préstamos pueden tener tasas de intéres variable o fija. 
 
 
-# Cuentas de Ahorros
+## Cuentas de Ahorros
 
 Es una cuenta bancaria que permite a una persona depositar dinero para ahorrarlo y ganar intereses sobre el saldo. Las cuentas de ahorro suelen tener menos requisitos que otros tipos de cuentas y son accesibles para la mayoría de las personas. La información requerida para abrir una cuenta de ahorro comúnmente es:
 
@@ -110,7 +112,7 @@ $$I_D=\frac{\text{Saldo al final del día}\times i}{365}$$
 
 Donde $i$ es la tasa de interés de la cuenta de ahorro e $I_D$ es la el valor diario de interés que se suma a la cuenta. 
 
-# Certificado de depósito a plazo (CDP)
+## Certificado de depósito a plazo (CDP)
 
 Es un tipo de inversión en la que se deposita una cantidad de dinero durante un período fijo, y el banco paga intereses sobre el monto al final del plazo. El dinero no puede retirarse antes de la fecha de vencimiento sin incurrir en penalizaciones. La información requerida para abrir un CDP es:
 
@@ -139,7 +141,7 @@ Donde:
 Cabe mencionar que $i$ se calcula igual que como se explicó para los préstamos. 
 
 
-# Reportes de transacciones
+## Reportes de transacciones
 
 Normalmente cada transacción tiene información distinta en sus reportes, pero hay varios datos básicos que debe incluir cualquier reporte:
 
@@ -153,27 +155,21 @@ Normalmente cada transacción tiene información distinta en sus reportes, pero 
 
 - Cuenta de Destino (si aplica): En caso de transferencias o abonos
 
-- Cliente Asociado: Nombre o ID del cliente que ejecutó la transacción
+- Cliente Asociado: Número de cédula o ID del cliente que ejecutó la transacción
 
 Ahora bien hay datos específicos que se deben tener para cada tipo de transacción:
 
-## Depósitos y Retiros
-
-La información adicional es:
+### Depósitos y Retiros
 
 - Saldo anterior
 
 - Saldo actual después de la transacción
 
-## Transferencias
+### Transferencias
 
-La información adicional requerida es: 
+- Nombre del cliente receptor de la transferencia
 
-- Nombre del cliente receptor
-
-## Abonos a Préstamos
-
-Se requieren los siguientes datos adicionales para el reporte:
+### Abonos a Préstamos
 
 - ID del préstamo
 
@@ -185,7 +181,7 @@ Se requieren los siguientes datos adicionales para el reporte:
 
 - Saldo restante del préstamo
 
-## Pago de un CDP
+### Pago al vencer un CDP
 
 - ID del CDP
 
@@ -194,7 +190,6 @@ Se requieren los siguientes datos adicionales para el reporte:
 - Intereses generados
 
 - Fecha de vencimiento
-
 
 
 ## Fase 2: Diseño
