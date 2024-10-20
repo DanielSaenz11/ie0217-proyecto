@@ -11,7 +11,7 @@ Antes que nada es importante definir que es un préstamo garantizado y no garant
 
 ## Préstamos garantizados 
 
-Es aquel que se otorga en base a algún tipo de garantía a modo de respaldo, que puede ser una propiedad o un bien material ó un aval financiero como un depósito bancario, acciones o similares. 
+Es aquel que se otorga en base a algún tipo de garantía a modo de respaldo, que puede ser una propiedad o un bien material ó un aval financiero como un depósito bancario, acciones o similares. [[1]](#bibliografía)
 
 El punto es que la garantía se usa para asegurarse que el prestamista recupere el dinero prestado en caso de que el deudor no pueda pagar. 
 
@@ -20,7 +20,7 @@ Este tipo de préstamos tienen una tasa de intéres más baja que los no garanti
 
 ## Préstamos no garantizados 
 
-Para solicitar estos préstamos no se requiere de ninguna garantía más que la solvencia del deudor para pagar, pero presenta un riesgo para el prestamista ya que no hay forma de asegurarse de que el deudor vaya a pagar. Por este mismo riesgo para el prestamista estos préstamos suelen pactarse con periodos de pago más cortos y a una tasa de intéres mucho mayor. 
+Para solicitar estos préstamos no se requiere de ninguna garantía más que la solvencia del deudor para pagar, pero presenta un riesgo para el prestamista ya que no hay forma de asegurarse de que el deudor vaya a pagar. Por este mismo riesgo para el prestamista estos préstamos suelen pactarse con periodos de pago más cortos y a una tasa de intéres mucho mayor. [[1]](#bibliografía)
 
 
 Teniendo esto claro pasamos a explicar cada tiṕo de préstamo:
@@ -28,7 +28,7 @@ Teniendo esto claro pasamos a explicar cada tiṕo de préstamo:
 
 ## Préstamos personales
 
-Es un tipo de préstamo **no garantizado** en el que se presta una cantidad específica de dinero a una persona, con la promesa de devolverlo en cuotas regulares. Es comúnmente utilizado para gastos personales, como la compra de electrodomésticos, viajes o consolidación de deudas. La información requierida para estimar el pago de este tipo de préstamos es:
+Es un tipo de préstamo **no garantizado** en el que se presta una cantidad específica de dinero a una persona, con la promesa de devolverlo en cuotas regulares. Es comúnmente utilizado para gastos personales, como la compra de electrodomésticos, viajes o consolidación de deudas [[2]](#bibliografía) . La información requierida para estimar el pago de este tipo de préstamos es:
 
 - **Monto solicitado:** Cantidad de dinero que se desea pedir prestado
 
@@ -39,11 +39,11 @@ Es un tipo de préstamo **no garantizado** en el que se presta una cantidad espe
 
 ## Préstamo prendario
 
-Es un préstamo que está **garantizado** por un bien mueble, como un vehículo o joyas. En caso de incumplimiento de pago, el banco puede tomar posesión del bien en garantía. 
+Es un préstamo que está **garantizado** por un bien mueble, como un vehículo o joyas [[3]](#bibliografía). En caso de incumplimiento de pago, el banco puede tomar posesión del bien en garantía. 
 
 Como se mencionó antes estos tiene una tasa de interés más baja que los no garantizados porque hay una garantía física de que el deudor no incumplirá los pagos. 
 
-La información que se requiere para estimar el pago es la misma que el préstamo personal, pero se debe asegurar que el bien que se ha dado como garantía tenga el mismo valor o superior al valor del préstamo. 
+La información que se requiere para estimar el pago es la misma que el préstamo personal, pero se debe asegurar que el bien que se ha dado como garantía tenga el mismo valor o superior al valor del préstamo en caso de que no sea la prenda misma [[3]](#bibliografía). 
 
 
 ## Préstamo hipotecario
@@ -196,3 +196,10 @@ Ahora bien hay datos específicos que se deben tener para cada tipo de transacci
 
 
 ## Bibliografía
+
+[1]: [Préstamo garantizado vs Préstamos no garantizados](https://www.santanderconsumer.es/blog/post/prestamo-garantizado-vs-prestamos-no-garantizados "Definiciones de tipos de préstamos")
+
+[2]: [Pŕestamos personales](https://www.cajadeande.fi.cr/servicios/pr%C3%A9stamos/pr%C3%A9stamos-personales/ "Tipos y modalidades de préstamos personales")
+
+[3]: [Pŕestamos prendarios](https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/creditos/creditos_para_vehiculos/vehiculo_nuevo_motos_y_afines/ "Requisitos para préstamo prendario")
+
