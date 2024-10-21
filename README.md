@@ -48,7 +48,7 @@ La información que se requiere para estimar el pago es la misma que el préstam
 
 ## Préstamo hipotecario
 
-Es un préstamo que se **garantiza** con una propiedad inmueble, como una casa o terreno. Se utiliza comúnmente para la compra, construcción o remodelación de bienes raíces. Para calcular el pago de este tipo de préstamos se requiere:
+Es un préstamo que se **garantiza** con una propiedad inmueble, como una casa o terreno. Se utiliza comúnmente para la compra, construcción o remodelación de bienes raíces [[4]](#bibliografía). Para calcular el pago de este tipo de préstamos se requiere:
 
 - **Valor de la propiedad:** Valor estimado del inmueble que servirá como garantía
 
@@ -63,7 +63,7 @@ Es un préstamo que se **garantiza** con una propiedad inmueble, como una casa o
 
 ### Cuotas mensuales
 
-El pago de cada cuota mensual para cualquiera de los préstamos anteriores se calcula en base a la siguiente fórmula:
+El pago de cada cuota mensual para cualquiera de los préstamos anteriores se calcula en base a la siguiente fórmula [[5]](#bibliografía):
 
 $$C=\frac{P\cdot i\cdot (1+i)^n}{(1+i)^n-1}$$
 
@@ -91,12 +91,12 @@ Donde $i_V$ es la tasa de interés variable en cada cuota, e $i$ es la tasa de i
 
 $$C=\frac{P\cdot i_V\cdot (1+i_V)^n}{(1+i_V)^n-1}$$
 
-Todos lo préstamos pueden tener tasas de intéres variable o fija. 
+Todos lo préstamos pueden tener tasas de intéres variable o fija [[6]](#bibliografía). 
 
 
 ## Cuentas de Ahorros
 
-Es una cuenta bancaria que permite a una persona depositar dinero para ahorrarlo y ganar intereses sobre el saldo. Las cuentas de ahorro suelen tener menos requisitos que otros tipos de cuentas y son accesibles para la mayoría de las personas. La información requerida para abrir una cuenta de ahorro comúnmente es:
+Es una cuenta bancaria que permite a una persona depositar dinero para ahorrarlo y ganar intereses sobre el saldo. Las cuentas de ahorro suelen tener menos requisitos que otros tipos de cuentas y son accesibles para la mayoría de las personas. La información requerida para abrir una cuenta de ahorro comúnmente es [[7]](#bibliografía):
 
 - Identificación personal (cédula o pasaporte)
 
@@ -106,7 +106,7 @@ Es una cuenta bancaria que permite a una persona depositar dinero para ahorrarlo
 
 - Tasa de interés sobre saldo promedio
 
-Esta tasa de interés en las cuentas de ahorro se calcula diariamente por medio de la siguiente fórmula:
+Esta tasa de interés en las cuentas de ahorro se calcula diariamente por medio de la siguiente fórmula [[8]](#bibliografía):
 
 $$I_D=\frac{\text{Saldo al final del día}\times i}{365}$$
 
@@ -114,7 +114,7 @@ Donde $i$ es la tasa de interés de la cuenta de ahorro e $I_D$ es la el valor d
 
 ## Certificado de depósito a plazo (CDP)
 
-Es un tipo de inversión en la que se deposita una cantidad de dinero durante un período fijo, y el banco paga intereses sobre el monto al final del plazo. El dinero no puede retirarse antes de la fecha de vencimiento sin incurrir en penalizaciones. La información requerida para abrir un CDP es:
+Es un tipo de inversión en la que se deposita una cantidad de dinero durante un período fijo, y el banco paga intereses sobre el monto al final del plazo. El dinero no puede retirarse antes de la fecha de vencimiento sin incurrir en penalizaciones. La información requerida para abrir un CDP es [[9]](#bibliografía):
 
 - Identificación personal (cédula o pasaporte)
 
@@ -124,7 +124,7 @@ Es un tipo de inversión en la que se deposita una cantidad de dinero durante un
 
 - Tasa de interés pactada
 
-Se puede calcular el monto de interés ganado al vencimiento del CDP por medio de la siguiente fórmula:
+Se puede calcular el monto de interés ganado al vencimiento del CDP por medio de la siguiente fórmula [[10]](#bibliografía):
 
 $$I=P\cdot i\cdot t$$
 
@@ -151,13 +151,13 @@ Normalmente cada transacción tiene información distinta en sus reportes, pero 
 
 - Monto: Importe de la transacción
 
-- Cuenta de Origen: Número o ID de la cuenta que origina la transacción
+- Cuenta de Origen: ID de la cuenta que origina la transacción
 
-- Cuenta de Destino (si aplica): En caso de transferencias o abonos
+- Cuenta de Destino (si aplica): ID de la cuenta que recibe la transacción en caso de que sea una transferencias o abonos
 
-- Cliente Asociado: Número de cédula o ID del cliente que ejecutó la transacción
+- Cliente Asociado: ID del cliente que ejecutó la transacción
 
-Ahora bien hay datos específicos que se deben tener para cada tipo de transacción:
+Ahora bien, hay datos específicos que se deben tener para cada tipo de transacción:
 
 ### Depósitos y Retiros
 
@@ -167,7 +167,7 @@ Ahora bien hay datos específicos que se deben tener para cada tipo de transacci
 
 ### Transferencias
 
-- Nombre del cliente receptor de la transferencia
+- ID del cliente receptor de la transferencia
 
 ### Abonos a Préstamos
 
@@ -189,8 +189,6 @@ Ahora bien hay datos específicos que se deben tener para cada tipo de transacci
 
 - Intereses generados
 
-- Fecha de vencimiento
-
 
 ## Fase 2: Diseño
 
@@ -202,4 +200,19 @@ Ahora bien hay datos específicos que se deben tener para cada tipo de transacci
 [2]: [Pŕestamos personales](https://www.cajadeande.fi.cr/servicios/pr%C3%A9stamos/pr%C3%A9stamos-personales/ "Tipos y modalidades de préstamos personales")
 
 [3]: [Pŕestamos prendarios](https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/creditos/creditos_para_vehiculos/vehiculo_nuevo_motos_y_afines/ "Requisitos para préstamo prendario")
+
+[4]: [Pŕestamos hipotecarios](https://www.bncr.fi.cr/personas/financiamiento/prestamo-para-vivienda "Propósito y requisitos para préstamo hipotecario")
+
+[5]: [Cálculo de las cuotas de un préstamo](https://www2.baccredomatic.com/sites/default/files/ni_formulas_y_ejemplos_de_prestamos_hipotecarios-_sitio_web_2020.pdf "Fórmula y ejemplos para calcular las cuotas de un préstamo")
+
+[6]: [Cálculo de las tasas de intéres mensual de un préstamo](https://www.bncr.fi.cr/personas-calculadoras-old "Forma de calcular las tasas de interés mensual")
+
+[7]: [Cuentas de ahorro](https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/cuentas/ahorro "Características y requisitos de las cuentas de ahorro")
+
+[8]: [Cálculo de los intereses de una cuenta de ahorro](https://www2.baccredomatic.com/sites/default/files/calculointerescuentaelectronica.pdf "Forma de calcular los intereses de una cuenta de ahorro")
+
+[9]: [Certificados de depósito a plazo](https://www.bancopopular.fi.cr/ahorro/ahorro-a-plazo/ "Características y requisitos de un CDP")
+
+[10]: [Cálculo de pagos de intereses de un CDP](https://www.bancopopular.fi.cr/calculadora-certificados-capitalizables/ "Fórmula de calcular el pago de intereses al vencer un CDP")
+
 
