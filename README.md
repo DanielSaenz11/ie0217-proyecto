@@ -1,89 +1,96 @@
 # ie0217-proyecto
-Proyecto para el curso IE-0217 II-2024 correspondiente a un sistema de gestión utilizado por los agentes de atención al cliente en ventanillas de una entidad bancaria.
+
+Este repositorio fue creado para el curso IE-0217 en el II ciclo del 2024. Contiene el proyecto final del curso correspondiente a la implementación de un sistema de gestión utilizado por los agentes de atención al cliente en ventanillas de una entidad bancaria. 
+
+El repositorio pertenece al grupo 6 que contiene a los siguientes integrantes:
+
+<div align="center">
+
+|        **Integrante**       | **Carne** |
+|:---------------------------:|:---------:|
+|   Rodrigo Madrigal Montes   |   C24458  |
+| Daniel Alberto Saenz Obando |   C37099  |
+
+</div>
 
 ## Fase 1: Investigación
 
-En esta sección se definen los conceptos, funcionamiento y caracteristicas de las partes de un sistema de gestión bancaria que serán las bases sobre las cuales se desarrollarán las distintas funcionalidades, implementaciones y diseño de nuestro programa. 
+En esta sección se define el concepto, funcionamiento y características de los componentes básicos de un sistema de gestión bancaria en ventanilla, que son la base sobre la que se desarrollará las distintas funcionalidades, implementación y diseño del proyecto en cuestión.
 
-## Préstamos
+### Préstamos
 
-Antes que nada es importante definir que es un préstamo garantizado y no garantizado:
+Inicialmente, se tiene que un préstamo consiste en un producto financiero que permite a un usuario acceder a una cantidad fija de dinero al comienzo de la operación. Además, esta debe ser devuelta junto a unos intereses pactados en un plazo determinado. Por lo general, la amortización del préstamo se realiza mediante cuotas mensuales.[[santander]](#bibliografía)
 
-## Préstamos garantizados 
+Con base en la definición anterior, es importante definir que es un préstamo garantizado y no garantizado, lo cual se realiza en las subsecciones siguientes. Posteriormente, se muestran los tipos de préstamos que van a ser contemplados en el proyecto.
 
-Es aquel que se otorga en base a algún tipo de garantía a modo de respaldo, que puede ser una propiedad o un bien material ó un aval financiero como un depósito bancario, acciones o similares. [[1]](#bibliografía)
+#### Préstamos garantizados 
 
-El punto es que la garantía se usa para asegurarse que el prestamista recupere el dinero prestado en caso de que el deudor no pueda pagar. 
+Es aquel que se otorga con base en algún tipo de garantía a modo de respaldo, que puede ser una propiedad, un bien material o un aval financiero como un depósito bancario, acciones o similares.[[1]](#bibliografía)
+
+El punto es que la garantía se usa para asegurarse que el prestamista (entidad bancaria) recupere el dinero prestado en caso de que el deudor (cliente) no pueda pagar.
 
 Este tipo de préstamos tienen una tasa de intéres más baja que los no garantizados y plazos de pago más largos, lo cual hace que los pagos mensuales sean menores. 
 
+#### Préstamos no garantizados 
 
-## Préstamos no garantizados 
+Para solicitar estos préstamos no se requiere de ninguna garantía más que la solvencia del deudor para pagar, pero presenta un riesgo para el prestamista ya que no hay forma de asegurarse de que el deudor vaya a pagar. Por este mismo riesgo para el prestamista estos préstamos suelen pactarse con periodos de pago más cortos y a una tasa de intéres mucho mayor.[[1]](#bibliografía)
 
-Para solicitar estos préstamos no se requiere de ninguna garantía más que la solvencia del deudor para pagar, pero presenta un riesgo para el prestamista ya que no hay forma de asegurarse de que el deudor vaya a pagar. Por este mismo riesgo para el prestamista estos préstamos suelen pactarse con periodos de pago más cortos y a una tasa de intéres mucho mayor. [[1]](#bibliografía)
+#### Préstamos personales
 
+Con respecto al primer tipo de préstamo contemplado en el proyecto, se tiene que este es **no garantizado**, en el que se presta una cantidad específica de dinero a una persona, con la promesa de devolverlo en cuotas regulares. Es comúnmente utilizado para gastos personales, como la compra de electrodomésticos, viajes o consolidación de deudas[[2]](#bibliografía).
 
-Teniendo esto claro pasamos a explicar cada tiṕo de préstamo:
+La información requierida para estimar el pago de este tipo de préstamos es la siguiente:
 
+- **Monto solicitado**: Cantidad de dinero que se desea pedir prestado.
+- **Plazo**: Período de tiempo en el que se pagará el préstamo (en meses).
+- **Tasa de interés**: Porcentaje anual que se aplica al monto del préstamo.
 
-## Préstamos personales
+#### Préstamo prendario
 
-Es un tipo de préstamo **no garantizado** en el que se presta una cantidad específica de dinero a una persona, con la promesa de devolverlo en cuotas regulares. Es comúnmente utilizado para gastos personales, como la compra de electrodomésticos, viajes o consolidación de deudas [[2]](#bibliografía) . La información requierida para estimar el pago de este tipo de préstamos es:
+Es un préstamo que está **garantizado** por un bien mueble, como un vehículo o joyas. En caso de incumplimiento de pago, el banco puede tomar posesión del bien en garantía.[[3]](#bibliografía)
 
-- **Monto solicitado:** Cantidad de dinero que se desea pedir prestado
+Como se mencionó antes, estos tiene una tasa de interés más baja que los no garantizados porque hay una garantía física de que el deudor no incumplirá los pagos. 
 
-- **Plazo:** Período de tiempo en el que se pagará el préstamo (en meses)
+La información que se requiere para estimar el pago es la misma que el préstamo personal, pero se debe asegurar que el bien que se ha dado como garantía tenga el mismo valor o superior al valor del préstamo en caso de que no sea el bien mismo.[[3]](#bibliografía)
 
-- **Tasa de interés:** Porcentaje anual que se aplica al monto del préstamo
+#### Préstamo hipotecario
 
+Es un préstamo que se **garantiza** con una propiedad inmueble, como una casa o terreno. Se utiliza comúnmente para la compra, construcción o remodelación de bienes raíces.[[4]](#bibliografía)
 
-## Préstamo prendario
+Para calcular el pago de este tipo de préstamos se requiere:
 
-Es un préstamo que está **garantizado** por un bien mueble, como un vehículo o joyas [[3]](#bibliografía). En caso de incumplimiento de pago, el banco puede tomar posesión del bien en garantía. 
-
-Como se mencionó antes estos tiene una tasa de interés más baja que los no garantizados porque hay una garantía física de que el deudor no incumplirá los pagos. 
-
-La información que se requiere para estimar el pago es la misma que el préstamo personal, pero se debe asegurar que el bien que se ha dado como garantía tenga el mismo valor o superior al valor del préstamo en caso de que no sea la prenda misma [[3]](#bibliografía). 
-
-
-## Préstamo hipotecario
-
-Es un préstamo que se **garantiza** con una propiedad inmueble, como una casa o terreno. Se utiliza comúnmente para la compra, construcción o remodelación de bienes raíces [[4]](#bibliografía). Para calcular el pago de este tipo de préstamos se requiere:
-
-- **Valor de la propiedad:** Valor estimado del inmueble que servirá como garantía
-
-- **Monto solicitado:** Cuánto dinero se quiere pedir prestado para la compra o construcción
-
-- **Plazo:** Tiempo en el que se pagará el préstamo (suele ser más largo que otros préstamos, por ejemplo, 15 a 30 años)
-
-- **Tasa de interés:** Porcentaje aplicado sobre el monto del préstamo, que puede ser fija o variable
+- **Valor de la propiedad**: Valor estimado del inmueble que servirá como garantía.
+- **Monto solicitado**: El dinero se quiere pedir prestado para la compra o construcción.
+- **Plazo**: Tiempo en el que se pagará el préstamo (suele ser más largo que otros préstamos, por ejemplo, 15 a 30 años).
+- **Tasa de interés**: Porcentaje aplicado sobre el monto del préstamo, que puede ser fija o variable.
 
 
-## ¿Cómo se calculan los montos de las cuotas de pago y los intereses?
+#### ¿Cómo se calculan los montos de las cuotas de pago y los intereses para préstamos?
 
-### Cuotas mensuales
+En las secciones anteriores, se mencionaron las cuotas e intereses de un préstamo. Sin embargo, para calcular estos valores se tienen fórmulas específicas, las cuales se detallan a continuación.
 
-El pago de cada cuota mensual para cualquiera de los préstamos anteriores se calcula en base a la siguiente fórmula [[5]](#bibliografía):
+##### Cuotas mensuales
+
+El pago de cada cuota mensual para cualquiera de los préstamos anteriores se calcula con base en la siguiente fórmula:
 
 $$C=\frac{P\cdot i\cdot (1+i)^n}{(1+i)^n-1}$$
 
 Donde:
 
-- $C$ es la cuota mensual
+- $C$: cuota mensual.
+- $P$: monto del préstamo.
+- $i$: tasa de interés mensual.
+- $n$: número total de meses de pago.
 
-- $P$  es el monto del préstamo 
+##### Intereses
 
-- $i$ es la tasa de interés mensual
+Existen dos tipos de intereses: **fijos** y **variables**. 
 
-- $n$ es el numero total de meses de pago
-
-### Intereses
-
-Existen dos tipos de intereses, **fijos** y **variables**. Si la tasa de interés es fija en el plazo del préstamo, significa que este será constante a lo largo de la duración del préstamo. Este de define en un plazo anual y en la fórmula anterior se ingresa el mensual, entonces el valor de interés que va en la fórmula anterior es:
+Si la tasa de interés es fija en el plazo del préstamo, significa que este será constante a lo largo de la duración del préstamo. Este se define en un plazo anual y en la fórmula anterior se ingresa el mensual, entonces el valor de interés que va en la fórmula de la sección anterior es:
 
 $$i=\frac{i_A}{12}$$
 
-Donde $i_A$ es la tasa de interés anual que normalmente se define como un porcentaje, por ejemplo $15\%$ ó $12\%$. Ahora bien si el interés es variable significa que este valor cambia en base al saldo pendiente del préstamo en cuestión, de la siguiente manera:
+$i_A$ es la tasa de interés anual que normalmente se define como un porcentaje, por ejemplo $15\%$ o $12\%$. Ahora bien si el interés es variable significa que este valor cambia con base en el saldo pendiente del préstamo en cuestión, de la siguiente manera:
 
 $$i_V=\text{Saldo pendiente del préstamo} \times i$$
 
@@ -91,57 +98,120 @@ Donde $i_V$ es la tasa de interés variable en cada cuota, e $i$ es la tasa de i
 
 $$C=\frac{P\cdot i_V\cdot (1+i_V)^n}{(1+i_V)^n-1}$$
 
-Todos lo préstamos pueden tener tasas de intéres variable o fija [[6]](#bibliografía). 
+Todos lo préstamos pueden tener tasas de intéres variable o fija.[[6]](#bibliografía)
 
+#### Abonos a Préstamos
 
-## Cuentas de Ahorros
+PENDIENTE
 
-Es una cuenta bancaria que permite a una persona depositar dinero para ahorrarlo y ganar intereses sobre el saldo. Las cuentas de ahorro suelen tener menos requisitos que otros tipos de cuentas y son accesibles para la mayoría de las personas. La información requerida para abrir una cuenta de ahorro comúnmente es [[7]](#bibliografía):
+- ID del préstamo
 
-- Identificación personal (cédula o pasaporte)
+- Cuota pagada
 
-- Comprobante de domicilio
+- Aporte al capital
 
-- Monto mínimo de apertura, dependiendo del banco
+- Aporte a los intereses
 
-- Tasa de interés sobre saldo promedio
+- Saldo restante del préstamo
 
-Esta tasa de interés en las cuentas de ahorro se calcula diariamente por medio de la siguiente fórmula [[8]](#bibliografía):
+### Cuentas de Ahorros
+
+Es una cuenta bancaria que permite a una persona depositar dinero para ahorrarlo y ganar intereses sobre el saldo. Las cuentas de ahorro suelen tener menos requisitos que otros tipos de cuentas y son accesibles para la mayoría de las personas. La información requerida para abrir una cuenta de ahorro comúnmente es:
+
+- Identificador del cliente (cédula o pasaporte).
+- Nombre y apellidos del cliente.
+- Comprobante de domicilio.
+- Teléfono
+- Monto mínimo de apertura (dependiendo del banco).
+- Tasa de interés sobre saldo promedio.[[7]](#bibliografía)
+
+Esta tasa de interés en las cuentas de ahorro se calcula diariamente por medio de la siguiente fórmula:
 
 $$I_D=\frac{\text{Saldo al final del día}\times i}{365}$$
 
-Donde $i$ es la tasa de interés de la cuenta de ahorro e $I_D$ es la el valor diario de interés que se suma a la cuenta. 
+Donde $i$ es la tasa de interés de la cuenta de ahorro e $I_D$ es el valor diario de interés que se suma a la cuenta.[[8]](#bibliografía)
 
-## Certificado de depósito a plazo (CDP)
+### Certificado de depósito a plazo (CDP)
 
-Es un tipo de inversión en la que se deposita una cantidad de dinero durante un período fijo, y el banco paga intereses sobre el monto al final del plazo. El dinero no puede retirarse antes de la fecha de vencimiento sin incurrir en penalizaciones. La información requerida para abrir un CDP es [[9]](#bibliografía):
+Es un tipo de inversión en la que se deposita una cantidad de dinero durante un período fijo, y el banco paga intereses sobre el monto al final del plazo. El dinero no puede retirarse antes de la fecha de vencimiento sin incurrir en penalizaciones.[[9]](#bibliografía)
 
-- Identificación personal (cédula o pasaporte)
+La información requerida para abrir un CDP se muestra a continuación:
 
-- Monto mínimo de inversión, que varía según el banco
+- Identificador del cliente (ID).
+- Monto mínimo de inversión (varía según el banco).
+- Plazo del depósito (en meses o años).
+- Tasa de interés pactada.
 
-- Plazo del depósito, que puede ser de meses o años
+Se puede calcular el monto de interés ganado al vencimiento del CDP por medio de la siguiente fórmula:
 
-- Tasa de interés pactada
+$$I = P\cdot i \cdot t$$ 
 
-Se puede calcular el monto de interés ganado al vencimiento del CDP por medio de la siguiente fórmula [[10]](#bibliografía):
+Las variables anteriores corresponden a:
 
-$$I=P\cdot i\cdot t$$
+- $I$: interés ganado.
+- $P$: monto del CDP.
+- $i$: tasa de interés anual.
+- $t$: tiempo de duración del CDP, en años.[[10]](#bibliografía)
 
-Donde:
+Cabe mencionar que $i$ se calcula igual que como se explicó para los préstamos.
 
-- $I$ es el interés ganado
+Respecto a la información que se almacena en el sistema al solicitar/vencer un CDP, se guardan los siguientes datos:
 
-- $P$ es el monto del CDP
+- Identificador del CDP.
+- Monto del capital.
+- Intereses generados.
 
-- $i$ es la tasa de interés anual
+### Depósitos y retiros de dinero
 
-- $t$ tiempo de duración del CDP, en años 
+En primer lugar, __depositar dinero__ en una entidad bancaria consiste en la acción de entregar dinero al banco para que lo almacene y lo inmovilice, a cambio de recibir una rentabilidad por ese dinero (en forma de intereses).[[BillIn PENDIENTE]](#bibliografía).
 
-Cabe mencionar que $i$ se calcula igual que como se explicó para los préstamos. 
+Para realizar un depósito de dinero, se requiere especificar el identificador de la cuenta bancaria a la que se desea ingresar el monto, así como el número de cédula del cliente de la cuenta, a modo de doble comprobación de los datos y asegurar que la cuenta realmente pertenece al cliente en cuestión.
+
+Para el almacenamiento de la información del depósito, se guardan los siguientes datos:
+
+- Identificador de la transacción (ID).
+- Identificador de la cuenta a la que se depositó el dinero.
+- Monto de dinero ingresado.
+
+En segundo lugar, un __retiro bancario__ corresponde a una operación financiera, mediante la cual un cliente extrae fondos de su cuenta, para utilizarlos en transacciones de pago, inversión, consumo, entre otros.[[RANKIA PENDIENTE]](#bibliografía)
+
+Esta es una operación común para realizar en una ventanilla, especialmente al retirar considerables sumas de dinero (que excedan el límite de un cajero automático). Por lo que, para realizar retiro es necesario indicar la cédula (identificación de la persona) y el número de la cuenta sobre la cual desea retirar el dinero.
+
+Dependiendo del retiro, se pueden aplicar comisiones que no van a ser tomadas en cuenta en la implementación actual del proyecto.
+
+En cuanto a la información que se va a almacenar en el sistema del movimiento actual, se tiene lo siguiente:
+
+- Identificador de la transacción (ID).
+- Identificador de la cuenta sobre la que se realizó el retiro.
+- Monto de dinero retirado.
+
+### Transferencias entre cuentas
+
+Una transferencia corresponde al envío de fondos de una cuenta a otra (puede ser del mismo banco o de terceros). Para efectos del proyecto, es importante mencionar que las transacciones se deben dar en cuentas de la misma moneda.
+
+En cuanto a los datos requeridos para realizar una transacción, se requiere el identificador (ID) de la cuenta del destinatario y su número de cédula. Esto tiene el propósito de realizar una doble verificación de que la cuenta pertenece a la persona indicada.[[BCR PENDIENTE]](#bibliografía)
+
+Además, para efectos de la información que se va a guardar en el sistema, se almacenan:
+
+- Identificador de la transacción (ID).
+- Identificador de la cuenta remitente.
+- Identificador de la cuenta destinataria.
+- Monto transferido.
+
+Dependiendo del contexto de la transferencia, ciertos bancos aplican un porcentaje de comisión respecto al total transferido. Sin embargo, en cuanto a los alcances del proyecto actual, esta variable va a ser tomada en consideración.
+
+### Confidencialidad de la información del banco
+
+Observe que en las transacciones mencionadas anteriormente, se establece como prioridad la confidencialidad de la información de los clientes. Únicamente se pueden realizar las transacciones si es el cliente el que proporciona la información correcta, no se sugieren cambios o correcciones a los valores ingresados por el cliente para la protección de datos. 
+
+Como establece el _Manual de buenas prácticas para el manejo de los datos personales de los clientes de los servicios financieros_ de la Cámara de Bancos e Instituciones Financieras de Costa Rica, la entidad financiera debe guardar secreto de todos los datos que manejen de sus clientes salvo que se encuentre dentro de las excepciones estipuladas en la Ley. Además, las entidades financieras deben proteger y utilizar adecuadamente cualquier dato o información confidencial que les suministren sus clientes. Ésta deberá ser utilizada de manera exclusiva para el propósito por el cual fue requerida.
+
+Por lo tanto, el propósito del proyecto actual es que se rija basándose en el párrafo anterior; es decir, priorizando la privacidad de los clientes en la entidad bancaria.
+
+## Fase 2: Diseño
 
 
-## Reportes de transacciones
+### Reportes de transacciones
 
 Normalmente cada transacción tiene información distinta en sus reportes, pero hay varios datos básicos que debe incluir cualquier reporte:
 
@@ -158,40 +228,6 @@ Normalmente cada transacción tiene información distinta en sus reportes, pero 
 - Cliente Asociado: ID del cliente que ejecutó la transacción
 
 Ahora bien, hay datos específicos que se deben tener para cada tipo de transacción:
-
-### Depósitos y Retiros
-
-- Saldo anterior
-
-- Saldo actual después de la transacción
-
-### Transferencias
-
-- ID del cliente receptor de la transferencia
-
-### Abonos a Préstamos
-
-- ID del préstamo
-
-- Cuota pagada
-
-- Aporte al capital
-
-- Aporte a los intereses
-
-- Saldo restante del préstamo
-
-### Pago al vencer un CDP
-
-- ID del CDP
-
-- Monto del capital
-
-- Intereses generados
-
-
-## Fase 2: Diseño
-
 
 ## Bibliografía
 
@@ -215,4 +251,13 @@ Ahora bien, hay datos específicos que se deben tener para cada tipo de transacc
 
 [10]: [Cálculo de pagos de intereses de un CDP](https://www.bancopopular.fi.cr/calculadora-certificados-capitalizables/ "Fórmula de calcular el pago de intereses al vencer un CDP")
 
+https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/servicios_personas/transferencias/
+
+https://www.rankia.com/diccionario/banca/retiro-bancario
+
+https://www.billin.net/glosario/definicion-depositar/
+
+Cámara de Bancos e Instituciones Financieras de Costa Rica (2015). _Manual de buenas prácticas para el manejo de los datos personales de los clientes de los servicios financieros_. 
+
+Banco Santander. ¿Qué diferencias hay entre un préstamo y un crédito? https://www.bancosantander.es/faqs/particulares/prestamos/diferencias-prestamo-credito#:~:text=Un%20préstamo%20es%20un%20producto,realiza%20mediante%20unas%20cuotas%20regulares.
 
