@@ -6,10 +6,10 @@ El repositorio pertenece al grupo 6 que contiene a los siguientes integrantes:
 
 <div align="center">
 
-|        **Integrante**       | **Carne** |
+|        **Integrantes**       | **Carné** |
 |:---------------------------:|:---------:|
 |   Rodrigo Madrigal Montes   |   C24458  |
-| Daniel Alberto Saenz Obando |   C37099  |
+| Daniel Alberto Sáenz Obando |   C37099  |
 
 </div>
 
