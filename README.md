@@ -19,7 +19,7 @@ En esta sección se define el concepto, funcionamiento y características de los
 
 ### Préstamos
 
-Inicialmente, se tiene que un préstamo consiste en un producto financiero que permite a un usuario acceder a una cantidad fija de dinero al comienzo de la operación. Además, esta debe ser devuelta junto a unos intereses pactados en un plazo determinado. Por lo general, la amortización del préstamo se realiza mediante cuotas mensuales.[[santander]](#bibliografía)
+Inicialmente, se tiene que un préstamo consiste en un producto financiero que permite a un usuario acceder a una cantidad fija de dinero al comienzo de la operación. Además, esta debe ser devuelta junto a unos intereses pactados en un plazo determinado. Por lo general, la amortización del préstamo se realiza mediante cuotas mensuales.[[11]](#bibliografía)
 
 Con base en la definición anterior, es importante definir que es un préstamo garantizado y no garantizado, lo cual se realiza en las subsecciones siguientes. Posteriormente, se muestran los tipos de préstamos que van a ser contemplados en el proyecto.
 
@@ -163,7 +163,7 @@ Respecto a la información que se almacena en el sistema al solicitar/vencer un 
 
 ### Depósitos y retiros de dinero
 
-En primer lugar, __depositar dinero__ en una entidad bancaria consiste en la acción de entregar dinero al banco para que lo almacene y lo inmovilice, a cambio de recibir una rentabilidad por ese dinero (en forma de intereses).[[BillIn PENDIENTE]](#bibliografía).
+En primer lugar, __depositar dinero__ en una entidad bancaria consiste en la acción de entregar dinero al banco para que lo almacene y lo inmovilice, a cambio de recibir una rentabilidad por ese dinero (en forma de intereses).[[12]](#bibliografía).
 
 Para realizar un depósito de dinero, se requiere especificar el identificador de la cuenta bancaria a la que se desea ingresar el monto, así como el número de cédula del cliente de la cuenta, a modo de doble comprobación de los datos y asegurar que la cuenta realmente pertenece al cliente en cuestión.
 
@@ -173,7 +173,7 @@ Para el almacenamiento de la información del depósito, se guardan los siguient
 - Identificador de la cuenta a la que se depositó el dinero.
 - Monto de dinero ingresado.
 
-En segundo lugar, un __retiro bancario__ corresponde a una operación financiera, mediante la cual un cliente extrae fondos de su cuenta, para utilizarlos en transacciones de pago, inversión, consumo, entre otros.[[RANKIA PENDIENTE]](#bibliografía)
+En segundo lugar, un __retiro bancario__ corresponde a una operación financiera, mediante la cual un cliente extrae fondos de su cuenta, para utilizarlos en transacciones de pago, inversión, consumo, entre otros.[[13]](#bibliografía)
 
 Esta es una operación común para realizar en una ventanilla, especialmente al retirar considerables sumas de dinero (que excedan el límite de un cajero automático). Por lo que, para realizar retiro es necesario indicar la cédula (identificación de la persona) y el número de la cuenta sobre la cual desea retirar el dinero.
 
@@ -189,7 +189,7 @@ En cuanto a la información que se va a almacenar en el sistema del movimiento a
 
 Una transferencia corresponde al envío de fondos de una cuenta a otra (puede ser del mismo banco o de terceros). Para efectos del proyecto, es importante mencionar que las transacciones se deben dar en cuentas de la misma moneda.
 
-En cuanto a los datos requeridos para realizar una transacción, se requiere el identificador (ID) de la cuenta del destinatario y su número de cédula. Esto tiene el propósito de realizar una doble verificación de que la cuenta pertenece a la persona indicada.[[BCR PENDIENTE]](#bibliografía)
+En cuanto a los datos requeridos para realizar una transacción, se requiere el identificador (ID) de la cuenta del destinatario y su número de cédula. Esto tiene el propósito de realizar una doble verificación de que la cuenta pertenece a la persona indicada.[[14]](#bibliografía)
 
 Además, para efectos de la información que se va a guardar en el sistema, se almacenan:
 
@@ -231,33 +231,35 @@ Ahora bien, hay datos específicos que se deben tener para cada tipo de transacc
 
 ## Bibliografía
 
-[1]: [Préstamo garantizado vs Préstamos no garantizados](https://www.santanderconsumer.es/blog/post/prestamo-garantizado-vs-prestamos-no-garantizados "Definiciones de tipos de préstamos")
+[1]: [Banco Santander. “Préstamo garantizado vs Préstamos no garantizados”. Santander Consumer. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.santanderconsumer.es/blog/post/prestamo-garantizado-vs-prestamos-no-garantizados](https://www.santanderconsumer.es/blog/post/prestamo-garantizado-vs-prestamos-no-garantizados "Definiciones de tipos de préstamos")
 
-[2]: [Pŕestamos personales](https://www.cajadeande.fi.cr/servicios/pr%C3%A9stamos/pr%C3%A9stamos-personales/ "Tipos y modalidades de préstamos personales")
+[2]: [Caja de ANDE. “Préstamos Personales”. Caja de ANDE. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.cajadeande.fi.cr/servicios/préstamos/préstamos-personales/](https://www.cajadeande.fi.cr/servicios/pr%C3%A9stamos/pr%C3%A9stamos-personales/ "Tipos y modalidades de préstamos personales")
 
-[3]: [Pŕestamos prendarios](https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/creditos/creditos_para_vehiculos/vehiculo_nuevo_motos_y_afines/ "Requisitos para préstamo prendario")
+[3]: [Banco de Costa Rica. “Vehículo Nuevo Motos y Afines”. Banco Nacional de Costa RIca. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/creditos/creditos_para_vehiculos/vehiculo_nuevo_motos_y_afines/](https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/creditos/creditos_para_vehiculos/vehiculo_nuevo_motos_y_afines/ "Requisitos para préstamo prendario")
 
-[4]: [Pŕestamos hipotecarios](https://www.bncr.fi.cr/personas/financiamiento/prestamo-para-vivienda "Propósito y requisitos para préstamo hipotecario")
+[4]: [Banco Nacional de Costa RIca. “Préstamos Para Vivienda”. Banco Nacional de Costa RIca. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.bncr.fi.cr/personas/financiamiento/prestamo-para-vivienda](https://www.bncr.fi.cr/personas/financiamiento/prestamo-para-vivienda "Propósito y requisitos para préstamo hipotecario")
 
-[5]: [Cálculo de las cuotas de un préstamo](https://www2.baccredomatic.com/sites/default/files/ni_formulas_y_ejemplos_de_prestamos_hipotecarios-_sitio_web_2020.pdf "Fórmula y ejemplos para calcular las cuotas de un préstamo")
+[5]: [BAC Credomatic. “Fórmulas y Ejemplos de Préstamos Hipotecarios”. BAC Credomatic. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www2.baccredomatic.com/sites/default/files/ni_formulas_y_ejemplos_de_prestamos_hipotecarios-_sitio_web_2020.pdf](https://www2.baccredomatic.com/sites/default/files/ni_formulas_y_ejemplos_de_prestamos_hipotecarios-_sitio_web_2020.pdf "Fórmula y ejemplos para calcular las cuotas de un préstamo")
 
-[6]: [Cálculo de las tasas de intéres mensual de un préstamo](https://www.bncr.fi.cr/personas-calculadoras-old "Forma de calcular las tasas de interés mensual")
+[6]: [Banco Nacional de Costa RIca. “Calculadoras”. Banco Nacional de Costa RIca. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bncr.fi.cr/personas-calculadoras-old](https://www.bncr.fi.cr/personas-calculadoras-old "Forma de calcular las tasas de interés mensual")
 
-[7]: [Cuentas de ahorro](https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/cuentas/ahorro "Características y requisitos de las cuentas de ahorro")
+[7]: [Banco de Costa Rica. “Cuenta de ahorro”. Banco BCR. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/cuentas/ahorro](https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/cuentas/ahorro "Características y requisitos de las cuentas de ahorro")
 
-[8]: [Cálculo de los intereses de una cuenta de ahorro](https://www2.baccredomatic.com/sites/default/files/calculointerescuentaelectronica.pdf "Forma de calcular los intereses de una cuenta de ahorro")
+[8]: [BAC Credomatic. “GUÍA PARA CALCULAR INTERÉS DIARIO Y MANTENIMIENTO DE VALOR PARA CUENTAS DE AHORRO”. BAC Credomatic. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www2.baccredomatic.com/sites/default/files/calculointerescuentaelectronica.pdf](https://www2.baccredomatic.com/sites/default/files/calculointerescuentaelectronica.pdf "Forma de calcular los intereses de una cuenta de ahorro")
 
-[9]: [Certificados de depósito a plazo](https://www.bancopopular.fi.cr/ahorro/ahorro-a-plazo/ "Características y requisitos de un CDP")
+[9]: [Banco Popular. “Ahorro a Plazo”. Banco Popular. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bancopopular.fi.cr/ahorro/ahorro-a-plazo/](https://www.bancopopular.fi.cr/ahorro/ahorro-a-plazo/ "Características y requisitos de un CDP")
 
-[10]: [Cálculo de pagos de intereses de un CDP](https://www.bancopopular.fi.cr/calculadora-certificados-capitalizables/ "Fórmula de calcular el pago de intereses al vencer un CDP")
+[10]: [Banco Popular. “Calculadora Certificados Capitalizables”. Banco Popular. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bancopopular.fi.cr/calculadora-certificados-capitalizables/](https://www.bancopopular.fi.cr/calculadora-certificados-capitalizables/ "Fórmula para calcular el pago de intereses al vencer un CDP")
 
-https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/servicios_personas/transferencias/
+[11]: [Banco Santander. “¿Qué diferencias hay entre un préstamo y un crédito?” Banco Santander. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.bancosantander.es/faqs/particulares/prestamos/diferencias-prestamo-credito#:~:text=Un%20préstamo%20es%20un%20producto,realiza%20mediante%20unas%20cuotas%20regulares](https://www.bancosantander.es/faqs/particulares/prestamos/diferencias-prestamo-credito#:~:text=Un%20pr%C3%A9stamo%20es%20un%20producto,realiza%20mediante%20unas%20cuotas%20regulares "Definición de un préstamo")
 
-https://www.rankia.com/diccionario/banca/retiro-bancario
+[12]: [Billin. “¿Qué es depositar?”. Billin. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.billin.net/glosario/definicion-depositar/](https://www.billin.net/glosario/definicion-depositar/ "Funcionamiento de un depósito")
 
-https://www.billin.net/glosario/definicion-depositar/
+[13]: [Rankia España. “Retiro bancario”. Rankia: Comunidad financiera. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.rankia.com/diccionario/banca/retiro-bancario](https://www.rankia.com/diccionario/banca/retiro-bancario "Funcionamiento de un retiro")
+
+[14]: [Banco de Costa Rica. “Transferencias”. Banco BCR. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/servicios_personas/transferencias/](https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/servicios_personas/transferencias/ "Definción y operación de una transferencia")
+
 
 Cámara de Bancos e Instituciones Financieras de Costa Rica (2015). _Manual de buenas prácticas para el manejo de los datos personales de los clientes de los servicios financieros_. 
 
-Banco Santander. ¿Qué diferencias hay entre un préstamo y un crédito? https://www.bancosantander.es/faqs/particulares/prestamos/diferencias-prestamo-credito#:~:text=Un%20préstamo%20es%20un%20producto,realiza%20mediante%20unas%20cuotas%20regulares.
 
