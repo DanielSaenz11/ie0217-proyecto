@@ -229,6 +229,36 @@ Normalmente cada transacción tiene información distinta en sus reportes, pero 
 
 Ahora bien, hay datos específicos que se deben tener para cada tipo de transacción:
 
+#### Depósitos y Retiros
+
+- Saldo anterior
+
+- Saldo actual después de la transacción
+
+#### Transferencias
+
+- ID del cliente receptor de la transferencia
+
+#### Abonos a Préstamos
+
+- ID del préstamo
+
+- Cuota pagada
+
+- Aporte al capital
+
+- Aporte a los intereses
+
+- Saldo restante del préstamo
+
+#### Pago al vencer un CDP
+
+- ID del CDP
+
+- Monto del capital
+
+- Intereses generados
+
 ## Bibliografía
 
 [1]: [Banco Santander. “Préstamo garantizado vs Préstamos no garantizados”. Santander Consumer. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.santanderconsumer.es/blog/post/prestamo-garantizado-vs-prestamos-no-garantizados](https://www.santanderconsumer.es/blog/post/prestamo-garantizado-vs-prestamos-no-garantizados "Definiciones de tipos de préstamos")
