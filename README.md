@@ -215,6 +215,83 @@ Por lo tanto, el propósito del proyecto actual es que se rija basándose en el 
 
 ## Fase 2: Diseño
 
+En la sección de diseño del proyecto, se desarrollan las bases sobre las cuales se va a realizar la implementación de la aplicación en cuestión.
+
+### Diseño de base de datos
+
+Como se mencionó anteriormente, la base de datos que se va a utilizar en el proyecto corresponde a SQLite. Para simular datos dentro de la base de datos, se crea un script que los ingresa cuando se clona el presente repositorio en un dispositivo nuevo. Esto se detalla a profundidad en la guía de uso de la aplicación.
+
+Ahora bien, en cuanto al diseño dentro de la base de datos, se plantea la implementación mostrada a continuación:
+
+<p align="center">
+  <img width="750" src="./images/diagramaDB.png">
+</p>
+
+> [!IMPORTANT]
+> El símbolo de llave al lado del nombre de campo de la tabla indica que es una llave primaria. Además, cuando aparece `NN` en los campos, indica que el valor no puede ser nulo.
+
+En esta, se incluyen las tablas a continuación:
+
+- __`Clientes`__: Tabla que guarda la información propia de cada cliente.
+    - __Clave primaria__ `idCliente`: Identificador único del cliente. Se genera automáticamente por la base de datos. 
+    - `cedula`: Número de identificación del cliente dado por el Registro Nacional (único). Utilizado para acceder a la información del cliente.
+    - `nombre`: Nombre del cliente.
+    - `primerApellido`: Primer apellido del cliente.
+    - `segundoApellido`: Segundo apellido del cliente. 
+    - `telefono`: Medio de comunicación con el cliente.
+
+> [!NOTE]
+> Dependiendo de la implementación, también es usual que las entidades bancarias almacenen domicilio y correo electrónico. Sin embargo, para efectos del proyecto, se almacena únicamente el número telefónico.
+
+- __`Cuentas`__: Tabla que guarda la información de cada cuenta de ahorro en la aplicación.
+    - __Clave primaria__ `idCuenta`: Identificador único de la cuenta bancaria de ahorros. Se genera automáticamente por la base de datos
+    - __Clave foránea__ `idCliente`: Identificador único del cliente referenciado de la tabla `Clientes`.
+    - `moneda`: Tipo de moneda de la cuenta (`USD` o `CRC`).
+    - `saldo`: Cantidad de dinero almacenado en la cuenta.
+    - `tasaInteres`: Tasa de interés que gana la cuenta diariamente.
+
+> [!NOTE]
+> Para los campos que poseen valores numéricos con decimales, se utiliza el tipo de dato `REAL`. Se van a manejar dos decimales como es generalmente en los bancos.
+
+- __`Prestamos`__: Tabla que guarda la información de cada préstamo bancario.
+    - __Clave primaria__ `idPrestamo`: Identificador único del préstamo. Generado de forma automática por la base de datos.
+    - __Clave foránea__ `idCuenta`: Identificador de la cuenta bancaria asociada al préstamo.
+    - `tipo`: Tipo de préstamo (`PER`: personal, `HIP`: hipotecario, `PRE`: prendario).
+    - `tasaInteres`: Tasa de interés asociada al préstamo. Se va a manejar una tasa de interés fija para los préstamos.
+    - `plazoMeses`: Plazo total en meses del préstamo.
+    - `cuotaMensual`: 
+    - `totalPagado`: 
+    - *`plazoRestante`: 
+    - *`total a pagar`: 
+    - *`interes a pagar`: 
+    - *`interes pagado`: 
+    - *`fecha vencimiento/solicitud`: 
+
+- __`PagoPrestamos`__: Tabla que guarda un registro del pago de los préstamos dentro de la entidad bancaria.
+    - __Clave primaria__ `idPagoPrestamo`: Identificador único del préstamo. Generado automáticamente por la base de datos.
+    - __Clave foránea__ `idPrestamo`: Identificador del préstamo asociado al pago.
+    - `cuotaPagada`: Cuota pagada del préstamo.
+    - `aporteCapital`: Aporte realizado al capital del préstamo.
+    - `aporteIntereses`: Aporte realizo a los intereses del préstamo.
+    - `saldoRestante`: Saldo restante por pagar (como forma de rastreo de los pagos anteriores y evitar irregularidades).
+
+- __`Transacciones`__: Tabla que guarda un registro de las transacciones que se han realizado dentro de las cuentas.
+    - __Clave primaria__ `idTransaccion`: Identificador único de la transacción realizada.
+    - __Clave foránea__ `idRemitente`: Hace referencia a la cuenta sobre la que se obtuvieron los fondos para la transacción (ID de la cuenta).
+    - __Clave foránea__ `idDestinatario`: Hace referencia a la cuenta a la que se depositaron los fondos para la transacción (ID de la cuenta).
+    - `tipo`: Tipo de transacción (`TRA`: transferencia, `RET`: retiro, `DEP`: Depósito).
+    - `monto`: Monto de dinero movido en la transacción.
+
+> [!NOTE]
+> En esta tabla, se manejan 3 tipos de movimientos: transferencias, retiros y depósitos (identificados por el tipo). Cuando se realiza un retiro, `idDestinatario` es nulo; mientras que, cuando se realiza un depósito, `idRemitente` es nulo.
+
+- __`CDP`__: Tabla que almacena la información de los certificados de depósito a plazo.
+    - __Clave primaria__ `idCDP`: Identificador único del CDP. Generado automáticamente por la base de datos,
+    - __Clave foránea__ `idCuenta`: Cuenta asociada al CDP.
+    - `deposito`: Monto destinado para el CDP por el cliente.
+    - `plazoMeses`: Plazo en meses de vigencia del CDP.
+    - `tasaInteres`: Tasa de interés asociada al CDP.
+    - `fechaSolicitud`: Fecha de registro del CDP por parte del usuario.
 
 ### Reportes de transacciones
 
@@ -263,6 +340,12 @@ Ahora bien, hay datos específicos que se deben tener para cada tipo de transacc
 - Monto del capital
 
 - Intereses generados
+
+PENDIENTE AGREGAR A LA LISTA DE LOGS
+
+## Cronograma
+
+
 
 ## Bibliografía
 
