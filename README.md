@@ -357,8 +357,8 @@ Ahora bien, en el caso de que se ingrese un cliente (por medio de `cedula`), si 
     - Se pasan los datos a la tabla `CDP` de la base de datos.
 - __Abono a préstamo__: Permite realizar un abono a un préstamo, a partir del ID del préstamo.
     - Se indica el ID del préstamo y se comprueba su existencia.
-    - Se indican el número de cuotas a abonar (se verifica si hay suficientes fondos para hacerlo).
-    - La primera cuota pagada corresponde a la cuota.
+    - Se revisa si la fecha del próximo pago ya ocurrió. En ese caso, se realiza el pago regular.
+    - Si todavía no ha ocurrido, se toma como un abono extraordinario. Se pregunta si este desea reducir la cantidad de cuotas o la cuota mensual. Se pregunta cuántas cuotas desea abonar. No se van a tomar restricciones a la hora de abonar.
 
 > [!NOTE]
 > Al terminar la ejecución de cada uno de estas opciones, se vuelve a mostrar el menú de atención al cliente. Para salir del modo, se debe seleccionar la opción de `Salir`.
