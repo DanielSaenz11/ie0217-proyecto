@@ -266,37 +266,34 @@ Ahora bien, hay datos específicos que se deben tener para cada tipo de transacc
 
 ## Bibliografía
 
-[1]: Banco Santander. “¿Qué diferencias hay entre un préstamo y un crédito?” Banco Santander. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.bancosantander.es/faqs/particulares/prestamos/diferencias-prestamo-credito#:~:text=Un%20préstamo%20es%20un%20producto,realiza%20mediante%20unas%20cuotas%20regulares
+\[1\]: Banco Santander, _¿Qué diferencias hay entre un préstamo y un crédito?_. Banco Santander. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.bancosantander.es/faqs/particulares/prestamos/diferencias-prestamo-credito#:~:text=Un%20préstamo%20es%20un%20producto,realiza%20mediante%20unas%20cuotas%20regulares
 
-(https://www.bancosantander.es/faqs/particulares/prestamos/diferencias-prestamo-credito#:~:text=Un%20pr%C3%A9stamo%20es%20un%20producto,realiza%20mediante%20unas%20cuotas%20regulares "Definición de un préstamo")
+\[2\]: Banco Santander. _Préstamo garantizado vs Préstamos no garantizados_. Santander Consumer. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.santanderconsumer.es/blog/post/prestamo-garantizado-vs-prestamos-no-garantizados
 
-[2]: [Banco Santander. “Préstamo garantizado vs Préstamos no garantizados”. Santander Consumer. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.santanderconsumer.es/blog/post/prestamo-garantizado-vs-prestamos-no-garantizados](https://www.santanderconsumer.es/blog/post/prestamo-garantizado-vs-prestamos-no-garantizados "Definiciones de tipos de préstamos")
+\[3\]: Caja de ANDE. _Préstamos Personales_. Caja de ANDE. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.cajadeande.fi.cr/servicios/préstamos/préstamos-personales/
 
-[3]: [Caja de ANDE. “Préstamos Personales”. Caja de ANDE. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.cajadeande.fi.cr/servicios/préstamos/préstamos-personales/](https://www.cajadeande.fi.cr/servicios/pr%C3%A9stamos/pr%C3%A9stamos-personales/ "Tipos y modalidades de préstamos personales")
+\[4\]: Banco de Costa Rica. _Vehículo Nuevo Motos y Afines_. Banco Nacional de Costa RIca. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/creditos/creditos_para_vehiculos/vehiculo_nuevo_motos_y_afines/
 
-[4]: [Banco de Costa Rica. “Vehículo Nuevo Motos y Afines”. Banco Nacional de Costa RIca. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/creditos/creditos_para_vehiculos/vehiculo_nuevo_motos_y_afines/](https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/creditos/creditos_para_vehiculos/vehiculo_nuevo_motos_y_afines/ "Requisitos para préstamo prendario")
+\[5\]: Banco Nacional de Costa Rica. _Préstamos Para Vivienda_. Banco Nacional de Costa Rica. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.bncr.fi.cr/personas/financiamiento/prestamo-para-vivienda
 
-[5]: [Banco Nacional de Costa Rica. “Préstamos Para Vivienda”. Banco Nacional de Costa Rica. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.bncr.fi.cr/personas/financiamiento/prestamo-para-vivienda](https://www.bncr.fi.cr/personas/financiamiento/prestamo-para-vivienda "Propósito y requisitos para préstamo hipotecario")
+\[6\]: BAC Credomatic. _Fórmulas y Ejemplos de Préstamos Hipotecarios_. BAC Credomatic. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www2.baccredomatic.com/sites/default/files/ni_formulas_y_ejemplos_de_prestamos_hipotecarios-_sitio_web_2020.pdf
 
-[6]: [BAC Credomatic. “Fórmulas y Ejemplos de Préstamos Hipotecarios”. BAC Credomatic. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www2.baccredomatic.com/sites/default/files/ni_formulas_y_ejemplos_de_prestamos_hipotecarios-_sitio_web_2020.pdf](https://www2.baccredomatic.com/sites/default/files/ni_formulas_y_ejemplos_de_prestamos_hipotecarios-_sitio_web_2020.pdf "Fórmula y ejemplos para calcular las cuotas de un préstamo")
+\[7\]: Banco Nacional de Costa RIca. _Calculadoras_. Banco Nacional de Costa RIca. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bncr.fi.cr/personas-calculadoras-old
 
-[7]: [Banco Nacional de Costa RIca. “Calculadoras”. Banco Nacional de Costa RIca. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bncr.fi.cr/personas-calculadoras-old](https://www.bncr.fi.cr/personas-calculadoras-old "Forma de calcular las tasas de interés mensual")
+\[8\]: W. Soto, _Abonos extraordinarios a préstamos, ¿reducción de cuota o tiempo?_. ProUsuario, 2022. https://prousuario.gob.do/educacion-financiera/blog/abonos-extraordinarios-a-préstamos-reducción-de-cuota-o-tiempo/
 
-[8]: W. Soto, _Abonos extraordinarios a préstamos, ¿reducción de cuota o tiempo?_. ProUsuario, 2022. https://prousuario.gob.do/educacion-financiera/blog/abonos-extraordinarios-a-préstamos-reducción-de-cuota-o-tiempo/
+\[9\]: Banco de Costa Rica. _Cuenta de ahorro_. Banco BCR. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/cuentas/ahorro
 
-[9]: [Banco de Costa Rica. “Cuenta de ahorro”. Banco BCR. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/cuentas/ahorro](https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/cuentas/ahorro "Características y requisitos de las cuentas de ahorro")
+\[10\]: BAC Credomatic. _Guía para calcular interés diario y mantenimiento de valor para cuentas de ahorro_. BAC Credomatic. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www2.baccredomatic.com/sites/default/files/calculointerescuentaelectronica.pdf
 
-[10]: [BAC Credomatic. “GUÍA PARA CALCULAR INTERÉS DIARIO Y MANTENIMIENTO DE VALOR PARA CUENTAS DE AHORRO”. BAC Credomatic. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www2.baccredomatic.com/sites/default/files/calculointerescuentaelectronica.pdf](https://www2.baccredomatic.com/sites/default/files/calculointerescuentaelectronica.pdf "Forma de calcular los intereses de una cuenta de ahorro")
+\[11\]: Banco Popular. _Ahorro a Plazo_. Banco Popular. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bancopopular.fi.cr/ahorro/ahorro-a-plazo/
 
-[11]: [Banco Popular. “Ahorro a Plazo”. Banco Popular. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bancopopular.fi.cr/ahorro/ahorro-a-plazo/](https://www.bancopopular.fi.cr/ahorro/ahorro-a-plazo/ "Características y requisitos de un CDP")
+\[12\]: Banco Popular. _Calculadora Certificados Capitalizables_. Banco Popular. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bancopopular.fi.cr/calculadora-certificados-capitalizables/
 
-[12]: [Banco Popular. “Calculadora Certificados Capitalizables”. Banco Popular. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bancopopular.fi.cr/calculadora-certificados-capitalizables/](https://www.bancopopular.fi.cr/calculadora-certificados-capitalizables/ "Fórmula para calcular el pago de intereses al vencer un CDP")
+\[13\]: BillIn. _¿Qué es depositar?_. BillIn. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.billin.net/glosario/definicion-depositar/
 
-[13]: [Billin. “¿Qué es depositar?”. Billin. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.billin.net/glosario/definicion-depositar/](https://www.billin.net/glosario/definicion-depositar/ "Funcionamiento de un depósito")
+\[14\]: Rankia España. _Retiro bancario_. Rankia: Comunidad financiera. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.rankia.com/diccionario/banca/retiro-bancario
 
-[14]: [Rankia España. “Retiro bancario”. Rankia: Comunidad financiera. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.rankia.com/diccionario/banca/retiro-bancario](https://www.rankia.com/diccionario/banca/retiro-bancario "Funcionamiento de un retiro")
+\[15\]: Banco de Costa Rica. _Transferencias_. Banco BCR. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/servicios_personas/transferencias/
 
-[15]: [Banco de Costa Rica. “Transferencias”. Banco BCR. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/servicios_personas/transferencias/](https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/servicios_personas/transferencias/ "Definción y operación de una transferencia")
-
-
-[16]: Cámara de Bancos e Instituciones Financieras de Costa Rica (2015). _Manual de buenas prácticas para el manejo de los datos personales de los clientes de los servicios financieros_. 
+\[16\]: Cámara de Bancos e Instituciones Financieras de Costa Rica. _Manual de buenas prácticas para el manejo de los datos personales de los clientes de los servicios financieros_, 2015. 
