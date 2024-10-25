@@ -102,16 +102,17 @@ Todos lo préstamos pueden tener tasas de intéres variable o fija.[[7]](#biblio
 
 #### Abonos a Préstamos
 
-Un abono extraordinario a préstamos consiste en el pago de cuotas adicionales antes de su tiempo programado.
+La acción de abonar a un préstamo es realizar un pago parcial que se destina a reducir el saldo total de la deuda. Además, un abono extraordinario a préstamos consiste en el pago de cuotas adicionales antes de su tiempo programado.
 
 Es importante mencionar que dependiendo del tipo de acuerdo que se tenga del préstamo de la entidad bancaria, pueden existir penalizaciones o limitaciones a la hora de realizar los abonos extraordinarios. En el caso de la implementación actual no se van a aplicar estas limitaciones.
 
-Ahora bien, al realizar abonos al préstamo hay dos posibilidades: se reduce la vida del préstamo (plazo en meses restantes) o se reduce el monto de la cuota mensual. En la aplicación se va a permitir escoger cuál opción se prefiere.[[8]](#bibliografía)
+Ahora bien, al realizar abonos extraordinarios al préstamo hay dos posibilidades: se reduce la vida del préstamo (plazo en meses restantes) o se reduce el monto de la cuota mensual. En la aplicación se va a permitir escoger cuál opción se prefiere.[[8]](#bibliografía)
 
 Para realizar los abonos al préstamo, se va a almacenar la siguiente información:
 
 - Identificador del pago del préstamo (ID).
 - Identificador del préstamo.
+- Identificador de la cuenta que realizó el pago
 - Cuota pagada.
 - Aporte al capital.
 - Aporte a los intereses.
@@ -225,6 +226,8 @@ Ahora bien, en cuanto al diseño dentro de la base de datos, se plantea la imple
 
 <p align="center">
   <img width="750" src="./images/diagramaDB.png">
+
+  __Figura 1.__ Diagrama de base de datos del proyecto.
 </p>
 
 > [!IMPORTANT]
@@ -257,15 +260,15 @@ En esta, se incluyen las tablas a continuación:
     - __Clave primaria__ `idPrestamo`: Identificador único del préstamo. Generado de forma automática por la base de datos.
     - __Clave foránea__ `idCuenta`: Identificador de la cuenta bancaria asociada al préstamo.
     - `tipo`: Tipo de préstamo (`PER`: personal, `HIP`: hipotecario, `PRE`: prendario).
+    - `monto`: Monto de dinero prestado.
     - `tasaInteres`: Tasa de interés asociada al préstamo. Se va a manejar una tasa de interés fija para los préstamos.
     - `plazoMeses`: Plazo total en meses del préstamo.
-    - `cuotaMensual`: 
-    - `totalPagado`: 
-    - *`plazoRestante`: 
-    - *`total a pagar`: 
-    - *`interes a pagar`: 
-    - *`interes pagado`: 
-    - *`fecha vencimiento/solicitud`: 
+    - `cuotaMensual`: Cuota a pagar cada mes.
+    - `capitalPagado`: Monto de capital pagado del préstamo. 
+    - `InteresesPagados`: Monto de intereses pagados del préstamo. 
+    - `fechaSolicitud`: Fecha en la que fue solicitado el préstamo.
+    - `fechaSiguientePago`: Fecha del siguiente pago del préstamo.
+    - `activo`: Estado de actividad del préstamo (fue pagado o no).
 
 - __`PagoPrestamos`__: Tabla que guarda un registro del pago de los préstamos dentro de la entidad bancaria.
     - __Clave primaria__ `idPagoPrestamo`: Identificador único del préstamo. Generado automáticamente por la base de datos.
@@ -279,11 +282,11 @@ En esta, se incluyen las tablas a continuación:
     - __Clave primaria__ `idTransaccion`: Identificador único de la transacción realizada.
     - __Clave foránea__ `idRemitente`: Hace referencia a la cuenta sobre la que se obtuvieron los fondos para la transacción (ID de la cuenta).
     - __Clave foránea__ `idDestinatario`: Hace referencia a la cuenta a la que se depositaron los fondos para la transacción (ID de la cuenta).
-    - `tipo`: Tipo de transacción (`TRA`: transferencia, `RET`: retiro, `DEP`: Depósito).
+    - `tipo`: Tipo de transacción (`TRA`: transferencia, `RET`: retiro, `DEP`: depósito, `ABO`: abono a préstamo, `CDP`).
     - `monto`: Monto de dinero movido en la transacción.
 
 > [!NOTE]
-> En esta tabla, se manejan 3 tipos de movimientos: transferencias, retiros y depósitos (identificados por el tipo). Cuando se realiza un retiro, `idDestinatario` es nulo; mientras que, cuando se realiza un depósito, `idRemitente` es nulo.
+> En esta tabla, se manejan 5 tipos de movimientos: transferencias, retiros y depósitos, abonos a préstamos, solicitud/recibimiento de beneficios de CDP (identificados por el tipo). Cuando se realiza un retiro, `idDestinatario` es nulo; mientras que, cuando se realiza un depósito, `idRemitente` es nulo.
 
 - __`CDP`__: Tabla que almacena la información de los certificados de depósito a plazo.
     - __Clave primaria__ `idCDP`: Identificador único del CDP. Generado automáticamente por la base de datos,
@@ -293,55 +296,80 @@ En esta, se incluyen las tablas a continuación:
     - `tasaInteres`: Tasa de interés asociada al CDP.
     - `fechaSolicitud`: Fecha de registro del CDP por parte del usuario.
 
-### Reportes de transacciones
+### Flujo de la aplicación durante la ejecución
 
-Normalmente cada transacción tiene información distinta en sus reportes, pero hay varios datos básicos que debe incluir cualquier reporte:
+En cuanto al flujo del programa al momento de ejecutarse, se diseñó un diagrama de flujo general para representar el proceso. Este se muestra en la imagen a continuación.
 
-- ID de Transacción: Identificador único
+<p align="center">
+  <img width="750" src="./images/diagramaFlujo.png">
 
-- Tipo de Transacción: Depósito, retiro, transferencia, abono a préstamo
+  __Figura 2.__ Diagrama de flujo del proyecto durante la ejecución.
+</p>
 
-- Monto: Importe de la transacción
+#### Inicio del programa
 
-- Cuenta de Origen: ID de la cuenta que origina la transacción
+Inicialmente, al ejecutar el programa se muestra un menú que permite escoger entre las opciones solicitadas en el enunciado de modos de operación de la aplicación:
 
-- Cuenta de Destino (si aplica): ID de la cuenta que recibe la transacción en caso de que sea una transferencias o abonos
+1) Modo de atención al cliente
+2) Modo de préstamos bancarios
 
-- Cliente Asociado: ID del cliente que ejecutó la transacción
+> [!NOTE]
+> Lo primero que ocurre es la creación de la clase Banco, la cual contiene métodos para las operaciones posibles, así como que en su constructor, inicializa la instancia de la base de datos a utilizar.
 
-Ahora bien, hay datos específicos que se deben tener para cada tipo de transacción:
+El usuario (encargado en ventanilla) escoge el tipo de modo y esto lo lleva a un submenú para cada caso. También, se presenta una opción `Salir`, si desea terminar la ejecución del programa.
 
-#### Depósitos y Retiros
+#### Submenú de Atención al Cliente
 
-- Saldo anterior
+En este submenú, se realizan las operaciones solicitadas por el cliente. Primero, se pregunta el número de cédula del cliente para identificarlo en el sistema o se puede registrar un cliente. Se presentan estas dos opciones. 
 
-- Saldo actual después de la transacción
+En el caso en que se registre un cliente, se deben preguntar la información de las columnas de la tabla `Clientes` para crear un registro nuevo: Nombre completo, cédula y teléfono.
+Posteriormente, es realiza la consulta en la base de datos para determinar si existe un usuario que coincida con el número de cédula proporcionado. En caso de que no pase, se crea un registro en la tabla `Clientes` con la información ingresada.
 
-#### Transferencias
+También se establece un `TRIGGER` que limita la cantidad de usuarios a 999 999 999. Entonces si se superó esa cantidad, no se permiten más inserciones de clientes.
 
-- ID del cliente receptor de la transferencia
+Al terminar esta operación, se vuelve a mostrar el menú de atención al cliente.
 
-#### Abonos a Préstamos
+Ahora bien, en el caso de que se ingrese un cliente (por medio de `cedula`), si existe, se muestra un menú para escoger el tipo de operación que desea realizar en la cuenta. Las opciones se muestran a continuación:
 
-- ID del préstamo
+- __Crear cuenta__: Permite crear una cuenta asociada al cliente de un tipo de moneda.
+    - Solicita el tipo de moneda para crear una cuenta (`USD`, `CRC`). En caso de que ya existe una cuenta con esa divisa asociada al cliente, se muestra un mensaje que lo indica.
+    - Si no existe, se crea un registro en la base de datos para la nueva cuenta con la información dada.
+- __Ver saldo__: Solicita el identificador de una cuenta asociada al cliente para ver el saldo.
+- __Depósito__: Agregar fondos a la cuenta.
+    - Primero se indica el tipo de moneda a ingresar.
+    - Se indica el ID de la cuenta a depositar.
+    - Si no coinciden, no se puede realizar el depósito.
+    - Si coinciden, el saldo de la cuenta se aumenta y se genera un registro del movimiento.
+- __Retiro__: Retira fondos de la cuenta.
+    - Primero se indica el tipo de moneda a retirar.
+    - Se indica el ID de la cuenta a retirar (se verifica su existencia).
+    - Si no coinciden, no se puede realizar el retiro.
+    - Si coinciden, el saldo de la cuenta se reduce por el monto indicado y se genera un registro del movimiento.
+- __Transferencia__: Transfiere fondos de una cuenta a otra.
+    - Primero se solicita el ID de la cuenta del destinatario y existe.
+    - Se verifica si ambas cuentas comparten el mismo tipo de moneda. 
+    - Luego, se indica el monto a transferir y se verifica si la cuenta tiene fondos suficientes.
+    - En caso de que los pasos anteriores fueran exitosos, se reduce y se aumentan los saldos de las cuentas involucradas y se genera un log del movimiento para la tabla `Transacciones`.
+- __Consultar historial__: A partir del ID de la cuenta, se muestra un historial de todos los movimientos realizados.
+- __Solicitar CDP__: Se solicita un certificado de depósito a plazo. 
+    - Se indica el monto destinado para el CDP y se verifica que existan suficientes fondos dentro de la cuenta para ello.
+    - Se escribe el plazo en meses y la tasa de interés.
+    - Se pasan los datos a la tabla `CDP` de la base de datos.
+- __Abono a préstamo__: Permite realizar un abono a un préstamo, a partir del ID del préstamo.
+    - Se indica el ID del préstamo y se comprueba su existencia.
+    - Se indican el número de cuotas a abonar (se verifica si hay suficientes fondos para hacerlo).
+    - La primera cuota pagada corresponde a la cuota.
 
-- Cuota pagada
+> [!NOTE]
+> Al terminar la ejecución de cada uno de estas opciones, se vuelve a mostrar el menú de atención al cliente. Para salir del modo, se debe seleccionar la opción de `Salir`.
 
-- Aporte al capital
+#### Submenú de Préstamos Bancarios
 
-- Aporte a los intereses
+En cuanto a este submenú, se pregunta si desea solicitar o revisar un préstamo.
 
-- Saldo restante del préstamo
+En el primer caso, de solicitar un préstamo, se muestra inicialmente los valores predeterminados de intéres, monto mensual y número de cuotas para cada uno. Luego, se pregunta si desea guardar una tabla de pagos estimados. Finalmente, se pregunta sobre la solicitud del préstamo, si se desea registrar el préstamo realmente. En caso afirmativo, se escriben los datos en la tabla `Prestamos` y se genera un log en la tabla `PagoPrestamos`.
 
-#### Pago al vencer un CDP
-
-- ID del CDP
-
-- Monto del capital
-
-- Intereses generados
-
-PENDIENTE AGREGAR A LA LISTA DE LOGS
+En el segundo caso, se revisa el estado de un préstamo a partir del ingreso de su ID. También, se da la opción de generar el reporte de un préstamo (cuotas pagadas, aporte total al capital e intereses abonados) en formato tabular.
 
 ## Cronograma
 
