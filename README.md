@@ -19,13 +19,13 @@ En esta sección se define el concepto, funcionamiento y características de los
 
 ### Préstamos
 
-Inicialmente, se tiene que un préstamo consiste en un producto financiero que permite a un usuario acceder a una cantidad fija de dinero al comienzo de la operación. Además, esta debe ser devuelta junto a unos intereses pactados en un plazo determinado. Por lo general, la amortización del préstamo se realiza mediante cuotas mensuales.[[11]](#bibliografía)
+Inicialmente, se tiene que un préstamo consiste en un producto financiero que permite a un usuario acceder a una cantidad fija de dinero al comienzo de la operación. Además, esta debe ser devuelta junto a unos intereses pactados en un plazo determinado. Por lo general, la amortización del préstamo se realiza mediante cuotas mensuales.[[1]](#bibliografía)
 
 Con base en la definición anterior, es importante definir que es un préstamo garantizado y no garantizado, lo cual se realiza en las subsecciones siguientes. Posteriormente, se muestran los tipos de préstamos que van a ser contemplados en el proyecto.
 
 #### Préstamos garantizados 
 
-Es aquel que se otorga con base en algún tipo de garantía a modo de respaldo, que puede ser una propiedad, un bien material o un aval financiero como un depósito bancario, acciones o similares.[[1]](#bibliografía)
+Es aquel que se otorga con base en algún tipo de garantía a modo de respaldo, que puede ser una propiedad, un bien material o un aval financiero como un depósito bancario, acciones o similares.[[2]](#bibliografía)
 
 El punto es que la garantía se usa para asegurarse que el prestamista (entidad bancaria) recupere el dinero prestado en caso de que el deudor (cliente) no pueda pagar.
 
@@ -33,11 +33,11 @@ Este tipo de préstamos tienen una tasa de intéres más baja que los no garanti
 
 #### Préstamos no garantizados 
 
-Para solicitar estos préstamos no se requiere de ninguna garantía más que la solvencia del deudor para pagar, pero presenta un riesgo para el prestamista ya que no hay forma de asegurarse de que el deudor vaya a pagar. Por este mismo riesgo para el prestamista estos préstamos suelen pactarse con periodos de pago más cortos y a una tasa de intéres mucho mayor.[[1]](#bibliografía)
+Para solicitar estos préstamos no se requiere de ninguna garantía más que la solvencia del deudor para pagar, pero presenta un riesgo para el prestamista ya que no hay forma de asegurarse de que el deudor vaya a pagar. Por este mismo riesgo para el prestamista estos préstamos suelen pactarse con periodos de pago más cortos y a una tasa de intéres mucho mayor.[[2]](#bibliografía)
 
 #### Préstamos personales
 
-Con respecto al primer tipo de préstamo contemplado en el proyecto, se tiene que este es **no garantizado**, en el que se presta una cantidad específica de dinero a una persona, con la promesa de devolverlo en cuotas regulares. Es comúnmente utilizado para gastos personales, como la compra de electrodomésticos, viajes o consolidación de deudas[[2]](#bibliografía).
+Con respecto al primer tipo de préstamo contemplado en el proyecto, se tiene que este es **no garantizado**, en el que se presta una cantidad específica de dinero a una persona, con la promesa de devolverlo en cuotas regulares. Es comúnmente utilizado para gastos personales, como la compra de electrodomésticos, viajes o consolidación de deudas[[3]](#bibliografía).
 
 La información requierida para estimar el pago de este tipo de préstamos es la siguiente:
 
@@ -47,15 +47,15 @@ La información requierida para estimar el pago de este tipo de préstamos es la
 
 #### Préstamo prendario
 
-Es un préstamo que está **garantizado** por un bien mueble, como un vehículo o joyas. En caso de incumplimiento de pago, el banco puede tomar posesión del bien en garantía.[[3]](#bibliografía)
+Es un préstamo que está **garantizado** por un bien mueble, como un vehículo o joyas. En caso de incumplimiento de pago, el banco puede tomar posesión del bien en garantía.[[4]](#bibliografía)
 
 Como se mencionó antes, estos tiene una tasa de interés más baja que los no garantizados porque hay una garantía física de que el deudor no incumplirá los pagos. 
 
-La información que se requiere para estimar el pago es la misma que el préstamo personal, pero se debe asegurar que el bien que se ha dado como garantía tenga el mismo valor o superior al valor del préstamo en caso de que no sea el bien mismo.[[3]](#bibliografía)
+La información que se requiere para estimar el pago es la misma que el préstamo personal, pero se debe asegurar que el bien que se ha dado como garantía tenga el mismo valor o superior al valor del préstamo en caso de que no sea el bien mismo.[[4]](#bibliografía)
 
 #### Préstamo hipotecario
 
-Es un préstamo que se **garantiza** con una propiedad inmueble, como una casa o terreno. Se utiliza comúnmente para la compra, construcción o remodelación de bienes raíces.[[4]](#bibliografía)
+Es un préstamo que se **garantiza** con una propiedad inmueble, como una casa o terreno. Se utiliza comúnmente para la compra, construcción o remodelación de bienes raíces.[[5]](#bibliografía)
 
 Para calcular el pago de este tipo de préstamos se requiere:
 
@@ -98,21 +98,26 @@ Donde $i_V$ es la tasa de interés variable en cada cuota, e $i$ es la tasa de i
 
 $$C=\frac{P\cdot i_V\cdot (1+i_V)^n}{(1+i_V)^n-1}$$
 
-Todos lo préstamos pueden tener tasas de intéres variable o fija.[[6]](#bibliografía)
+Todos lo préstamos pueden tener tasas de intéres variable o fija.[[7]](#bibliografía)
 
 #### Abonos a Préstamos
 
-PENDIENTE
+Un abono extraordinario a préstamos consiste en el pago de cuotas adicionales antes de su tiempo programado.
 
-- ID del préstamo
+Es importante mencionar que dependiendo del tipo de acuerdo que se tenga del préstamo de la entidad bancaria, pueden existir penalizaciones o limitaciones a la hora de realizar los abonos extraordinarios. En el caso de la implementación actual no se van a aplicar estas limitaciones.
 
-- Cuota pagada
+Ahora bien, al realizar abonos al préstamo hay dos posibilidades: se reduce la vida del préstamo (plazo en meses restantes) o se reduce el monto de la cuota mensual. En la aplicación se va a permitir escoger cuál opción se prefiere.[8](#bibliografía)
 
-- Aporte al capital
+Para realizar los abonos al préstamo, se va a almacenar la siguiente información:
 
-- Aporte a los intereses
+- Identificador del pago del préstamo (ID).
+- Identificador del préstamo.
+- Cuota pagada.
+- Aporte al capital.
+- Aporte a los intereses.
+- Saldo restante del préstamo.
 
-- Saldo restante del préstamo
+Guardar el saldo del préstamo es realizado como un mecanismo de seguridad para rastrear la correcta reducción del préstamo y reducir la posibilidad de que ocurran irregularidades.
 
 ### Cuentas de Ahorros
 
@@ -123,17 +128,17 @@ Es una cuenta bancaria que permite a una persona depositar dinero para ahorrarlo
 - Comprobante de domicilio.
 - Teléfono
 - Monto mínimo de apertura (dependiendo del banco).
-- Tasa de interés sobre saldo promedio.[[7]](#bibliografía)
+- Tasa de interés sobre saldo promedio.[[9]](#bibliografía)
 
 Esta tasa de interés en las cuentas de ahorro se calcula diariamente por medio de la siguiente fórmula:
 
 $$I_D=\frac{\text{Saldo al final del día}\times i}{365}$$
 
-Donde $i$ es la tasa de interés de la cuenta de ahorro e $I_D$ es el valor diario de interés que se suma a la cuenta.[[8]](#bibliografía)
+Donde $i$ es la tasa de interés de la cuenta de ahorro e $I_D$ es el valor diario de interés que se suma a la cuenta.[[10]](#bibliografía)
 
 ### Certificado de depósito a plazo (CDP)
 
-Es un tipo de inversión en la que se deposita una cantidad de dinero durante un período fijo, y el banco paga intereses sobre el monto al final del plazo. El dinero no puede retirarse antes de la fecha de vencimiento sin incurrir en penalizaciones.[[9]](#bibliografía)
+Es un tipo de inversión en la que se deposita una cantidad de dinero durante un período fijo, y el banco paga intereses sobre el monto al final del plazo. El dinero no puede retirarse antes de la fecha de vencimiento sin incurrir en penalizaciones.[[11]](#bibliografía)
 
 La información requerida para abrir un CDP se muestra a continuación:
 
@@ -151,7 +156,7 @@ Las variables anteriores corresponden a:
 - $I$: interés ganado.
 - $P$: monto del CDP.
 - $i$: tasa de interés anual.
-- $t$: tiempo de duración del CDP, en años.[[10]](#bibliografía)
+- $t$: tiempo de duración del CDP, en años.[[12]](#bibliografía)
 
 Cabe mencionar que $i$ se calcula igual que como se explicó para los préstamos.
 
@@ -163,7 +168,7 @@ Respecto a la información que se almacena en el sistema al solicitar/vencer un 
 
 ### Depósitos y retiros de dinero
 
-En primer lugar, __depositar dinero__ en una entidad bancaria consiste en la acción de entregar dinero al banco para que lo almacene y lo inmovilice, a cambio de recibir una rentabilidad por ese dinero (en forma de intereses).[[12]](#bibliografía).
+En primer lugar, __depositar dinero__ en una entidad bancaria consiste en la acción de entregar dinero al banco para que lo almacene y lo inmovilice, a cambio de recibir una rentabilidad por ese dinero (en forma de intereses).[[13]](#bibliografía).
 
 Para realizar un depósito de dinero, se requiere especificar el identificador de la cuenta bancaria a la que se desea ingresar el monto, así como el número de cédula del cliente de la cuenta, a modo de doble comprobación de los datos y asegurar que la cuenta realmente pertenece al cliente en cuestión.
 
@@ -173,7 +178,7 @@ Para el almacenamiento de la información del depósito, se guardan los siguient
 - Identificador de la cuenta a la que se depositó el dinero.
 - Monto de dinero ingresado.
 
-En segundo lugar, un __retiro bancario__ corresponde a una operación financiera, mediante la cual un cliente extrae fondos de su cuenta, para utilizarlos en transacciones de pago, inversión, consumo, entre otros.[[13]](#bibliografía)
+En segundo lugar, un __retiro bancario__ corresponde a una operación financiera, mediante la cual un cliente extrae fondos de su cuenta, para utilizarlos en transacciones de pago, inversión, consumo, entre otros.[[14]](#bibliografía)
 
 Esta es una operación común para realizar en una ventanilla, especialmente al retirar considerables sumas de dinero (que excedan el límite de un cajero automático). Por lo que, para realizar retiro es necesario indicar la cédula (identificación de la persona) y el número de la cuenta sobre la cual desea retirar el dinero.
 
@@ -189,7 +194,7 @@ En cuanto a la información que se va a almacenar en el sistema del movimiento a
 
 Una transferencia corresponde al envío de fondos de una cuenta a otra (puede ser del mismo banco o de terceros). Para efectos del proyecto, es importante mencionar que las transacciones se deben dar en cuentas de la misma moneda.
 
-En cuanto a los datos requeridos para realizar una transacción, se requiere el identificador (ID) de la cuenta del destinatario y su número de cédula. Esto tiene el propósito de realizar una doble verificación de que la cuenta pertenece a la persona indicada.[[14]](#bibliografía)
+En cuanto a los datos requeridos para realizar una transacción, se requiere el identificador (ID) de la cuenta del destinatario y su número de cédula. Esto tiene el propósito de realizar una doble verificación de que la cuenta pertenece a la persona indicada.[[15]](#bibliografía)
 
 Además, para efectos de la información que se va a guardar en el sistema, se almacenan:
 
@@ -204,7 +209,7 @@ Dependiendo del contexto de la transferencia, ciertos bancos aplican un porcenta
 
 Observe que en las transacciones mencionadas anteriormente, se establece como prioridad la confidencialidad de la información de los clientes. Únicamente se pueden realizar las transacciones si es el cliente el que proporciona la información correcta, no se sugieren cambios o correcciones a los valores ingresados por el cliente para la protección de datos. 
 
-Como establece el _Manual de buenas prácticas para el manejo de los datos personales de los clientes de los servicios financieros_ de la Cámara de Bancos e Instituciones Financieras de Costa Rica, la entidad financiera debe guardar secreto de todos los datos que manejen de sus clientes salvo que se encuentre dentro de las excepciones estipuladas en la Ley. Además, las entidades financieras deben proteger y utilizar adecuadamente cualquier dato o información confidencial que les suministren sus clientes. Ésta deberá ser utilizada de manera exclusiva para el propósito por el cual fue requerida.
+Como establece el _Manual de buenas prácticas para el manejo de los datos personales de los clientes de los servicios financieros_ de la Cámara de Bancos e Instituciones Financieras de Costa Rica, la entidad financiera debe guardar secreto de todos los datos que manejen de sus clientes salvo que se encuentre dentro de las excepciones estipuladas en la Ley. Además, las entidades financieras deben proteger y utilizar adecuadamente cualquier dato o información confidencial que les suministren sus clientes. Ésta deberá ser utilizada de manera exclusiva para el propósito por el cual fue requerida.[16](#bibliografía)
 
 Por lo tanto, el propósito del proyecto actual es que se rija basándose en el párrafo anterior; es decir, priorizando la privacidad de los clientes en la entidad bancaria.
 
@@ -261,35 +266,37 @@ Ahora bien, hay datos específicos que se deben tener para cada tipo de transacc
 
 ## Bibliografía
 
-[1]: [Banco Santander. “Préstamo garantizado vs Préstamos no garantizados”. Santander Consumer. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.santanderconsumer.es/blog/post/prestamo-garantizado-vs-prestamos-no-garantizados](https://www.santanderconsumer.es/blog/post/prestamo-garantizado-vs-prestamos-no-garantizados "Definiciones de tipos de préstamos")
+[1]: Banco Santander. “¿Qué diferencias hay entre un préstamo y un crédito?” Banco Santander. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.bancosantander.es/faqs/particulares/prestamos/diferencias-prestamo-credito#:~:text=Un%20préstamo%20es%20un%20producto,realiza%20mediante%20unas%20cuotas%20regulares
 
-[2]: [Caja de ANDE. “Préstamos Personales”. Caja de ANDE. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.cajadeande.fi.cr/servicios/préstamos/préstamos-personales/](https://www.cajadeande.fi.cr/servicios/pr%C3%A9stamos/pr%C3%A9stamos-personales/ "Tipos y modalidades de préstamos personales")
+(https://www.bancosantander.es/faqs/particulares/prestamos/diferencias-prestamo-credito#:~:text=Un%20pr%C3%A9stamo%20es%20un%20producto,realiza%20mediante%20unas%20cuotas%20regulares "Definición de un préstamo")
 
-[3]: [Banco de Costa Rica. “Vehículo Nuevo Motos y Afines”. Banco Nacional de Costa RIca. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/creditos/creditos_para_vehiculos/vehiculo_nuevo_motos_y_afines/](https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/creditos/creditos_para_vehiculos/vehiculo_nuevo_motos_y_afines/ "Requisitos para préstamo prendario")
+[2]: [Banco Santander. “Préstamo garantizado vs Préstamos no garantizados”. Santander Consumer. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.santanderconsumer.es/blog/post/prestamo-garantizado-vs-prestamos-no-garantizados](https://www.santanderconsumer.es/blog/post/prestamo-garantizado-vs-prestamos-no-garantizados "Definiciones de tipos de préstamos")
 
-[4]: [Banco Nacional de Costa RIca. “Préstamos Para Vivienda”. Banco Nacional de Costa RIca. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.bncr.fi.cr/personas/financiamiento/prestamo-para-vivienda](https://www.bncr.fi.cr/personas/financiamiento/prestamo-para-vivienda "Propósito y requisitos para préstamo hipotecario")
+[3]: [Caja de ANDE. “Préstamos Personales”. Caja de ANDE. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.cajadeande.fi.cr/servicios/préstamos/préstamos-personales/](https://www.cajadeande.fi.cr/servicios/pr%C3%A9stamos/pr%C3%A9stamos-personales/ "Tipos y modalidades de préstamos personales")
 
-[5]: [BAC Credomatic. “Fórmulas y Ejemplos de Préstamos Hipotecarios”. BAC Credomatic. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www2.baccredomatic.com/sites/default/files/ni_formulas_y_ejemplos_de_prestamos_hipotecarios-_sitio_web_2020.pdf](https://www2.baccredomatic.com/sites/default/files/ni_formulas_y_ejemplos_de_prestamos_hipotecarios-_sitio_web_2020.pdf "Fórmula y ejemplos para calcular las cuotas de un préstamo")
+[4]: [Banco de Costa Rica. “Vehículo Nuevo Motos y Afines”. Banco Nacional de Costa RIca. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/creditos/creditos_para_vehiculos/vehiculo_nuevo_motos_y_afines/](https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/creditos/creditos_para_vehiculos/vehiculo_nuevo_motos_y_afines/ "Requisitos para préstamo prendario")
 
-[6]: [Banco Nacional de Costa RIca. “Calculadoras”. Banco Nacional de Costa RIca. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bncr.fi.cr/personas-calculadoras-old](https://www.bncr.fi.cr/personas-calculadoras-old "Forma de calcular las tasas de interés mensual")
+[5]: [Banco Nacional de Costa Rica. “Préstamos Para Vivienda”. Banco Nacional de Costa Rica. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www.bncr.fi.cr/personas/financiamiento/prestamo-para-vivienda](https://www.bncr.fi.cr/personas/financiamiento/prestamo-para-vivienda "Propósito y requisitos para préstamo hipotecario")
 
-[7]: [Banco de Costa Rica. “Cuenta de ahorro”. Banco BCR. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/cuentas/ahorro](https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/cuentas/ahorro "Características y requisitos de las cuentas de ahorro")
+[6]: [BAC Credomatic. “Fórmulas y Ejemplos de Préstamos Hipotecarios”. BAC Credomatic. Accedido el 19 de octubre de 2024. [En línea]. Disponible: https://www2.baccredomatic.com/sites/default/files/ni_formulas_y_ejemplos_de_prestamos_hipotecarios-_sitio_web_2020.pdf](https://www2.baccredomatic.com/sites/default/files/ni_formulas_y_ejemplos_de_prestamos_hipotecarios-_sitio_web_2020.pdf "Fórmula y ejemplos para calcular las cuotas de un préstamo")
 
-[8]: [BAC Credomatic. “GUÍA PARA CALCULAR INTERÉS DIARIO Y MANTENIMIENTO DE VALOR PARA CUENTAS DE AHORRO”. BAC Credomatic. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www2.baccredomatic.com/sites/default/files/calculointerescuentaelectronica.pdf](https://www2.baccredomatic.com/sites/default/files/calculointerescuentaelectronica.pdf "Forma de calcular los intereses de una cuenta de ahorro")
+[7]: [Banco Nacional de Costa RIca. “Calculadoras”. Banco Nacional de Costa RIca. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bncr.fi.cr/personas-calculadoras-old](https://www.bncr.fi.cr/personas-calculadoras-old "Forma de calcular las tasas de interés mensual")
 
-[9]: [Banco Popular. “Ahorro a Plazo”. Banco Popular. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bancopopular.fi.cr/ahorro/ahorro-a-plazo/](https://www.bancopopular.fi.cr/ahorro/ahorro-a-plazo/ "Características y requisitos de un CDP")
+[8]: W. Soto, _Abonos extraordinarios a préstamos, ¿reducción de cuota o tiempo?_. ProUsuario, 2022. https://prousuario.gob.do/educacion-financiera/blog/abonos-extraordinarios-a-préstamos-reducción-de-cuota-o-tiempo/
 
-[10]: [Banco Popular. “Calculadora Certificados Capitalizables”. Banco Popular. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bancopopular.fi.cr/calculadora-certificados-capitalizables/](https://www.bancopopular.fi.cr/calculadora-certificados-capitalizables/ "Fórmula para calcular el pago de intereses al vencer un CDP")
+[9]: [Banco de Costa Rica. “Cuenta de ahorro”. Banco BCR. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/cuentas/ahorro](https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/cuentas/ahorro "Características y requisitos de las cuentas de ahorro")
 
-[11]: [Banco Santander. “¿Qué diferencias hay entre un préstamo y un crédito?” Banco Santander. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.bancosantander.es/faqs/particulares/prestamos/diferencias-prestamo-credito#:~:text=Un%20préstamo%20es%20un%20producto,realiza%20mediante%20unas%20cuotas%20regulares](https://www.bancosantander.es/faqs/particulares/prestamos/diferencias-prestamo-credito#:~:text=Un%20pr%C3%A9stamo%20es%20un%20producto,realiza%20mediante%20unas%20cuotas%20regulares "Definición de un préstamo")
+[10]: [BAC Credomatic. “GUÍA PARA CALCULAR INTERÉS DIARIO Y MANTENIMIENTO DE VALOR PARA CUENTAS DE AHORRO”. BAC Credomatic. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www2.baccredomatic.com/sites/default/files/calculointerescuentaelectronica.pdf](https://www2.baccredomatic.com/sites/default/files/calculointerescuentaelectronica.pdf "Forma de calcular los intereses de una cuenta de ahorro")
 
-[12]: [Billin. “¿Qué es depositar?”. Billin. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.billin.net/glosario/definicion-depositar/](https://www.billin.net/glosario/definicion-depositar/ "Funcionamiento de un depósito")
+[11]: [Banco Popular. “Ahorro a Plazo”. Banco Popular. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bancopopular.fi.cr/ahorro/ahorro-a-plazo/](https://www.bancopopular.fi.cr/ahorro/ahorro-a-plazo/ "Características y requisitos de un CDP")
 
-[13]: [Rankia España. “Retiro bancario”. Rankia: Comunidad financiera. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.rankia.com/diccionario/banca/retiro-bancario](https://www.rankia.com/diccionario/banca/retiro-bancario "Funcionamiento de un retiro")
+[12]: [Banco Popular. “Calculadora Certificados Capitalizables”. Banco Popular. Accedido el 20 de octubre de 2024. [En línea]. Disponible: https://www.bancopopular.fi.cr/calculadora-certificados-capitalizables/](https://www.bancopopular.fi.cr/calculadora-certificados-capitalizables/ "Fórmula para calcular el pago de intereses al vencer un CDP")
 
-[14]: [Banco de Costa Rica. “Transferencias”. Banco BCR. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/servicios_personas/transferencias/](https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/servicios_personas/transferencias/ "Definción y operación de una transferencia")
+[13]: [Billin. “¿Qué es depositar?”. Billin. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.billin.net/glosario/definicion-depositar/](https://www.billin.net/glosario/definicion-depositar/ "Funcionamiento de un depósito")
+
+[14]: [Rankia España. “Retiro bancario”. Rankia: Comunidad financiera. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.rankia.com/diccionario/banca/retiro-bancario](https://www.rankia.com/diccionario/banca/retiro-bancario "Funcionamiento de un retiro")
+
+[15]: [Banco de Costa Rica. “Transferencias”. Banco BCR. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/servicios_personas/transferencias/](https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/servicios_personas/transferencias/ "Definción y operación de una transferencia")
 
 
-Cámara de Bancos e Instituciones Financieras de Costa Rica (2015). _Manual de buenas prácticas para el manejo de los datos personales de los clientes de los servicios financieros_. 
-
-
+[16]: Cámara de Bancos e Instituciones Financieras de Costa Rica (2015). _Manual de buenas prácticas para el manejo de los datos personales de los clientes de los servicios financieros_. 
