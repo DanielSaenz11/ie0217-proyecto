@@ -106,7 +106,7 @@ Un abono extraordinario a préstamos consiste en el pago de cuotas adicionales a
 
 Es importante mencionar que dependiendo del tipo de acuerdo que se tenga del préstamo de la entidad bancaria, pueden existir penalizaciones o limitaciones a la hora de realizar los abonos extraordinarios. En el caso de la implementación actual no se van a aplicar estas limitaciones.
 
-Ahora bien, al realizar abonos al préstamo hay dos posibilidades: se reduce la vida del préstamo (plazo en meses restantes) o se reduce el monto de la cuota mensual. En la aplicación se va a permitir escoger cuál opción se prefiere.[8](#bibliografía)
+Ahora bien, al realizar abonos al préstamo hay dos posibilidades: se reduce la vida del préstamo (plazo en meses restantes) o se reduce el monto de la cuota mensual. En la aplicación se va a permitir escoger cuál opción se prefiere.[[8]](#bibliografía)
 
 Para realizar los abonos al préstamo, se va a almacenar la siguiente información:
 
@@ -344,6 +344,137 @@ Ahora bien, hay datos específicos que se deben tener para cada tipo de transacc
 PENDIENTE AGREGAR A LA LISTA DE LOGS
 
 ## Cronograma
+
+<table>
+  <tr>
+    <th>Fase</th>
+    <th>Actividad</th>
+    <th>Responsable</th>
+    <th>Inicio</th>
+    <th>Fin</th>
+    <th>Avances</th>
+  </tr>
+  <tr>
+    <td rowspan="2">Investigación</td>
+    <td>Recopilación de fuentes bibliográficas</td>
+    <td>Todos</td>
+    <td>12/10/2024</td>
+    <td>18/10/2024</td>
+    <td rowspan="5">Presentación de la propuesta del proyecto</td>
+  </tr>
+  <tr>
+    <td>Redacción de README.md</td>
+    <td>Todos</td>
+    <td>19/10/2024</td>
+    <td>25/10/2024</td>
+  </tr>
+  <tr>
+    <td rowspan="3">Diseño</td>
+    <td>Diseño de la base de datos</td>
+    <td>Todos</td>
+    <td>15/10/2024</td>
+    <td>15/10/2024</td>
+  </tr>
+  <tr>
+    <td>Flujo del programa</td>
+    <td>Todos</td>
+    <td>15/10/2024</td>
+    <td>20/10/2024</td>
+  </tr>
+  <tr>
+    <td>Planteamiento del cronograma</td>
+    <td>Todos</td>
+    <td>22/10/2024</td>
+    <td>24/10/2024</td>
+  </tr>
+  <tr>
+    <td rowspan="14">Implementación</td>
+    <td>Funciones que crean las tablas en el constructor de la clase</td>
+    <td>Daniel</td>
+    <td>26/10/2024</td>
+    <td>27/10/2024</td>
+    <td rowspan="7">Avance del proyecto</td>
+  </tr>
+  <tr>
+    <td>Implementar funciones de validación de datos</td>
+    <td>Daniel</td>
+    <td>26/10/2024</td>
+    <td>27/10/2024</td>
+  </tr>
+  <tr>
+    <td>Crear funciones de verificación de existencia de registros (clientes, cuentas, préstamos, CDP)</td>
+    <td>Rodrigo</td>
+    <td>26/10/2024</td>
+    <td>29/10/2024</td>
+  </tr>
+  <tr>
+    <td>Implementar funciones para crear nuevos registros (clientes, cuentas, préstamos, CDP)</td>
+    <td>Daniel</td>
+    <td>28/10/2024</td>
+    <td>01/11/2024</td>
+  </tr>
+  <tr>
+    <td>Crear función de reporte de solicitud/vencimiento CDP</td>
+    <td>Rodrigo</td>
+    <td>30/10/2024</td>
+    <td>01/11/2024</td>
+  </tr>
+  <tr>
+    <td>Crear funciones para hacer reportes (transferencias, depósitos, retiros)</td>
+    <td>Todos</td>
+    <td>02/11/2024</td>
+    <td>04/11/2024</td>
+  </tr>
+  <tr>
+    <td>Revisión de avance</td>
+    <td>Todos</td>
+    <td>05/11/2024</td>
+    <td>07/11/2024</td>
+  </tr>
+  <tr>
+    <td>Preparar exposición del avance</td>
+    <td>Todos</td>
+    <td>05/11/2024</td>
+    <td>08/11/2024</td>
+    <td rowspan="7">Presentación final del proyecto</td>
+  </tr>
+  <tr>
+    <td>Crear función de reporte de abonos a préstamos y hacer reporte de préstamos en formato tabular</td>
+    <td>Daniel</td>
+    <td>09/11/2024</td>
+    <td>13/11/2024</td>
+  </tr>
+  <tr>
+    <td>Crear función de abonar a préstamo</td>
+    <td>Daniel</td>
+    <td>09/11/2024</td>
+    <td>13/11/2024</td>
+  </tr>
+  <tr>
+    <td>Implementar funciones de transacciones (transferencias, depósitos y retiros)</td>
+    <td>Rodrigo</td>
+    <td>09/11/2024</td>
+    <td>13/11/2024</td>
+  </tr>
+  <tr>
+    <td>Implementar menú y submenús en la función main</td>
+    <td>Todos</td>
+    <td>14/11/2024</td>
+    <td>16/11/2024</td>
+  </tr>
+  <tr>
+    <td>Pruebas y Debugging</td>
+    <td>Todos</td>
+    <td>17/11/2024</td>
+    <td>22/11/2024</td>
+  </tr>
+  <tr>
+    <td>Preparar presentación final</td>
+    <td>Todos</td>
+    <td>23/11/2024</td>
+    <td>26/11/2024</td>
+  </tr>
+</table>
 
 
 
