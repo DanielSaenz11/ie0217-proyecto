@@ -1,7 +1,7 @@
 /**
  * @file reportesCDP.cpp
  * @author Rodrigo Madrigal Montes
- * @brief Implemetación de las funciones para generar reportes para un CDP
+ * @brief Implementación de las funciones para generar reportes para un CDP
  * @version 1.0
  * @date 2024-11-06
  * 
@@ -41,5 +41,5 @@ bool reporteSolicitudCDP(sqlite3* db) {
     sqlite3_finalize(stmt);
     file.close();
     return true;
-    
+
 }
