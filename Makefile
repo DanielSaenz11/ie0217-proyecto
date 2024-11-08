@@ -1,7 +1,8 @@
 # Compilador y banderas para la compilación
 CXX = g++
 CXXFLAGS = -std=c++20 -Wall
-INCLUDE_DIR = -Iinclude
+SQLITE_INCLUDE = -I<path_include_directory_sqlite> 
+SQLITE_LIB = -L<path_library_directory_sqlite> 
 
 # Archivos fuente y archivos objeto
 SRC_FILES = $(wildcard src/*.cpp) utils/auxiliares.cpp
