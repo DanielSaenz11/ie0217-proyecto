@@ -45,6 +45,18 @@ La información requierida para estimar el pago de este tipo de préstamos es la
 - **Plazo**: Período de tiempo en el que se pagará el préstamo (en meses).
 - **Tasa de interés**: Porcentaje anual que se aplica al monto del préstamo.
 
+Basándose en las tasas de interés y plazos que se insvestigaron en las fuentes [[17]](#bibliografía) y [[18]](#bibliografía) se determinó que las condiciones para préstamos personales que se manejarán en este proyecto son:
+
+
+<div align="center">
+
+|  Moneda | Monto total | Cuota mensual | Plazo en meses | Tasa de interés |
+|:-------:|:-----------:|:-------------:|:--------------:|:---------------:|
+| Colones |   260.000   |    23.222,44   |       12       |      13,5%      |
+| Dólares |    6.000    |    306,842    |       24       |      20,5%      |
+
+</div>
+
 #### Préstamo prendario
 
 Es un préstamo que está **garantizado** por un bien mueble, como un vehículo o joyas. En caso de incumplimiento de pago, el banco puede tomar posesión del bien en garantía.[[4]](#bibliografía)
@@ -52,6 +64,18 @@ Es un préstamo que está **garantizado** por un bien mueble, como un vehículo 
 Como se mencionó antes, estos tiene una tasa de interés más baja que los no garantizados porque hay una garantía física de que el deudor no incumplirá los pagos. 
 
 La información que se requiere para estimar el pago es la misma que el préstamo personal, pero se debe asegurar que el bien que se ha dado como garantía tenga el mismo valor o superior al valor del préstamo en caso de que no sea el bien mismo.[[4]](#bibliografía)
+
+Basándose en las tasas de interés y plazos que se insvestigaron en las fuentes [[19]](#bibliografía) y [[20]](#bibliografía) se determinó que las condiciones para préstamos prendarios que se manejarán en este proyecto son:
+
+
+<div align="center">
+
+|  Moneda | Monto total | Cuota mensual | Plazo en meses | Tasa de interés |
+|:-------:|:-----------:|:-------------:|:--------------:|:---------------:|
+| Colones |  15.000.000 |    250.367    |       72       |      6,25%      |
+| Dólares |    23.500   |    396,226    |       84       |      10,5%      |
+
+</div>
 
 #### Préstamo hipotecario
 
@@ -63,6 +87,18 @@ Para calcular el pago de este tipo de préstamos se requiere:
 - **Monto solicitado**: El dinero se quiere pedir prestado para la compra o construcción.
 - **Plazo**: Tiempo en el que se pagará el préstamo (suele ser más largo que otros préstamos, por ejemplo, 15 a 30 años).
 - **Tasa de interés**: Porcentaje aplicado sobre el monto del préstamo, que puede ser fija o variable.
+
+Basándose en las tasas de interés y plazos que se insvestigaron en las fuentes [[21]](#bibliografía) y [[22]](#bibliografía) se determinó que las condiciones para préstamos hipotecarios que se manejarán en este proyecto son:
+
+
+<div align="center">
+
+|  Moneda | Monto total | Cuota mensual | Plazo en meses | Tasa de interés |
+|:-------:|:-----------:|:-------------:|:--------------:|:---------------:|
+| Colones |  45.000.000 |    251.286    |       360      |      5,35%      |
+| Dólares |   120.000   |    791,603    |       300      |      6,25%     |
+
+</div>
 
 
 #### ¿Cómo se calculan los montos de las cuotas de pago y los intereses para préstamos?
@@ -539,3 +575,16 @@ En el segundo caso, se revisa el estado de un préstamo a partir del ingreso de 
 \[15\]: Banco de Costa Rica. _Transferencias_. Banco BCR. Accedido el 22 de octubre de 2024. [En línea]. Disponible: https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/servicios_personas/transferencias/
 
 \[16\]: Cámara de Bancos e Instituciones Financieras de Costa Rica. _Manual de buenas prácticas para el manejo de los datos personales de los clientes de los servicios financieros_, 2015. 
+
+\[17\]: Scotiabank. _Banca Personal_. Scotiabank Costa Rica. Accedido el 6 de noviembre de 2024. [En línea]. Disponible: https://www.scotiabankcr.com/personas/creditos-y-leasing/prestamos-personales/prestamo-personal.aspx
+
+\[18\]: BAC Credomatic. _Prestamo Personal_. BAC Credomatic. Accedido el 6 de noviembre de 2024. [En línea]. Disponible: https://www.baccredomatic.com/es-cr/personas/landing/prestamo-personal
+
+\[19\]: Scotiabank. _Financiamiento prendario_. Scotiabank Costa Rica. Accedido el 6 de noviembre de 2024. [En línea]. Disponible: https://www.scotiabankcr.com/personas/creditos-y-leasing/credito-prendario/financiamiento-prendario-nuevos-y-usados.aspx
+
+\[20\]: Coopebanpo. _Créditos prendarios_. Coopebanpo. Accedido el 6 de noviembre de 2024. [En línea]. Disponible: https://www.coopebanpo.fi.cr/creditos-prendarios/
+
+\[21\]: Mucap. _Tasas de crédito_. Mucap. Accedido el 6 de noviembre de 2024. [En línea]. Disponible: https://www.mucap.fi.cr/docs/tasas_de_credito.pdf
+
+\[22\]: Scotiabank. _Tasas y tarifas_. Scotiabank Costa Rica. Accedido el 6 de noviembre de 2024. [En línea]. Disponible: https://www.scotiabankcr.com/tasas-y-tarifarios/prestamos-de-vivienda.aspx
+
