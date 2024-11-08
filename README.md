@@ -13,6 +13,27 @@ El repositorio pertenece al grupo 6 que contiene a los siguientes integrantes:
 
 </div>
 
+## Instrucciones de compilación y ejecución
+
+Para compilar los archivos de este proyecto se utilza un `Makefile`, que generará dos ejecutables: `sistemaGestionBancaria` e `iniciar_db`, para compilarlos se debe ejecutar el siguiente comando:
+
+```
+make
+```
+
+Esto generará ambos ejecutables en la carpeta `build`. Y para ejecutar el programa primero se debe dirigir a la carpeta `build` con el siguiente y primero ejecutar `iniciar_db`, ya que este archivo inicializa la base de datos:
+
+```
+cd build
+./iniciar_db
+```
+
+Y por último se procede a ejecutar el ejecutable del programa principal con el siguiente comando:
+
+```
+./sistemaGestionBancaria
+```
+
 ## Fase 1: Investigación
 
 En esta sección se define el concepto, funcionamiento y características de los componentes básicos de un sistema de gestión bancaria en ventanilla, que son la base sobre la que se desarrollará las distintas funcionalidades, implementación y diseño del proyecto en cuestión.
