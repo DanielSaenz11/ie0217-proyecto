@@ -16,23 +16,26 @@
 using namespace std;
 
 /**
- * @brief Función para generar un reporte de los CDP solicitados
+ * @brief Función para generar un reporte al solicitar un CDP
  * 
  * @param db Puntero a la base de datos
+ * @param idCuenta Id de la cuenta remitente del CDP
+ * @param monto Monto del CDP
  * @return true Cuando se generó el reporte
  * @return false Si hubo un error al generar el reporte
  */
-bool reporteSolicitudCDP(sqlite3* db);
+bool reporteSolicitudCDP(sqlite3* db, int idCuenta, double monto);
 
 /**
- * @brief Función para generar un reporte de los CDP vencidos hasta la fecha
+ * @brief Función para generar un reporte al vencer un CDP
  * 
  * @param db Puntero a la base de datos
- * @param fechaActual Fecha actual para generar el reporte
- * @return true Cuando se generó el reporte
+ * @param idCuenta Id de la cuenta remitente del CDP
+ * @param monto Monto del CDP
+ * @return true true Cuando se generó el reporte
  * @return false Si hubo un error al generar el reporte
  */
-bool reporteVencimientoCDP(sqlite3* db, const string& fechaActual);
+bool reporteVencimientoCDP(sqlite3* db, int idCuenta, double monto);
 
 
 #endif // REPORTES_CDP_HPP

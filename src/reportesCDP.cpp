@@ -11,116 +11,80 @@
 using namespace std;
 
 /**
- * @brief Función para generar un reporte de los CDP solicitados
+ * @brief Función para generar un reporte al solicitar un CDP
  * 
  * @param db Puntero a la base de datos
+ * @param idCuenta Id de la cuenta remitente del CDP
+ * @param monto Monto del CDP
  * @return true Cuando se generó el reporte
  * @return false Si hubo un error al generar el reporte
  */
-bool reporteSolicitudCDP(sqlite3* db) {
+bool reporteSolicitudCDP(sqlite3* db, int idCuenta, double monto) {
 
-    /*Comando para la solicitud SQL */
-    const char* sql = "SELECT idCDP, idCuenta, deposito, tasaInteres, fechaSolicitud FROM CDP;";
+    // Consulta a la base de datos
+    const char* sql = "INSERT INTO Transacciones (idRemitente, idDestinatario, tipo, monto) "
+                      "VALUES (?, NULL, 'CDP', ?);";
 
-    /*Se prepara el statement para la consulta, y si hay un error al prepararlo se imprime este mensaje de error*/
+    // Se prepara la consulta y se emite un mensaje de error si falla
     sqlite3_stmt* stmt;
     if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
-        cerr << "Ocurrió un error al preparar la consulta" << sqlite3_errmsg(db) << endl;
-        return false;        
-    }
-
-    /*Se abre el archivo "reporteSolicitudCDP.csv" para escribir el reporte, y si hubiera un error igualmente se 
-    muestra un mensaje de error y se libera la memoria del statement para evitar memory leaks*/
-    ofstream file("reporteSolicitudCDP.csv");
-    if (!file.is_open()) {
-        cerr << "Ocurrió un error al abrir el archivo para escribir los reportes" << endl;
-        sqlite3_finalize(stmt);
+        cerr << "Ocurrió un error al preparar la consulta de solicitud CDP: " << sqlite3_errmsg(db) << endl;
         return false;
     }
 
-    /*Primero se escribe el encabezado en el archivo de reportes*/
-    file << "ID CDP,ID Cuenta,Deposito,Plazo en Meses,Tasa de Interes,Fecha de Solicitud\n";
+    // Se enlaza el ID de la cuenta y el monto en la consulta
+    sqlite3_bind_int(stmt, 1, idCuenta); // ID del Remitente
+    sqlite3_bind_double(stmt, 2, monto); // monto del CDP
 
-    /*Para cada fila que coincide con la busqueda se escribe en el archivo de reportes*/
-    while (sqlite3_step(stmt) == SQLITE_ROW) {
-        int idCDP = sqlite3_column_int(stmt, 0);
-        int idCuenta = sqlite3_column_int(stmt, 1);
-        double deposito = sqlite3_column_double(stmt, 2);
-        int plazoMeses = sqlite3_column_int(stmt, 3);
-        double tasaInteres = sqlite3_column_double(stmt, 4);
-        const unsigned char* fechaSolictud = sqlite3_column_text(stmt, 5);
-
-        file << idCDP << "," << idCuenta << "," << deposito << "," << plazoMeses << "," << tasaInteres << "," << fechaSolictud << "\n";
+    // Ejecutamos la inserción y verificamos si fue exitosa
+    if (sqlite3_step(stmt) != SQLITE_DONE) {
+        cerr << "Ocurrió un error al insertar el registro en Transacciones: " << sqlite3_errmsg(db) << endl;
+        sqlite3_finalize(stmt);     // se libera la memoria del statement para evitar memory leaks
+        return false;
     }
 
-    /*Se libera la memoria del statement y se cierra el archivo*/
+    // Se libera la memoria del statement
     sqlite3_finalize(stmt);
-    file.close();
-
-    cout << "El reporte de solicitud de CDP se ha generado en el archivo reporteSolicitudCDP.csv" << endl;
+    cout << "Registro de solicitud de CDP agregado exitosamente en Transacciones." << endl;
     return true;
 }
 
 /**
- * @brief Función para generar un reporte de los CDP vencidos hasta la fecha
+ * @brief Función para generar un reporte al vencer un CDP
  * 
  * @param db Puntero a la base de datos
- * @param fechaActual Fecha actual para generar el reporte
- * @return true Cuando se generó el reporte
+ * @param idCuenta Id de la cuenta remitente del CDP
+ * @param monto Monto del CDP
+ * @return true true Cuando se generó el reporte
  * @return false Si hubo un error al generar el reporte
  */
-bool reporteVencimientoCDP(sqlite3* db, const string& fechaActual) {
+bool reporteVencimientoCDP(sqlite3* db, int idCuenta, double monto) {
+    
+    // Consulta a la base de datos
+    const char* sql = "INSERT INTO Transacciones (idRemitente, idDestinatario, tipo, monto) "
+                      "VALUES (NULL, ?, 'CDP', ?);";
 
-    /*Comando para la solicitud SQL */
-    const char* sql = "SELECT idCDP, idCuenta, deposito, plazoMeses, tasaInteres, fechaSolicitud "
-                      "FROM CDP WHERE date(fechaSolicitud, '+' || plazoMeses || ' months') <= date(?);";
-
-    /*Se prepara el statement para la consulta, y si hay un error al prepararlo se imprime este mensaje de error*/
+    // Se prepara la consulta y se emite un mensaje de error si falla
     sqlite3_stmt* stmt;
     if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
-        cerr << "Ocurrió un error al preparar la consulta de vencimiento de CDPs: " << sqlite3_errmsg(db) << endl;
+        cerr << "Ocurrió un error al preparar la consulta de vencimiento CDP: " << sqlite3_errmsg(db) << endl;
         return false;
     }
 
-    /*Se enlaza la fecha actual con el parámetro que recibe la consulta y si hay un error al hacerlo se 
-    lanza un mensaje de error y se libera el statement para evitar memory leaks*/
-    if (sqlite3_bind_text(stmt, 1, fechaActual.c_str(), -1, SQLITE_STATIC) != SQLITE_OK) {
-        cerr << "Ocurrió un error al enlazar la fecha actual: " << sqlite3_errmsg(db) << endl;
-        sqlite3_finalize(stmt);
+    // Se enlaza el ID de la cuenta y el monto en la consulta
+    sqlite3_bind_int(stmt, 1, idCuenta); // ID del Destinatario
+    sqlite3_bind_double(stmt, 2, monto); // monto del CDP mas los intereses 
+
+    // Ejecutamos la inserción y verificamos si fue exitosa
+    if (sqlite3_step(stmt) != SQLITE_DONE) {
+        cerr << "Ocurrió un error al insertar el registro en Transacciones: " << sqlite3_errmsg(db) << endl;
+        sqlite3_finalize(stmt);     // se libera la memoria del statement para evitar memory leaks
         return false;
     }
 
-    /*Se abre el archivo "reporteVencimientoCDP.csv" para escribir el reporte, y si hubiera un error igualmente se 
-    muestra un mensaje de error y se libera la memoria del statement para evitar memory leaks*/
-    ofstream file("reporteVencimientoCDP.csv");
-    if (!file.is_open()) {
-        cerr << "Ocurrió un error al abrir el archivo para escribir los reportes." << endl;
-        sqlite3_finalize(stmt);
-        return false;
-    }
-
-    /*Se escribe el encabezado en el archivo de reportes*/
-    file << "ID CDP,ID Cuenta,Deposito,Plazo en Meses,Tasa de Interes,Fecha de Solicitud\n";
-
-    /*Para cada fila que coincide con la busqueda se escribe en el archivo de reportes*/
-    while (sqlite3_step(stmt) == SQLITE_ROW) {
-        int idCDP = sqlite3_column_int(stmt, 0);
-        int idCuenta = sqlite3_column_int(stmt, 1);
-        double deposito = sqlite3_column_double(stmt, 2);
-        int plazoMeses = sqlite3_column_int(stmt, 3);
-        double tasaInteres = sqlite3_column_double(stmt, 4);
-        const unsigned char* fechaSolicitud = sqlite3_column_text(stmt, 5);
-
-        file << idCDP << "," << idCuenta << "," << fixed << setprecision(2)
-             << deposito << "," << plazoMeses << "," << tasaInteres << ","
-             << fechaSolicitud << "\n";
-    }
-
-    /*Se libera la memoria del statement y se cierra el archivo*/
+    // Se libera la memoria del statement 
     sqlite3_finalize(stmt);
-    file.close();
-
-    cout << "El reporte de vencimiento de CDP se ha generado en el archivo reporteVencimientoCDP.csv" << endl;
+    cout << "Registro de vencimiento de CDP agregado exitosamente en Transacciones." << endl;
     return true;
 }
 
