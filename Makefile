@@ -1,37 +1,46 @@
 # Compilador y banderas para la compilación
 CXX = g++
-CXXFLAGS = -std=c++20 -Wall -Iinclide
+CXXFLAGS = -std=c++20 -Wall
+INCLUDE_DIR = -Iinclude
 
-# Directorios
+# Archivos fuente y archivos objeto
+SRC_FILES = $(wildcard src/*.cpp) utils/auxiliares.cpp
+OBJ_FILES = $(SRC_FILES:.cpp=.o)
 BUILD_DIR = build
-SRC_DIR = src
-INCLUDE_DIR = include
-UTILS_DIR = utils
 
-# Archivos fuente y ejecutables
-MAIN_SRC = $(SRC_DIR)/main.cpp $(SRC_DIR)/CDP.cpp $(SRC_DIR)/Cliente.cpp $(SRC_DIR)/Cuenta.cpp \
-           $(SRC_DIR)/Database.cpp $(SRC_DIR)/Transaccion.cpp $(SRC_DIR)/verificarExistencia.cpp \
-           $(UTILS_DIR)/auxiliares.cpp
-INIT_DB_SRC = $(UTILS_DIR)/inicio_db.cpp $(UTILS_DIR)/auxiliares.cpp
-MAIN_EXEC = $(BUILD_DIR)/sistemaGestionBancaria
-INIT_DB_EXEC = $(BUILD_DIR)/iniciar_db
+# Ejecutables
+EXEC_MAIN = $(BUILD_DIR)/sistemaGestionBancaria
+EXEC_DB_INIT = $(BUILD_DIR)/iniciar_db
 
-# Comandos
-all: $(MAIN_EXEC) $(INIT_DB_EXEC)
+# Verificar el sistema operativo
+ifeq ($(OS), Windows_NT)
+    RM = del /Q
+    MKDIR = if not exist $(BUILD_DIR) mkdir $(BUILD_DIR)
+    EXT = .exe
+else
+    RM = rm -rf
+    MKDIR = mkdir -p $(BUILD_DIR)
+    EXT =
+endif
 
-# Instrucciones para la compilación del ejecutable principal
-$(MAIN_EXEC): $(MAIN_SRC)
-	mkdir -p $(BUILD_DIR)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+# Reglas para construir los ejecutables
+all: $(EXEC_MAIN)$(EXT) $(EXEC_DB_INIT)$(EXT)
 
-# Instrucciones para la compilación del ejecutable para la inicialización de la base de datos
-$(INIT_DB_EXEC): $(INIT_DB_SRC)
-	mkdir -p $(BUILD_DIR)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+$(EXEC_MAIN)$(EXT): src/main.cpp $(OBJ_FILES)
+	$(MKDIR)
+	$(CXX) $(CXXFLAGS) $(INCLUDE_DIR) -o $@ src/main.cpp $(OBJ_FILES)
 
-# Regla para limpiar los archivos utilizados en la compilación
+$(EXEC_DB_INIT)$(EXT): utils/inicio_db.cpp $(OBJ_FILES)
+	$(MKDIR)
+	$(CXX) $(CXXFLAGS) $(INCLUDE_DIR) -o $@ utils/inicio_db.cpp $(OBJ_FILES)
+
+# Compilación de los archivos objeto
+$(OBJ_FILES): %.o : %.cpp
+	$(CXX) $(CXXFLAGS) $(INCLUDE_DIR) -c $< -o $@
+
+# Limpiar archivos generados
 clean:
-	rm -rf $(BUILD_DIR)
+	$(RM) $(BUILD_DIR)/*$(EXT) $(OBJ_FILES)
 
-# PHONY targets
+# PHONY targets	
 .PHONY: all clean
