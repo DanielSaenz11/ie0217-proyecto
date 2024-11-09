@@ -1,17 +1,20 @@
 # Compilador y banderas para la compilación
 CXX = g++
 CXXFLAGS = -std=c++20 -Wall
-SQLITE_INCLUDE = -I<path_include_directory_sqlite> 
-SQLITE_LIB = -L<path_library_directory_sqlite> 
 
-# Archivos fuente y archivos objeto
-SRC_FILES = $(wildcard src/*.cpp) utils/auxiliares.cpp
-OBJ_FILES = $(SRC_FILES:.cpp=.o)
+# Directorios de SQLite
+SQLITE_INCLUDE = -I<path_to_sqlite_include>
+SQLITE_LIB = -L<path_to_sqlite_lib>
+
+# Directorios de los archivos fuente, de cabecera y de compilación
+SRC_DIR = src
+INCLUDE_DIR = include
+UTILS_DIR = utils
 BUILD_DIR = build
 
-# Ejecutables
-EXEC_MAIN = $(BUILD_DIR)/sistemaGestionBancaria
-EXEC_DB_INIT = $(BUILD_DIR)/iniciar_db
+# Archivos fuente y archivos objeto
+SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp) utils/auxiliares.cpp
+OBJ_FILES = $(addprefix $(BUILD_DIR)/, $(notdir $(SRC_FILES:.cpp=.o)))
 
 # Verificar el sistema operativo
 ifeq ($(OS), Windows_NT)
@@ -24,24 +27,37 @@ else
     EXT =
 endif
 
+# Ejecutables
+EXEC_MAIN = $(BUILD_DIR)/sistemaGestionBancaria
+EXEC_DB_INIT = $(BUILD_DIR)/inicio_db
+
 # Reglas para construir los ejecutables
-all: $(EXEC_MAIN)$(EXT) $(EXEC_DB_INIT)$(EXT)
+all: $(BUILD_DIR) $(EXEC_MAIN)$(EXT) $(EXEC_DB_INIT)$(EXT)
 
-$(EXEC_MAIN)$(EXT): src/main.cpp $(OBJ_FILES)
+# Crear el directorio build
+$(BUILD_DIR):
 	$(MKDIR)
-	$(CXX) $(CXXFLAGS) $(INCLUDE_DIR) -o $@ src/main.cpp $(OBJ_FILES)
 
-$(EXEC_DB_INIT)$(EXT): utils/inicio_db.cpp $(OBJ_FILES)
-	$(MKDIR)
-	$(CXX) $(CXXFLAGS) $(INCLUDE_DIR) -o $@ utils/inicio_db.cpp $(OBJ_FILES)
+$(EXEC_MAIN)$(EXT): $(BUILD_DIR)/main.o $(OBJ_FILES)
+	$(CXX) $(CXXFLAGS) -I$(INCLUDE_DIR) $(SQLITE_INCLUDE) $(SQLITE_LIB) -o $@ $(OBJ_FILES) -lsqlite3
+
+$(EXEC_DB_INIT)$(EXT): $(BUILD_DIR)/inicio_db.o $(OBJ_FILES)
+	$(CXX) $(CXXFLAGS) $(SQLITE_INCLUDE) $(SQLITE_LIB) -o $@ -lsqlite3 utils/inicio_db.cpp
 
 # Compilación de los archivos objeto
-$(OBJ_FILES): %.o : %.cpp
-	$(CXX) $(CXXFLAGS) $(INCLUDE_DIR) -c $< -o $@
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+	$(CXX) $(CXXFLAGS) -I$(INCLUDE_DIR) $(SQLITE_INCLUDE) -c $< -o $@
+
+$(BUILD_DIR)/%.o: $(UTILS_DIR)/%.cpp
+	$(CXX) $(CXXFLAGS) -I$(INCLUDE_DIR) $(SQLITE_INCLUDE) -c $< -o $@
 
 # Limpiar archivos generados
 clean:
 	$(RM) $(BUILD_DIR)/*$(EXT) $(OBJ_FILES)
 
-# PHONY targets	
+# Regla para ejecutar el programa completo
+run: all
+	./$(EXEC_DB_INIT) && ./$(EXEC_MAIN)
+
+# PHONY targets
 .PHONY: all clean
