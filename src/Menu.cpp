@@ -1,3 +1,15 @@
+/**
+ * @file Menu.cpp
+ * @brief Implementación de las funciones de los menús de la aplicación bancaria.
+ * @details Este archivo contiene la implementación de las funciones que presentan los menús 
+ *          al usuario y manejan las interacciones y opciones del menú principal, menú de atención al cliente,
+ *          y menú de operaciones de un cliente autenticado.
+ * 
+ * @author Daniel Alberto Sáenz Obando
+ * @copyright MIT License
+ * @date 08/11/2024
+ */
+
 #include "Menu.hpp"
 #include <iostream>
 #include "Cliente.hpp"
@@ -21,78 +33,62 @@ void menuOperacionesCliente(sqlite3* db, Cuenta& cuenta) {
         std::cout << "8. Regresar\n";
         std::cout << "Seleccione una opción: ";
         
-        opcionOperacion = obtenerEntero();
+        opcionOperacion = obtenerEntero(); // Validar opción ingresada en el menú
 
         switch (static_cast<OperacionesCliente>(opcionOperacion)) {
             case OperacionesCliente::VER_SALDO: {
+                // Opción para ver el saldo actual de la cuenta
                 std::cout << "Saldo actual: " << cuenta.verSaldo() << std::endl;
                 break;
             }
             case OperacionesCliente::CONSULTAR_HISTORIAL: {
+                // Opción para mostrar el historial de transacciones de la cuenta
                 cuenta.consultarHistorial(db);
                 break;
             }
             case OperacionesCliente::SOLICITAR_CDP: {
-                
+                // Opción para solicitar CDP
                 std::cout << "Opción en construcción." << std::endl;
                 break;
-                // std::cout << "Ingrese monto para CDP: ";
-                // double monto = obtenerDecimal();
-                // std::cout << "Ingrese plazo en meses: ";
-                // int plazoMeses = obtenerEntero();
-
-                // if (cuenta.solicitarCDP(db, monto, plazoMeses)) {
-                //     std::cout << "CDP solicitado con éxito." << std::endl;
-                // } else {
-                //     std::cout << "Error al solicitar CDP." << std::endl;
-                // }
-                // break;
             }
             case OperacionesCliente::ABONO_PRESTAMO: {
+                // Opción para realizar un abono a un préstamo
                 std::cout << "Opción en construcción." << std::endl;
                 break;
-                // std::cout << "Ingrese ID del préstamo a abonar: ";
-                // int idPrestamo = obtenerEntero();
-
-                // std::cout << "Ingrese monto a abonar: ";
-                // double monto = obtenerDecimal();
-
-                // if (cuenta.abonarPrestamo(db, idPrestamo, monto)) {
-                //     std::cout << "Abono realizado con éxito." << std::endl;
-                // } else {
-                //     std::cout << "Error en el abono al préstamo." << std::endl;
-                // }
-                // break;
             }
             case OperacionesCliente::DEPOSITO: {
+                // Opción para realizar un depósito a la cuenta
                 std::cout << "Ingrese monto a depositar: ";
-                double montoDeposito = obtenerDecimal();
+                double montoDeposito = obtenerDecimal(); // Validar monto a depositar
 
+                // Realizar transacción de depósito
                 if (cuenta.depositar(db, montoDeposito)) {
                     std::cout << "Depósito realizado con éxito." << std::endl;
                 }
                 break;
             }
             case OperacionesCliente::TRANSFERENCIA: {
+                // Opción para realizar una transferencia entre cuentas del mismo tipo de moneda
                 std::cout << "Ingrese ID de la cuenta destino: ";
-                int idCuentaDestino = obtenerEntero();
+                int idCuentaDestino = obtenerEntero(); // Validar número de cuenta de destinatario
                 
                 std::cout << "Ingrese monto a transferir: ";
-                double montoTransferencia = obtenerDecimal();
+                double montoTransferencia = obtenerDecimal(); // Validar monto a transferir
 
+                // Realizar la transacción actual
                 if (cuenta.transferir(db, idCuentaDestino, montoTransferencia)) {
                     std::cout << "Transferencia realizada con éxito." << std::endl;
                 }
                 break;
             }
             case OperacionesCliente::RETIRO: {
+                // Opción para realizar un retiro
                 std::cout << "Ingrese monto a retirar: ";
-                double montoRetiro = obtenerDecimal();
-
+                double montoRetiro = obtenerDecimal(); // Validar monto a retirar
+                
+                // Realizar la transacción
                 if (cuenta.retirar(db, montoRetiro)) {
                     std::cout << "Retiro realizado con éxito." << std::endl;
-                } else {
-                    std::cout << "Error en el retiro." << std::endl;
                 }
                 break;
             }
@@ -101,7 +97,7 @@ void menuOperacionesCliente(sqlite3* db, Cuenta& cuenta) {
                 break;
             }
             default: {
-                std::cout << "Opción inválida en el menú de operaciones." << std::endl;
+                std::cout << "Opción inválida. Intente nuevamente." << std::endl;
                 break;
             }
         }
@@ -111,6 +107,7 @@ void menuOperacionesCliente(sqlite3* db, Cuenta& cuenta) {
 // Función para el menú de atención al cliente
 void menuAtencionCliente(sqlite3* db) {
     int opcionAtencion;
+
     do {
         // Mostrar el menú de atención al cliente
         std::cout << "\n=== Menú de Atención al Cliente ===\n";
@@ -121,8 +118,12 @@ void menuAtencionCliente(sqlite3* db) {
         
         opcionAtencion = obtenerEntero();
 
+        // Validar opción seleccionada
         switch (static_cast<MenuAtencionClienteOpciones>(opcionAtencion)) {
             case MenuAtencionClienteOpciones::INICIAR_SESION: {
+                // Opción para iniciar sesión de cliente
+
+                // Solicitud de cédula de identificación
                 std::cout << "Ingrese la cédula del cliente: ";
                 int cedula = obtenerEntero();
 
@@ -130,37 +131,49 @@ void menuAtencionCliente(sqlite3* db) {
                 Cliente cliente = Cliente::obtener(db, cedula);
                 int idCliente = cliente.getID();
 
+                // Si no existe, se sale y vuelve a mostrar el menú
                 if (idCliente == 0) {
                     break;
                 }
 
-                int opcionCuenta;
+                int opcionCuenta; // Opción respecto a la cuenta con la que desea iniciar sesión
                 std::cout << "\n1. Crear nueva cuenta\n2. Acceder a cuenta existente\nSeleccione una opción: ";
                 opcionCuenta = obtenerEntero();
 
+                // Clasificar opción de cuenta
                 if (opcionCuenta == 1) {
+                    // Opción de crear cuenta
+
+                    // Ingreso del tipo de moneda de la cuenta
                     std::string moneda = validarMoneda();
 
+                    // Ingreso del saldo inicial de la cuenta
                     std::cout << "Ingrese saldo inicial: ";
                     double saldoInicial = obtenerDecimal();
 
+                    // Ingreso de la tasa de interés de la cuenta
                     std::cout << "Ingrese tasa de interés: ";
                     double tasaInteres = obtenerDecimal();
 
+                    // Crear instancia de Cuenta con los datos ingresados
                     Cuenta nuevaCuenta(idCliente, moneda, saldoInicial, tasaInteres);
 
+                    // Insertar en la base de datos
                     if (nuevaCuenta.crear(db)) {
                         std::cout << "Cuenta creada con éxito.\nID de la cuenta: " << nuevaCuenta.getID() << std::endl;
-                    } else {
-                        std::cout << "Error al crear la cuenta." << std::endl;
                     }
                 }
                 else if (opcionCuenta == 2) {
+                    // Opción de acceder a una cuenta existente
+
+                    // Solicitud del identificador de la cuenta
                     std::cout << "Ingrese el ID de la cuenta: ";
                     int idCuenta = obtenerEntero();
                     
+                    // Buscar cuenta con el ID ingresado
                     Cuenta cuenta = Cuenta::obtener(db, idCuenta);
 
+                    // Comprobar que exista la cuenta y que la cuenta pertenezca al cliente actual
                     if (cuenta.getID() == 0 || cuenta.getIDCliente() != idCliente) {
                         std::cout << "Error: La cuenta no existe o no pertenece al cliente." << std::endl;
                         break;
@@ -175,41 +188,52 @@ void menuAtencionCliente(sqlite3* db) {
                 break;
             }
             case MenuAtencionClienteOpciones::REGISTRAR_CLIENTE: {
+                // Opción de registrar cliente en el sistema
+
+                // Ingreso de cédula
                 std::cout << "Ingrese cédula: ";
                 int cedula = obtenerEntero();
 
+                // Verificar que no exista un cliente registrado con el mismo número de cédula
                 if (Cliente::existe(db, cedula)) {
                     std::cout << "Error: El cliente ya está registrado." << std::endl;
                     break;
                 }
 
+                // Ingreso de nombre
                 std::cout << "Ingrese nombre: ";
                 std::string nombre;
                 std::cin >> nombre;
 
+                // Ingreso de primer apellido
                 std::cout << "Ingrese primer apellido: ";
                 std::string primerApellido;
                 std::cin >> primerApellido;
 
+                // Ingreso de segundo apellido
                 std::cout << "Ingrese segundo apellido: ";
                 std::string segundoApellido;
                 std::cin >> segundoApellido;
 
+                // Ingreso de teléfono
                 std::string telefono = validarTelefono();
 
+                // Crear instancia de cliente con los datos ingresados
                 Cliente cliente(cedula, nombre, primerApellido, segundoApellido, telefono);
+                
+                // Insertar cliente en la base de datos
                 if (cliente.crear(db)) {
                     std::cout << "Cliente registrado con éxito." << std::endl;
-                } else {
-                    std::cout << "Error al registrar cliente." << std::endl;
                 }
                 break;
             }
             case MenuAtencionClienteOpciones::REGRESAR:
+                // Opción para salir del menú de atención al cliente
                 std::cout << "Regresando al menú principal." << std::endl;
                 break;
             default:
-                std::cout << "Opción inválida en el menú de atención al cliente." << std::endl;
+                // Caso default para opciones inválidas
+                std::cout << "Opción inválida. Intente nuevamente." << std::endl;
                 break;
         }
     } while (opcionAtencion != static_cast<int>(MenuAtencionClienteOpciones::REGRESAR));
@@ -217,6 +241,7 @@ void menuAtencionCliente(sqlite3* db) {
 
 // Función para mostrar el menú principal
 void mostrarMenuPrincipal() {
+    // Formato del menú principal
     std::cout << "\n=== Menú Principal ===\n";
     std::cout << "1. Atención al Cliente\n";
     std::cout << "2. Préstamo Bancario\n";
