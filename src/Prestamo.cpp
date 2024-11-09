@@ -1,12 +1,12 @@
 
 
 #include "Prestamo.hpp"
+#include "auxiliares.hpp"
 #include <iostream>
 
 // Definición del constructor de la clase Prestamo
 Prestamo::Prestamo(int idCuenta, const std::string &tipo, double monto, double tasaInteres, int plazoMeses)
     : idCuenta(idCuenta), tipo(tipo), monto(monto), tasaInteres(tasaInteres), plazoMeses(plazoMeses), cuotaMensual(0), capitalPagado(0), interesesPagados(0), saldoRestante(monto), activo(true) {}
-
 
 
 bool Prestamo::existe(sqlite3* db, int idPrestamo) {
@@ -27,4 +27,14 @@ bool Prestamo::existe(sqlite3* db, int idPrestamo) {
 
     sqlite3_finalize(stmt);
     return exists;
+}
+
+double Prestamo::calcularCuotaMensual(double monto, double tasaInteres, int plazoMeses) {
+    double tasaInteresMensual = (tasaInteres/100) / 12;
+
+    double a = 1 + tasaInteresMensual;
+
+    double cuotaMensual = (monto * tasaInteresMensual * potencia(a, plazoMeses)) / (potencia(a, plazoMeses) - 1);
+
+    return cuotaMensual;
 }
