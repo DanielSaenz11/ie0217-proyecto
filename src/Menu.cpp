@@ -72,6 +72,29 @@ void menuOperacionesCliente(sqlite3* db, Cuenta& cuenta) {
                 std::cout << "Ingrese ID de la cuenta destino: ";
                 int idCuentaDestino = obtenerEntero(); // Validar número de cuenta de destinatario
                 
+                // Obtener la cuenta de destino
+                Cuenta cuentaDestino = Cuenta::obtener(db, idCuentaDestino);
+
+                // Verificar que la cuenta existe
+                if (cuentaDestino.getID() == 0) {
+                    std::cout << "Error: La cuenta destino no existe." << std::endl;
+                    break;
+                }
+
+                // Ingreso de cédula de cliente de la cuenta destino
+                std::cout << "Ingrese la cédula del titular de la cuenta destino: ";
+                int cedulaDestino = obtenerEntero();
+
+                // Obtener el cliente de destino
+                Cliente clienteDestino = Cliente::obtener(db, cedulaDestino);
+
+                // Verificar que el cliente existe y que idCliente coincide entre cliente y cuenta de destino
+                if (clienteDestino.getID() == 0 || clienteDestino.getID() != cuentaDestino.getIDCliente()) {
+                    std::cout << "Error: La cédula no coincide con la cuenta destino ingresada." << std::endl;
+                    break;
+                }
+
+                // Ingreso de monto a transferir
                 std::cout << "Ingrese monto a transferir: ";
                 double montoTransferencia = obtenerDecimal(); // Validar monto a transferir
 
