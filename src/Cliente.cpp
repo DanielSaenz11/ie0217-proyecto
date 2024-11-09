@@ -131,6 +131,12 @@ bool Cliente::existe(sqlite3* db, int cedula) {
     return existe; // Retornar el resultado de existencia
 }
 
+// Función que retorna la cédula del cliente
 int Cliente::getCedula() const {
     return cedula;
+}
+
+// Función que retorna el identificador (ID) del cliente
+int Cliente::getID() const {
+    return idCliente;
 }
