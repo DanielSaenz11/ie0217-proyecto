@@ -1,11 +1,33 @@
-
+/**
+ * @file Transaccion.cpp
+ * @author Daniel Alberto Sáenz Obando
+ * @brief Archivo de implementación de los métodos para las transacciones
+ * @version 1.0
+ * @date 2024-11-07
+ * 
+ */
 
 #include "Transaccion.hpp"
 #include <iostream>
 
+/**
+ * @brief Definición del constructor de la clase CDP
+ * 
+ * @param idRemitente ID de la cuenta remitente
+ * @param idDestinatario ID de la cuenta destinataria
+ * @param tipo Tipo de transacción
+ * @param monto Monto de la transacción
+ */
 Transaccion::Transaccion(int idRemitente, int idDestinatario, const std::string &tipo, double monto)
     : idRemitente(idRemitente), idDestinatario(idDestinatario), tipo(tipo), monto(monto) {}
 
+/**
+ * @brief Definición del método para procesar una transaccion en la base de datos
+ * 
+ * @param db Puntero a la base de datos
+ * @return true Si se pudo procesar y agregar la transacción en la base de datos
+ * @return false Si no se pudo procesar y agregar la transacción en la base de datos
+ */
 bool Transaccion::procesar(sqlite3* db) {
 
     const char* sql = "INSERT INTO Transacciones (idRemitente, idDestinatario, tipo, monto) VALUES (?, ?, ?, ?);";
