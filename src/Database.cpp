@@ -1,4 +1,14 @@
-
+/**
+ * @file Database.cpp
+ * @brief Implementación de la clase Database para gestionar la conexión a la base de datos.
+ * @details Este archivo contiene la implementación de los métodos de la clase Database, 
+ *          que permite abrir y cerrar una conexión a la base de datos SQLite.
+ * 
+ * @author Daniel Alberto Sáenz Obando
+ * @author Rodrigo Madrigal Montes
+ * @date 08/11/2024
+ * @copyright MIT License
+ */
 
 #include "Database.hpp"
 #include <iostream>
@@ -17,4 +27,9 @@ Database::~Database() {
     if (db) {
         sqlite3_close(db);
     }
+}
+
+// Definición de función para obtener la conexión a la base de datos
+sqlite3* Database::get() const {
+    return db;
 }
