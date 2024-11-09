@@ -48,7 +48,7 @@ bool CDP::crear(sqlite3* db) {
 
     bool exito = sqlite3_step(stmt) == SQLITE_DONE;
     if (exito) {
-        idCDP = sqlite3_last_insert_rowid(db);
+        int idCDP = sqlite3_last_insert_rowid(db);
         std::cout << "CDP creado con ID: " << idCDP << std::endl;
     }
     else {
