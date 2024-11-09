@@ -4,13 +4,9 @@
  * @details Este archivo contiene la implementación de los métodos de la clase Cliente, que permite
  *          la creación, obtención y verificación de clientes en la base de datos SQLite.
  * 
- * Software bajo la licencia de MIT.
- * En términos generales, se concede permiso para utilizar este Software sin ninguna restricción, pero se proporciona sin
- * ninguna garantía. 
- * El aviso de copyright anterior y este aviso de permiso deberán incluirse en todas
- * las copias o partes sustanciales del Software.
- * 
- * @author Daniel Alberto Sáenz Obando y Rodrigo Madrigal Montes
+ * @author Daniel Alberto Sáenz Obando
+ * @author Rodrigo Madrigal Montes
+ * @copyright MIT License
  * @date 08/11/2024
  */
 
