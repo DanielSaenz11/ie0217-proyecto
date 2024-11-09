@@ -1,10 +1,27 @@
-
+/**
+ * @file inicio_db.cpp
+ * @brief Implementación de inicio de una base de datos SQLite de clientes bancarios.
+ * @details Este archivo contiene funciones para crear las tablas necesarias en la base de datos,
+ *          insertar datos de ejemplo y realizar operaciones SQL en una base de datos de un banco.
+ *          Utiliza la biblioteca SQLite3 para interactuar con la base de datos "banco.db".
+ * 
+ * @author Daniel Alberto Sáenz Obando
+ * @copyright MIT License
+ * @date 08/11/2024
+ */
 
 #include <iostream>
 #include <sqlite3.h>
 
+/// @brief Nombre de la base de datos utilizada en este programa.
 const char* DB_NAME = "banco.db";
 
+/**
+ * @brief Script SQL para la creación de las tablas en la base de datos.
+ * 
+ * Este script incluye la creación de las tablas Clientes, Cuentas, CDP, Transacciones, Prestamos,
+ * y PagoPrestamos, al asegurar las restricciones necesarias en cada campo para la integridad de los datos.
+ */
 const char* SQL_CREATE_TABLES = R"(
     CREATE TABLE IF NOT EXISTS Clientes (
         idCliente INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -72,18 +89,32 @@ const char* SQL_CREATE_TABLES = R"(
     );
 )";
 
+/**
+ * @brief Ejecuta un comando SQL en la base de datos.
+ * 
+ * @param db Puntero a la base de datos SQLite.
+ * @param sql Comando SQL a ejecutar.
+ * @details Esta función intenta ejecutar el comando SQL especificado en la base de datos.
+ */
 void ejecutarSQL(sqlite3* db, const char* sql) {
+    char* errMsg = nullptr; // Mensaje de error
 
-    char* errMsg = nullptr;
-
+    // Ejecución de comando SQL
     if (sqlite3_exec(db, sql, nullptr, nullptr, &errMsg) != SQLITE_OK) {
         std::cerr << "Error ejecutando SQL: " << errMsg << std::endl;
         sqlite3_free(errMsg);
     }
 }
 
-void insertarDatosLogicos(sqlite3* db) {
-
+/**
+ * @brief Inserta datos de ejemplo en las tablas de la base de datos.
+ * 
+ * Esta función inserta datos de ejemplo en las tablas Clientes, Cuentas, CDP, Transacciones,
+ * Prestamos y PagoPrestamos, con datos ficticios para representar clientes, cuentas y transacciones.
+ * 
+ * @param db Puntero a la base de datos SQLite.
+ */
+void insertarDatos(sqlite3* db) {
     const char* sqlInsertarDatos = R"(
         -- Insertar datos en Clientes
         INSERT INTO Clientes (cedula, nombre, primerApellido, segundoApellido, telefono) VALUES 
@@ -128,12 +159,21 @@ void insertarDatosLogicos(sqlite3* db) {
         (2, 1500.0, 1200.0, 300.0, 45000.0);
     )";
 
-    ejecutarSQL(db, sqlInsertarDatos);
+    ejecutarSQL(db, sqlInsertarDatos); // Ejecución del comando de inserción de datos
     std::cout << "Datos insertados exitosamente en todas las tablas." << std::endl;
 }
 
+/**
+ * @brief Función principal del programa.
+ * 
+ * Abre una conexión a la base de datos, crea las tablas necesarias y luego inserta los datos de ejemplo.
+ * Finalmente, cierra la conexión a la base de datos.
+ * 
+ * @return `int` Código de salida del programa.
+ */
 int main() {
-    sqlite3* db;
+    sqlite3* db; // Declarar base de datos
+
     if (sqlite3_open(DB_NAME, &db) != SQLITE_OK) {
         std::cerr << "Error al abrir la base de datos: " << sqlite3_errmsg(db) << std::endl;
         return 1;
@@ -143,8 +183,8 @@ int main() {
     ejecutarSQL(db, SQL_CREATE_TABLES);
     std::cout << "Tablas creadas exitosamente." << std::endl;
 
-    // Insertar datos lógicos
-    insertarDatosLogicos(db);
+    // Insertar datos
+    insertarDatos(db);
 
     sqlite3_close(db);
     return 0;
