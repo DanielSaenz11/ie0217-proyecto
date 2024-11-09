@@ -1,6 +1,6 @@
 /**
  * @file CDP.cpp
- * @author Daniel Alberto Sáenz Obando
+ * @author Rodrigo Madrigal Montes
  * @brief Archivo de implementación de los métodos para CDP
  * @version 1.0
  * @date 2024-11-07
