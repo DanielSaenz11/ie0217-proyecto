@@ -48,6 +48,7 @@ bool Transaccion::procesar(sqlite3* db) {
     bool exito = sqlite3_step(stmt) == SQLITE_DONE;
     if (!exito) {
         std::cerr << "Error al procesar transacción: " << sqlite3_errmsg(db) << std::endl;
+        // Revisar memory leaks
     }
 
     sqlite3_finalize(stmt);
