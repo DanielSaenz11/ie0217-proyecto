@@ -32,10 +32,6 @@ class Prestamo {
         static Prestamo obtener(sqlite3* db, int idPrestamo);
 
         static bool existe(sqlite3* db, int idPrestamo);
-
-        bool actualizar(sqlite3* db);
-        
-        bool eliminar(sqlite3* db);
 };
 
 #endif // PRESTAMO_HPP
