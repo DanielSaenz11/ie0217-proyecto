@@ -90,3 +90,38 @@ std::string validarTelefono() {
         std::cout << "Error: Número de teléfono inválido. Inténtelo de nuevo.\n";
     }
 }
+
+/**
+ * @brief Función para calcular el resultado de elevar un numero a una potencia
+ * 
+ * @param n Numero que se quiere elevar
+ * @param p Potencia
+ * @return double Resultado de la operación
+ */
+double potencia(double n, double p) {
+    double resultado = 1;
+    for (int i = 1; i <=p; i++) {
+        resultado *= n;
+    }
+    return resultado;
+}
+
+/**
+ * @brief Función para calcular la cuota mensula a pagar para un préstamo
+ * 
+ * @param monto Monto del préstamo
+ * @param plazo Plazo del préstamo
+ * @param tasaInteres Tasa de interés del préstamo
+ * @return double Monto de la cuota mensual
+ */
+double calcularCuotaMensual(double monto, int plazo, double tasaInteres) {
+    
+    double tasaInteresMensual = (tasaInteres/100) / 12;
+
+    double a  = 1 + tasaInteresMensual;
+
+    double cuotaMensual = (monto * tasaInteresMensual * potencia(a, plazo)) / (potencia(a, plazo) - 1);
+
+    return cuotaMensual;
+}
+
