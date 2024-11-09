@@ -2,6 +2,9 @@
  * @file reportesCDP.cpp
  * @author Rodrigo Madrigal Montes
  * @brief Implementación de las funciones para generar reportes para un CDP
+ * 
+ * Pendiente de integración en clase CDP
+ * 
  * @version 1.0
  * @date 2024-11-06
  * 
