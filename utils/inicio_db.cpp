@@ -24,7 +24,7 @@ const char* DB_NAME = "banco.db";
  */
 const char* SQL_CREATE_TABLES = R"(
     CREATE TABLE IF NOT EXISTS Clientes (
-        idCliente INTEGER PRIMARY KEY AUTOINCREMENT,
+        idCliente INTEGER PRIMARY KEY AUTOINCREMENT CHECK (idCliente <= 999999999),
         cedula INTEGER UNIQUE NOT NULL,
         nombre TEXT NOT NULL,
         primerApellido TEXT NOT NULL,
