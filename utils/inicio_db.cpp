@@ -92,9 +92,11 @@ const char* SQL_CREATE_TABLES = R"(
 /**
  * @brief Ejecuta un comando SQL en la base de datos.
  * 
+ * Esta función intenta ejecutar el comando SQL especificado en la base de datos.
+ * 
  * @param db Puntero a la base de datos SQLite.
  * @param sql Comando SQL a ejecutar.
- * @details Esta función intenta ejecutar el comando SQL especificado en la base de datos.
+ * @return `void`
  */
 void ejecutarSQL(sqlite3* db, const char* sql) {
     char* errMsg = nullptr; // Mensaje de error
@@ -113,6 +115,7 @@ void ejecutarSQL(sqlite3* db, const char* sql) {
  * Prestamos y PagoPrestamos, con datos ficticios para representar clientes, cuentas y transacciones.
  * 
  * @param db Puntero a la base de datos SQLite.
+ * @return `void`
  */
 void insertarDatos(sqlite3* db) {
     const char* sqlInsertarDatos = R"(
