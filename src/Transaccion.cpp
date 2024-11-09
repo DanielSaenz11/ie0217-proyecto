@@ -1,57 +1,52 @@
 /**
  * @file Transaccion.cpp
- * @author Daniel Alberto Sáenz Obando
- * @brief Archivo de implementación de los métodos para las transacciones
- * @version 1.0
- * @date 2024-11-07
+ * @brief Implementación de la clase Transaccion para el procesamiento de transacciones bancarias.
+ * @details Este archivo contiene la implementación de los métodos de la clase Transaccion,
+ *          que maneja las operaciones financieras entre cuentas, como depósitos, retiros,
+ *          transferencias, abonos a préstamos y pagos de CDP, para registrar cada transacción en
+ *          la base de datos.
  * 
+ * @author Daniel Alberto Sáenz Obando
+ * @copyright MIT License
+ * @date 08/11/2024
  */
 
 #include "Transaccion.hpp"
 #include <iostream>
 
-/**
- * @brief Definición del constructor de la clase CDP
- * 
- * @param idRemitente ID de la cuenta remitente
- * @param idDestinatario ID de la cuenta destinataria
- * @param tipo Tipo de transacción
- * @param monto Monto de la transacción
- */
+// Definición del constructor de la clase Transaccion
 Transaccion::Transaccion(int idRemitente, int idDestinatario, const std::string &tipo, double monto)
     : idRemitente(idRemitente), idDestinatario(idDestinatario), tipo(tipo), monto(monto) {}
 
-/**
- * @brief Definición del método para procesar una transaccion en la base de datos
- * 
- * @param db Puntero a la base de datos
- * @return true Si se pudo procesar y agregar la transacción en la base de datos
- * @return false Si no se pudo procesar y agregar la transacción en la base de datos
- */
+// Definición de método para procesar una transacción en la base de datos
 bool Transaccion::procesar(sqlite3* db) {
-
+    // Consulta SQL para la inserción
     const char* sql = "INSERT INTO Transacciones (idRemitente, idDestinatario, tipo, monto) VALUES (?, ?, ?, ?);";
     sqlite3_stmt* stmt;
 
+    // Preparación de consulta SQL
     if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
         std::cerr << "Error al preparar la consulta de transacción: " << sqlite3_errmsg(db) << std::endl;
-        return false;
+        sqlite3_finalize(stmt); // Liberar memoria del stmt
+        return false; // Salir
     }
 
     // Verificar si hay identificadores nulos
     if (idRemitente != -1) sqlite3_bind_int(stmt, 1, idRemitente); else sqlite3_bind_null(stmt, 1);
     if (idDestinatario != -1) sqlite3_bind_int(stmt, 2, idDestinatario); else sqlite3_bind_null(stmt, 2);
 
+    // Agregar tipo de transacción y monto al stmt
     sqlite3_bind_text(stmt, 3, tipo.c_str(), -1, SQLITE_STATIC);
     sqlite3_bind_double(stmt, 4, monto);
 
+    // Ejecutar el comando SQL y obtener su código de salida
     bool exito = sqlite3_step(stmt) == SQLITE_DONE;
     if (!exito) {
+        // Si ocurrió un error
         std::cerr << "Error al procesar transacción: " << sqlite3_errmsg(db) << std::endl;
-        // Revisar memory leaks
     }
 
-    sqlite3_finalize(stmt);
+    sqlite3_finalize(stmt); // Liberar memoria del stmt
 
-    return exito;
+    return exito; // Retornar estado de transacción
 }
