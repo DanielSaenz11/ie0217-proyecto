@@ -1,13 +1,35 @@
-
+/**
+ * @file CDP.cpp
+ * @author Daniel Alberto Sáenz Obando
+ * @brief Archivo de implementación de los métodos para CDP
+ * @version 1.0
+ * @date 2024-11-07
+ * 
+ */
 
 #include "CDP.hpp"
 #include <iostream>
 
-// Definición del constructor de la clase CDP
+/**
+ * @brief Definición del constructor de la clase CDP
+ * 
+ * @param idCuenta ID de la cuenta asocidada al CDP
+ * @param deposito Monto del depósito
+ * @param plazoMeses Plazo en meses del CDP
+ * @param tasaInteres Tasa de interés anual del CDP
+ * @param fechaSolicitud Fecha en la que se solicita el CDP
+ */
 CDP::CDP(int idCuenta, double deposito, int plazoMeses, double tasaInteres, const std::string &fechaSolicitud)
     : idCuenta(idCuenta), deposito(deposito), plazoMeses(plazoMeses), tasaInteres(tasaInteres), fechaSolicitud(fechaSolicitud) {}
 
-// Definición del método para crear un CDP en la base de datos
+
+/**
+ * @brief Definición del método para crear un CDP en la base de datos
+ * 
+ * @param db Puntero a la base de datos
+ * @return true Si se pudo crear el CDP en la base de datos
+ * @return false Si no se pudo crear el CDP en la base de datos
+ */
 bool CDP::crear(sqlite3* db) {
 
     std::string sql = "INSERT INTO CDP (idCuenta, deposito, plazoMeses, tasaInteres, fechaSolicitud) VALUES (?, ?, ?, ?, ?);";
@@ -38,7 +60,13 @@ bool CDP::crear(sqlite3* db) {
     return exito;
 }
 
-// Definición del método estático para obtener un CDP de la base de datos
+/**
+ * @brief Definición del método estático para obtener un CDP de la base de datos
+ * 
+ * @param db Puntero a la base de datos
+ * @param idCDP ID del CDP
+ * @return Datos del CDP
+ */
 CDP CDP::obtener(sqlite3* db, int idCDP) {
     std::string sql = "SELECT idCuenta, deposito, plazoMeses, tasaInteres, fechaSolicitud FROM CDP WHERE idCDP = ?;";
     sqlite3_stmt* stmt;
