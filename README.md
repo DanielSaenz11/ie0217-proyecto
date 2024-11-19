@@ -337,6 +337,18 @@ Respecto a la información que se almacena en el sistema al solicitar/vencer un 
 - Monto del capital.
 - Intereses generados.
 
+Basándose en las tasas de interés y plazos que se insvestigaron en las fuentes [[12]](#bibliografía) y [[23]](#bibliografía) se determinó que las condiciones preestablecidas para certificados de depósito a plazo que se manejarán en este proyecto son:
+
+<div align="center">
+
+|  Moneda | Monto total | Plazo en meses | Tasa de interés | Intereses a ganar |
+|:-------:|:-----------:|:--------------:|:---------------:|:-----------------:|
+| Colones |   500.000   |        6       |      4,68%      |       11700       |
+| Dólares |    6.000    |       12       |      3,83%      |        230        |
+
+</div>
+
+
 ### Depósitos y retiros de dinero
 
 En primer lugar, __depositar dinero__ en una entidad bancaria consiste en la acción de entregar dinero al banco para que lo almacene y lo inmovilice, a cambio de recibir una rentabilidad por ese dinero (en forma de intereses).[[13]](#bibliografía).
@@ -722,3 +734,5 @@ En el segundo caso, se revisa el estado de un préstamo a partir del ingreso de 
 
 \[22\]: Scotiabank. _Tasas y tarifas_. Scotiabank Costa Rica. Accedido el 6 de noviembre de 2024. [En línea]. Disponible: https://www.scotiabankcr.com/tasas-y-tarifarios/prestamos-de-vivienda.aspx
 
+
+\[23\]: Banco de Costa Rica. _Tasas de Interés para CDPs_. Banco BCR. Accedido el 19 de noviembre de 2024. [En línea]. Disponible: https://www.bancobcr.com/wps/portal/bcr/bancobcr/personas/inversiones/certificados_de_deposito_a_plazo/tasas_de_interes_para_cdps/
