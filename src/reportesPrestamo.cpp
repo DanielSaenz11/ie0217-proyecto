@@ -175,7 +175,7 @@ bool reportePagoEstimado(sqlite3* db, int idPrestamo) {
         int plazoMeses = sqlite3_column_int(stmt, 4);
 
         // Llamada a la función auxiliar para calcular la cuota mensual
-        double cuotaMensual = cuotaMensualPrestamo(monto, tasaInteres, plazoMeses);
+        double cuotaMensual = calcularCuotaMensual(monto, plazoMeses, tasaInteres);
 
         // Generar y mostrar el reporte en pantalla
         std::cout << "Reporte de Pago Estimado para el Préstamo\n";
@@ -216,5 +216,24 @@ bool reportePagoEstimado(sqlite3* db, int idPrestamo) {
 
     sqlite3_finalize(stmt);
     return true;
+}
+
+/**
+ * @brief Función para calcular la cuota mensula a pagar para un préstamo
+ * 
+ * @param monto Monto del préstamo
+ * @param plazo Plazo del préstamo
+ * @param tasaInteres Tasa de interés del préstamo
+ * @return double Monto de la cuota mensual
+ */
+double calcularCuotaMensual(double monto, int plazo, double tasaInteres) {
+    
+    double tasaInteresMensual = (tasaInteres/100) / 12;
+
+    double a  = 1 + tasaInteresMensual;
+
+    double cuotaMensual = (monto * tasaInteresMensual * potencia(a, plazo)) / (potencia(a, plazo) - 1);
+
+    return cuotaMensual;
 }
 
