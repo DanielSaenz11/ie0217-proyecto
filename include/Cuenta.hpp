@@ -160,6 +160,13 @@ class Cuenta {
          * @return `int` El identificar de la cliente de la cuenta.
          */
         int getIDCliente() const;
+
+        /**
+         * @brief Retorna el tipo de moneda de la cuenta.
+         * 
+         * @return `std::string` La moneda ('CRC', 'USD').
+         */
+        std::string getMoneda() const;
         
         /**
          * @brief Consulta el saldo actual de la cuenta.
@@ -210,11 +217,10 @@ class Cuenta {
          * PENDIENTE
          * 
          * @param db Conexión a la base de datos SQLite.
-         * @param idPrestamo Identificador del préstamo a abonar.
          * @param monto Monto a abonar al préstamo.
          * @return `true` si el abono fue exitoso, `false` en caso contrario.
          */
-        bool abonarPrestamo(sqlite3* db, int idPrestamo, double monto);
+        bool abonarPrestamo(sqlite3* db, double monto);
 
         /**
          * @brief Solicita un Certificado de Depósito a Plazo (CDP) desde la cuenta.
