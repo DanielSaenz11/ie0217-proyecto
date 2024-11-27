@@ -1,0 +1,65 @@
+
+#include "PagoPrestamo.hpp"
+#include "SQLiteStatement.hpp"
+
+#include <iostream>
+#include <stdexcept>
+#include <sstream>
+
+
+// Definición del constructor de la clase PagoPrestamo
+PagoPrestamo::PagoPrestamo(int idPrestamo, double cuotaPagada, double aporteCapital, double aporteIntereses, double saldoRestante)
+    : idPrestamo(idPrestamo), cuotaPagada(cuotaPagada), aporteCapital(aporteCapital),
+      aporteIntereses(aporteIntereses), saldoRestante(saldoRestante), idPagoPrestamo(0) {}
+
+
+// Definición de método público para registrar el pago de un préstamo
+bool PagoPrestamo::crear(sqlite3* db) {
+    try {
+        // Iniciar transacción
+        if (sqlite3_exec(db, "BEGIN TRANSACTION", nullptr, nullptr, nullptr) != SQLITE_OK) {
+            throw std::runtime_error("Error: No se pudo iniciar la transacción para registrar el pago.");
+        }
+
+        // Consulta para insertar el pago en la tabla
+        std::string sql = R"(
+            INSERT INTO PagoPrestamos (idPrestamo, cuotaPagada, aporteCapital, aporteIntereses, saldoRestante)
+            VALUES (?, ?, ?, ?, ?);
+        )";
+
+        // Crear statement y preparar la consulta
+        SQLiteStatement statement(db, sql);
+
+        // Asignar valores a los parámetros de la consulta
+        sqlite3_bind_int(statement.get(), 1, idPrestamo);
+        sqlite3_bind_double(statement.get(), 2, cuotaPagada);
+        sqlite3_bind_double(statement.get(), 3, aporteCapital);
+        sqlite3_bind_double(statement.get(), 4, aporteIntereses);
+        sqlite3_bind_double(statement.get(), 5, saldoRestante);
+
+        // Ejecutar la consulta
+        if (sqlite3_step(statement.get()) != SQLITE_DONE) {
+            throw std::runtime_error("Error al ejecutar la consulta para registrar el pago: " + std::string(sqlite3_errmsg(db)));
+        }
+
+        // Obtener el ID generado (en caso de que se desee imprimir en una implementación después)
+        idPagoPrestamo = sqlite3_last_insert_rowid(db);
+
+        // Confirmar la transacción
+        if (sqlite3_exec(db, "COMMIT", nullptr, nullptr, nullptr) != SQLITE_OK) {
+            throw std::runtime_error("Error: No se pudo confirmar la transacción para registrar el pago.");
+        }
+
+        return true;
+
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+
+        // Rollback en caso de error
+        if (sqlite3_exec(db, "ROLLBACK", nullptr, nullptr, nullptr) != SQLITE_OK) {
+            std::cerr << "Error: No se pudo realizar el rollback después del fallo." << std::endl;
+        }
+
+        return false;
+    }
+}
