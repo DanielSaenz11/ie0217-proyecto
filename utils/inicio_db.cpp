@@ -65,15 +65,14 @@ const char* SQL_CREATE_TABLES = R"(
         idPrestamo INTEGER PRIMARY KEY AUTOINCREMENT,
         idCuenta INTEGER NOT NULL,
         tipo TEXT NOT NULL CHECK (tipo IN ('PER', 'PRE', 'HIP')),
+        moneda TEXT NOT NULL CHECK (moneda IN ('CRC', 'USD')),
         monto REAL NOT NULL,
         tasaInteres REAL NOT NULL,
         plazoMeses INTEGER NOT NULL,
         cuotaMensual REAL NOT NULL,
-        capitalPagado REAL NOT NULL,
-        interesesPagados REAL NOT NULL,
-        saldoRestante REAL NOT NULL,
-        fechaSolicitud TEXT NOT NULL,
-        fechaSiguientePago TEXT NOT NULL,
+        cuotasPagadas INTEGER NOT NULL DEFAULT 0,
+        capitalPagado REAL NOT NULL DEFAULT 0,
+        interesesPagados REAL NOT NULL DEFAULT 0,
         activo BOOLEAN NOT NULL DEFAULT 1,
         FOREIGN KEY (idCuenta) REFERENCES Cuentas(idCuenta)
     );
@@ -151,9 +150,9 @@ void insertarDatos(sqlite3* db) {
         (5, NULL, 'ABO', 250.0);
 
         -- Insertar préstamos
-        INSERT INTO Prestamos (idCuenta, tipo, monto, tasaInteres, plazoMeses, cuotaMensual, capitalPagado, interesesPagados, saldoRestante, fechaSolicitud, fechaSiguientePago, activo) VALUES 
-        (1, 'PER', 100000.0, 5.0, 24, 5000.0, 10000.0, 2500.0, 87500.0, '2024-11-01', '2024-12-01', 1),
-        (5, 'HIP', 50000.0, 3.5, 120, 1500.0, 3000.0, 750.0, 46250.0, '2024-10-15', '2024-11-15', 1);
+        INSERT INTO Prestamos (idCuenta, tipo, moneda, monto, tasaInteres, plazoMeses, cuotaMensual, cuotasPagadas, capitalPagado, interesesPagados, activo) VALUES 
+        (1, 'PER', 'CRC', 100000.0, 5.0, 24, 5000.0, 2, 10000.0, 2500.0, 1),
+        (5, 'HIP', 'USD', 50000.0, 3.5, 120, 1500.0, 3, 3000.0, 750.0, 1);
 
         -- Insertar datos en PagoPrestamos
         INSERT INTO PagoPrestamos (idPrestamo, cuotaPagada, aporteCapital, aporteIntereses, saldoRestante) VALUES 
