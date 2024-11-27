@@ -37,6 +37,7 @@ class Database {
          * abrir la base de datos, el constructor maneja el error apropiadamente.
          * 
          * @param dbName Nombre de la base de datos a abrir.
+         * @throws `std::runtime_error` si no se pudo crear/abrir correctamente.
          */
         Database(const std::string& dbName);
         
