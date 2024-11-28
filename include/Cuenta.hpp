@@ -89,17 +89,6 @@ class Cuenta {
          */
         bool crearTransaccion(sqlite3* db, int idRemitente, int idDestinatario, const std::string& tipo, double monto);
 
-        /**
-         * @brief Verifica la compatibilidad de moneda entre cuentas para una transferencia.
-         * 
-         * Asegura que la cuenta de destino tenga la misma moneda antes de realizar la transferencia.
-         * 
-         * @param db Conexión a la base de datos SQLite.
-         * @param idCuentaDestino Identificador de la cuenta destino.
-         * @return `true` si las cuentas tienen la misma moneda, `false` en caso contrario.
-         */
-        bool verificarCompatibilidadMoneda(sqlite3* db, int idCuentaDestino) const;
-
     public:
         /**
          * @brief Constructor de la clase Cuenta.
@@ -228,11 +217,12 @@ class Cuenta {
          * Crea un CDP con el monto y plazo especificados, disminuyendo el saldo de la cuenta.
          * 
          * @param db Conexión a la base de datos SQLite.
+         * @param moneda Tipo de moneda del CDP ('CRC', 'USD')
          * @param monto Monto a depositar en el CDP.
          * @param plazoMeses Plazo del CDP en meses.
          * @return `true` si la solicitud fue exitosa, `false` en caso contrario.
          */
-        bool solicitarCDP(sqlite3* db, double monto, int plazoMeses);
+        bool solicitarCDP(sqlite3* db, std::string &moneda, double monto, int plazoMeses, double tasaInteres);
 
         /**
          * @brief Consulta el historial de transacciones de la cuenta.
@@ -243,6 +233,17 @@ class Cuenta {
          * @return `void`
          */
         void consultarHistorial(sqlite3* db) const; 
+
+        /**
+         * @brief Verifica la compatibilidad de moneda entre cuentas para una transferencia.
+         * 
+         * Asegura que la cuenta de destino tenga la misma moneda antes de realizar la transferencia.
+         * 
+         * @param db Conexión a la base de datos SQLite.
+         * @param idCuentaDestino Identificador de la cuenta destino.
+         * @return `true` si las cuentas tienen la misma moneda, `false` en caso contrario.
+         */
+        bool verificarCompatibilidadMoneda(sqlite3* db, int idCuentaDestino) const;
 };
 
 #endif // CUENTA_HPP

@@ -3,6 +3,7 @@
 #include "Cuenta.hpp"
 #include "Transaccion.hpp"
 #include "SQLiteStatement.hpp"
+#include "CDP.hpp"
 #include <iostream>
 
 // Definición del constructor
@@ -182,51 +183,92 @@ std::string Cuenta::getMoneda() const {
 
 // Método para realizar un depósito a la cuenta
 bool Cuenta::depositar(sqlite3* db, double monto) {
-    
-    // Aumentar saldo con el monto
-    saldo += monto;
+    try {
+        // Comenzar una transacción
+        if (sqlite3_exec(db, "BEGIN TRANSACTION", nullptr, nullptr, nullptr) != SQLITE_OK) {
+            throw std::runtime_error("Error: No se pudo iniciar la transacción.");
+        }
 
-    // Actualizar el saldo en la base de datos
-    if (!actualizarSaldo(db)) {
-        saldo -= monto;  // Revertir saldo
-        return false; // Salir
+        // Aumentar el saldo en la instancia
+        saldo += monto;
+
+        // Actualizar el saldo en la base de datos
+        if (!actualizarSaldo(db)) {
+            saldo -= monto; // Revertir el saldo en la instancia
+            throw std::runtime_error("Error: No se pudo actualizar el saldo en la base de datos.");
+        }
+
+        // Registrar la transacción como depósito
+        if (!crearTransaccion(db, -1, idCuenta, "DEP", monto)) {
+            saldo -= monto; // Revertir el saldo en la instancia
+            throw std::runtime_error("Error: No se pudo registrar la transacción de depósito.");
+        }
+
+        // Confirmar la transacción
+        if (sqlite3_exec(db, "COMMIT", nullptr, nullptr, nullptr) != SQLITE_OK) {
+            saldo -= monto; // Revertir el saldo en la instancia
+            throw std::runtime_error("Error: No se pudo confirmar la transacción.");
+        }
+
+        return true; // Depósito exitoso
+
+    } catch (const std::exception& e) {
+        // Realizar rollback en caso de error
+        std::cerr << e.what() << std::endl;
+        if (sqlite3_exec(db, "ROLLBACK", nullptr, nullptr, nullptr) != SQLITE_OK) {
+            std::cerr << "Error: No se pudo realizar el rollback." << std::endl;
+        }
+        return false; // Depósito fallido
     }
-
-    // Hacer transacción de depósito
-    if (!crearTransaccion(db, -1, idCuenta, "DEP", monto)) {
-        saldo -= monto;  // Revertir el saldo si falla
-        std::cerr << "Error: No se pudo procesar el depósito. Fondos revertidos." << std::endl;
-        return false;
-    }
-
-    return true;
 }
+
 
 // Método para retirar fondos de la cuenta
 bool Cuenta::retirar(sqlite3* db, double monto) {
-    // Comprobar que existen fondos suficientes
-    if (!verificarFondos(monto)) {
-        std::cerr << "Error: Fondos insuficientes para retiro." << std::endl;
-        return false; // Salir de la función
+    try {
+        // Comenzar una transacción
+        if (sqlite3_exec(db, "BEGIN TRANSACTION", nullptr, nullptr, nullptr) != SQLITE_OK) {
+            throw std::runtime_error("Error: No se pudo iniciar la transacción.");
+        }
+
+        // Verificar si hay fondos suficientes
+        if (!verificarFondos(monto)) {
+            throw std::runtime_error("Error: Fondos insuficientes para retiro.");
+        }
+
+        // Reducir saldo en la instancia
+        saldo -= monto;
+
+        // Actualizar el saldo en la base de datos
+        if (!actualizarSaldo(db)) {
+            saldo += monto; // Revertir el saldo en la instancia
+            throw std::runtime_error("Error: No se pudo actualizar el saldo en la base de datos.");
+        }
+
+        // Registrar la transacción como retiro
+        if (!crearTransaccion(db, idCuenta, -1, "RET", monto)) {
+            saldo += monto; // Revertir el saldo en la instancia
+            throw std::runtime_error("Error: No se pudo registrar la transacción de retiro.");
+        }
+
+        // Confirmar la transacción
+        if (sqlite3_exec(db, "COMMIT", nullptr, nullptr, nullptr) != SQLITE_OK) {
+            saldo += monto; // Revertir el saldo en la instancia
+            throw std::runtime_error("Error: No se pudo confirmar la transacción.");
+        }
+
+        return true; // Retiro exitoso
+        
+    } catch (const std::exception& e) {
+        // Realizar rollback en caso de error
+        std::cerr << e.what() << std::endl;
+        if (sqlite3_exec(db, "ROLLBACK", nullptr, nullptr, nullptr) != SQLITE_OK) {
+            std::cerr << "Error: No se pudo realizar el rollback." << std::endl;
+        }
+        return false; // Retiro fallido
     }
-
-    saldo -= monto; // Reducir la cantidad de fondos
-
-    // Actualizar el saldo en la base de datos
-    if (!actualizarSaldo(db)) {
-        saldo += monto;  // Revertir saldo
-        return false; // Salir
-    }
-
-    // Hacer transaccion de retiro
-    if (!crearTransaccion(db, idCuenta, -1, "RET", monto)) {
-        saldo += monto;  // Revertir el saldo si falla
-        std::cerr << "Error: No se pudo procesar el retiro. Fondos revertidos." << std::endl;
-        return false;
-    }
-
-    return true;
 }
+
 
 // Método para transferir fondos desde la instancia de Cuenta a otra
 bool Cuenta::transferir(sqlite3* db, int idCuentaDestino, double monto) {
@@ -236,11 +278,6 @@ bool Cuenta::transferir(sqlite3* db, int idCuentaDestino, double monto) {
         // Verificar fondos de la cuenta actual
         if (!verificarFondos(monto)) {
             throw std::runtime_error("Error: Fondos insuficientes para transferencia.");
-        }
-
-        // Verificar compatibilidad de monedas entre cuenta remitente y destinatario
-        if (!verificarCompatibilidadMoneda(db, idCuentaDestino)) {
-            throw std::runtime_error("Error: Las cuentas deben ser de la misma moneda para realizar la transferencia.");
         }
 
         // Obtener cuenta destino
@@ -276,7 +313,7 @@ bool Cuenta::transferir(sqlite3* db, int idCuentaDestino, double monto) {
             throw std::runtime_error("Error: No se pudo confirmar la transacción.");
         }
 
-        return true;
+        return true; // Transferencia exitosa
 
     } catch (const std::exception& e) {
         // Manejo de errores
@@ -288,7 +325,7 @@ bool Cuenta::transferir(sqlite3* db, int idCuentaDestino, double monto) {
         // Revertir saldo en el objeto
         saldo = saldoOriginal;
 
-        return false;
+        return false; // Transferencia fallida
     }
 }
 
@@ -297,7 +334,7 @@ bool Cuenta::transferir(sqlite3* db, int idCuentaDestino, double monto) {
 bool Cuenta::abonarPrestamo(sqlite3* db, double monto) {
     try {
         // Verificar si hay suficientes fondos
-        if (saldo < monto) {
+        if (!verificarFondos(monto)) {
             throw std::runtime_error("Error: Fondos insuficientes para realizar el abono.");
         }
 
@@ -323,13 +360,77 @@ bool Cuenta::abonarPrestamo(sqlite3* db, double monto) {
             throw std::runtime_error("Error: No se pudo actualizar el saldo en la base de datos.");
         }
 
-        return true; // Operación exitosa
+        return true; // Abono exitoso
 
     } catch (const std::exception& e) {
         // Manejo de errores
         std::cerr << e.what() << std::endl;
 
-        return false; // Indicar fallo en la operación
+        return false; // Abono fallido
+    }
+}
+
+
+// Método para solicitar un CDP
+bool Cuenta::solicitarCDP(sqlite3* db, std::string &moneda, double monto, int plazoMeses, double tasaInteres) {
+    try {
+        // Iniciar transacción
+        if (sqlite3_exec(db, "BEGIN TRANSACTION", nullptr, nullptr, nullptr) != SQLITE_OK) {
+            throw std::runtime_error("Error: No se pudo iniciar la transacción.");
+        }
+
+        // Verificar fondos suficientes
+        if (!verificarFondos(monto)) {
+            throw std::runtime_error("Error: Fondos insuficientes para solicitar el CDP.");
+        }
+
+        // Reducir el saldo de la cuenta en el objeto de Cuenta
+        saldo -= monto;
+
+        // Actualizar el saldo en la base de datos
+        std::string actualizarSaldoSQL = "UPDATE Cuentas SET saldo = ? WHERE idCuenta = ?;";
+        {
+            // Bloque de código para liberar el statement cuando salga
+            SQLiteStatement statement(db, actualizarSaldoSQL);
+            sqlite3_bind_double(statement.get(), 1, saldo);
+            sqlite3_bind_int(statement.get(), 2, idCuenta);
+
+            if (sqlite3_step(statement.get()) != SQLITE_DONE) {
+                saldo += monto; // Reintegrar los fondos al saldo de la cuenta
+                throw std::runtime_error("Error: No se pudo actualizar el saldo en la base de datos.");
+            }
+        }
+
+        // Crear el CDP en la base de datos
+        CDP cdp(idCuenta, moneda, monto, plazoMeses, tasaInteres);
+        if (!cdp.crear(db)) {
+            saldo += monto; // Reintegrar los fondos al saldo de la cuenta
+            throw std::runtime_error("Error: No se pudo crear el CDP en la base de datos.");
+        }
+
+        // Registrar la transacción del CDP
+        Transaccion transaccion(idCuenta, -1, "CDP", monto);
+        if (!transaccion.procesar(db)) {
+            saldo += monto; // Reintegrar los fondos al saldo de la cuenta
+            throw std::runtime_error("Error: No se pudo registrar la transacción del CDP.");
+        }
+
+        // Confirmar transacción
+        if (sqlite3_exec(db, "COMMIT", nullptr, nullptr, nullptr) != SQLITE_OK) {
+            saldo += monto; // Reintegrar los fondos al saldo de la cuenta
+            throw std::runtime_error("Error: No se pudo confirmar la transacción.");
+        }
+        
+        return true; // Abono exitoso
+
+    } catch (const std::exception& e) {
+        // Realizar rollback en caso de error
+        std::cerr << e.what() << std::endl;
+        if (sqlite3_exec(db, "ROLLBACK", nullptr, nullptr, nullptr) != SQLITE_OK) {
+            std::cerr << "Error: No se pudo realizar el rollback." << std::endl;
+        }
+
+        return false; // Abono fallido
     }
 }
 
