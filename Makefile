@@ -59,5 +59,13 @@ clean:
 run: all
 	./$(EXEC_DB_INIT) && ./$(EXEC_MAIN)
 
+# Regla para ejecutar el programa de inicialización de la base de datos
+run_init:
+	./$(EXEC_DB_INIT)
+
+# Regla para ejecutar el main del programa
+run_main:
+	./$(EXEC_MAIN)
+
 # PHONY targets
 .PHONY: all clean
