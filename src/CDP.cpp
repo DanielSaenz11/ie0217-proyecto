@@ -1,98 +1,101 @@
-/**
- * @file CDP.cpp
- * @author Rodrigo Madrigal Montes
- * @brief Archivo de implementación de los métodos para CDP
- * @version 1.0
- * @date 2024-11-07
- * 
- */
+
 
 #include "CDP.hpp"
 #include <iostream>
+#include <string>
 
-/**
- * @brief Definición del constructor de la clase CDP
- * 
- * @param idCuenta ID de la cuenta asocidada al CDP
- * @param deposito Monto del depósito
- * @param plazoMeses Plazo en meses del CDP
- * @param tasaInteres Tasa de interés anual del CDP
- * @param fechaSolicitud Fecha en la que se solicita el CDP
- */
-CDP::CDP(int idCuenta, double deposito, int plazoMeses, double tasaInteres, const std::string &fechaSolicitud)
-    : idCuenta(idCuenta), deposito(deposito), plazoMeses(plazoMeses), tasaInteres(tasaInteres), fechaSolicitud(fechaSolicitud) {}
+// Definición del constructor de la clase CDP
+CDP::CDP(int idCuenta, const std::string &moneda, double deposito, int plazoMeses, double tasaInteres)
+    : idCuenta(idCuenta), moneda(moneda), deposito(deposito), plazoMeses(plazoMeses), tasaInteres(tasaInteres) {}
 
 
-/**
- * @brief Definición del método para crear un CDP en la base de datos
- * 
- * @param db Puntero a la base de datos
- * @return true Si se pudo crear el CDP en la base de datos
- * @return false Si no se pudo crear el CDP en la base de datos
- */
-bool CDP::crear(sqlite3* db) {
-
-    std::string sql = "INSERT INTO CDP (idCuenta, deposito, plazoMeses, tasaInteres, fechaSolicitud) VALUES (?, ?, ?, ?, ?);";
-    sqlite3_stmt* stmt;
-
-    if (sqlite3_prepare_v2(db, sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK) {
-        std::cerr << "Error al preparar la consulta: " << sqlite3_errmsg(db) << std::endl;
-        return false;
-    }
-
-    sqlite3_bind_int(stmt, 1, idCuenta);
-    sqlite3_bind_double(stmt, 2, deposito);
-    sqlite3_bind_int(stmt, 3, plazoMeses);
-    sqlite3_bind_double(stmt, 4, tasaInteres);
-    sqlite3_bind_text(stmt, 5, fechaSolicitud.c_str(), -1, SQLITE_STATIC);
-
-    bool exito = sqlite3_step(stmt) == SQLITE_DONE;
-    if (exito) {
-        int idCDP = sqlite3_last_insert_rowid(db);
-        std::cout << "CDP creado con ID: " << idCDP << std::endl;
-    }
-    else {
-        std::cerr << "Error al insertar en la base de datos: " << sqlite3_errmsg(db) << std::endl;
-    }
-
-    sqlite3_finalize(stmt);
-
-    return exito;
+// Definición de función para calcular el monto de intereses ganados al final del CDP
+double CDP::interesGanado() const {
+    return deposito * tasaInteres * plazoMeses;
 }
 
-/**
- * @brief Definición del método estático para obtener un CDP de la base de datos
- * 
- * @param db Puntero a la base de datos
- * @param idCDP ID del CDP
- * @return Datos del CDP
- */
+// Definición de método para crear el CDP
+bool CDP::crear(sqlite3* db) {
+    std::string sql = R"(
+        INSERT INTO CDP (idCuenta, moneda, deposito, plazoMeses, tasaInteres)
+        VALUES (?, ?, ?, ?, ?);
+    )";
+
+    try {
+        SQLiteStatement statement(db, sql);
+
+        // Asociar los valores a la consulta preparada
+        sqlite3_bind_int(statement.get(), 1, idCuenta);
+        sqlite3_bind_text(statement.get(), 2, moneda.c_str(), -1, SQLITE_STATIC);
+        sqlite3_bind_double(statement.get(), 3, deposito);
+        sqlite3_bind_int(statement.get(), 4, plazoMeses);
+        sqlite3_bind_double(statement.get(), 5, tasaInteres);
+
+        // Ejecutar la consulta
+        if (sqlite3_step(statement.get()) != SQLITE_DONE) {
+            throw std::runtime_error("Error: No se pudo insertar el CDP en la base de datos.");
+        }
+
+        idCDP = sqlite3_last_insert_rowid(db);
+        std::cout << "CDP creado con éxito. ID: " << idCDP << std::endl;
+
+        return true; // Creación exitosa
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+        return false; // Creación fallida
+    }
+}
+
+
+// Definición de método para obtener un CDP de la base de datos
 CDP CDP::obtener(sqlite3* db, int idCDP) {
-    std::string sql = "SELECT idCuenta, deposito, plazoMeses, tasaInteres, fechaSolicitud FROM CDP WHERE idCDP = ?;";
-    sqlite3_stmt* stmt;
+    // Consulta SQL para obtener los datos del CDP
+    std::string sql = "SELECT idCuenta, moneda, deposito, plazoMeses, tasaInteres FROM CDP WHERE idCDP = ?;";
 
-    CDP cdp(0, 0.0, 0, 0.0, ""); // Crear instancia vacía de CDP
+    // Crear instancia vacía de CDP
+    CDP cdp(0, "", 0.0, 0, 0.0);
 
-    if (sqlite3_prepare_v2(db, sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK) {
-        std::cerr << "Error al preparar la consulta: " << sqlite3_errmsg(db) << std::endl;
-        return cdp; // Retornar objeto vacío
+    try {
+        // Crear instancia de SQLiteStatement para manejar el statement
+        SQLiteStatement statement(db, sql);
+
+        // Asignar ID del CDP como parámetro de la consulta
+        sqlite3_bind_int(statement.get(), 1, idCDP);
+
+        // Ejecutar la consulta y verificar si se encontró el registro
+        if (sqlite3_step(statement.get()) == SQLITE_ROW) {
+            // Asignar los valores obtenidos a la instancia de CDP
+            cdp.idCDP = idCDP;
+            cdp.idCuenta = sqlite3_column_int(statement.get(), 0);
+            cdp.moneda = reinterpret_cast<const char*>(sqlite3_column_text(statement.get(), 1));
+            cdp.deposito = sqlite3_column_double(statement.get(), 2);
+            cdp.plazoMeses = sqlite3_column_int(statement.get(), 3);
+            cdp.tasaInteres = sqlite3_column_double(statement.get(), 4);
+        } else {
+            // Lanzar excepción si no se encuentra el registro
+            throw std::runtime_error("Error: CDP no encontrado con el ID especificado.");
+        }
+    } catch (const std::exception& e) {
+        // Manejar errores y reportar en consola
+        std::cerr << e.what() << std::endl;
     }
 
-    sqlite3_bind_int(stmt, 1, idCDP); // Asignar ID del CDP para la búsqueda en la consulta SQL
-
-    if (sqlite3_step(stmt) == SQLITE_ROW) {
-        
-        cdp.idCuenta = sqlite3_column_int(stmt, 0);
-        cdp.deposito = sqlite3_column_double(stmt, 1);
-        cdp.plazoMeses = sqlite3_column_int(stmt, 2);
-        cdp.tasaInteres = sqlite3_column_double(stmt, 3);
-        cdp.fechaSolicitud = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 4));
-    }
-    else {
-        std::cerr << "CDP no encontrado." << std::endl;
-    }
-
-    sqlite3_finalize(stmt);
-    
     return cdp;
+}
+
+
+int CDP::getID() const {
+    return idCDP;
+}
+
+// Función para mostrar la información básica del CDP en el menú al consultar su estado
+void CDP::mostrarInformacion() const {
+    // Imprime los datos del CDP con formato tabular
+    std::cout << "\n=== Estado del CDP ===" << std::endl;
+    std::cout << std::left << std::setw(20) << "ID del CDP:" << idCDP << std::endl;
+    std::cout << std::left << std::setw(20) << "ID de la Cuenta:" << idCuenta << std::endl;
+    std::cout << std::left << std::setw(20) << "Moneda:" << moneda << std::endl;
+    std::cout << std::left << std::setw(20) << "Monto:" << deposito << std::endl;
+    std::cout << std::left << std::setw(20) << "Plazo en Meses:" << plazoMeses << std::endl;
+    std::cout << std::left << std::setw(20) << "Tasa de Interés:" << tasaInteres << std::endl;
 }
