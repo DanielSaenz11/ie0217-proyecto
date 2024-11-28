@@ -12,6 +12,7 @@
  */
 
 #include <iostream>
+#include <iomanip>
 #include "Database.hpp"
 #include "constants.hpp"
 #include "Menu.hpp"
@@ -28,32 +29,50 @@
  * @return `int` Código de estado de la ejecución del programa.
  */
 int main() {
-    Database db("banco.db"); // Conectar a la base de datos
-    int opcionPrincipal;
-    
-    do {
-        mostrarMenuPrincipal(); // Mostrar las opciones del menú principal
-        opcionPrincipal = obtenerEntero(); // Obtener opción seleccionada por el usuario
 
-        // Ejecutar acción correspondiente a la opción seleccionada en el menú principal
-        switch (static_cast<MenuPrincipalOpciones>(opcionPrincipal)) {
-            case MenuPrincipalOpciones::ATENCION_CLIENTE:
-                menuAtencionCliente(db.get()); // Llamar a la función del menú de atención al cliente
-                break;
-            case MenuPrincipalOpciones::PRESTAMO_BANCARIO:
-                // Implementación de la sección de préstamo bancario (en desarrollo).
-                std::cout << "Funcionalidad de préstamo bancario en construcción." << std::endl;
-                break;
-            case MenuPrincipalOpciones::SALIR:
-                // Mensaje de salida del programa
-                std::cout << "Saliendo del programa..." << std::endl;
-                break;
-            default:
-                // Manejo de opción inválida
-                std::cout << "Opción inválida en el menú principal." << std::endl;
-                break;
-        }
-    } while (opcionPrincipal != static_cast<int>(MenuPrincipalOpciones::SALIR));
+    try {
+        Database db("banco.db"); // Conectar a la base de datos
+    
+        int opcionPrincipal; // Opción ingresada para el menú principal
+
+        std::cout << std::fixed << std::setprecision(2); // Configurar salida con 2 decimales
+        
+        do {
+            mostrarMenuPrincipal(); // Mostrar las opciones del menú principal
+            opcionPrincipal = obtenerEntero(); // Obtener opción seleccionada por el usuario
+
+            // Ejecutar acción correspondiente a la opción seleccionada en el menú principal
+            switch (static_cast<MenuPrincipalOpciones>(opcionPrincipal)) {
+                case MenuPrincipalOpciones::ATENCION_CLIENTE:
+                    menuAtencionCliente(db.get()); // Llamar a la función del menú de atención al cliente
+                    break;
+                case MenuPrincipalOpciones::PRESTAMO_BANCARIO:
+                    menuPrestamos(db.get()); // Llamar a la función del menú de préstamos
+                    break;
+                case MenuPrincipalOpciones::SALIR:
+                    // Mensaje de salida del programa
+                    std::cout << "Saliendo del programa..." << std::endl;
+                    break;
+                default:
+                    // Manejo de opción inválida
+                    std::cout << "Opción inválida en el menú principal." << std::endl;
+                    break;
+            }
+        } while (opcionPrincipal != static_cast<int>(MenuPrincipalOpciones::SALIR));
+
+    } catch (const std::runtime_error& e) {
+        // Manejo de errores de runtime
+        std::cerr << "Error en tiempo de ejecución: " << e.what() << std::endl;
+        return 1; // Código de error
+    } catch (const std::exception& e) {
+        // Manejo de otros errores genéricos
+        std::cerr << "Error inesperado: " << e.what() << std::endl;
+        return 1; // Código de error
+    } catch (...) {
+        // Manejo de errores desconocidos
+        std::cerr << "Error desconocido: Terminando el programa." << std::endl;
+        return 1; // Código de error
+    }
     
     return 0;
 }
