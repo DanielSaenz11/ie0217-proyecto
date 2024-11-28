@@ -67,6 +67,24 @@ std::string validarMoneda();
 std::string validarTelefono();
 
 /**
+ * @brief Valida el ingreso de 's' o 'n' para operaciones donde se realizan preguntas binarias.
+ * 
+ * Solicita una respuesta de 's' o 'n' (case insensitive) hasta que se ingrese una válida.
+ * 
+ * @return `true` si se ingresó 's'; `false` para 'n'.
+ */
+bool validarRespuestaSN();
+
+/**
+ * @brief Valida el ingreso de un nombre de un archivo con extensión .csv.
+ * 
+ * Utiliza regex para validar el formato y solicita el ingreso del nombre hasta que se indique uno válido.
+ * 
+ * @return `std::string` El nombre del .csv ingresado.
+ */
+std::string obtenerArchivoCSV();
+
+/**
  * @brief Calcula la potencia de un número.
  * 
  * Esta función eleva un número base a una potencia entera positiva, multiplicando

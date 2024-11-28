@@ -2,7 +2,8 @@
  * @file auxiliares.cpp
  * @brief Implementación de funciones auxiliares para la validación de datos.
  * @details Este archivo contiene la implementación de funciones de validación de fechas,
- *          números enteros, decimales, selección de moneda y formatos de teléfono.
+ *          números enteros, decimales, selección de moneda y formatos de teléfono, así como
+ *          nombres de archivos `.csv` y respuestas s/n.
  *          Estas funciones aseguran que los datos ingresados cumplen con el formato esperado
  *          antes de ser utilizados en el programa principal.
  * 
@@ -18,6 +19,7 @@
 #include <regex>
 #include <limits>
 
+// Definición de función para validar una fecha ingresada
 std::string validarFecha() {
     // Declaración de string para almacenar la fecha
     std::string fecha;
@@ -47,6 +49,7 @@ std::string validarFecha() {
     }
 }
 
+// Definición de función para obtener un entero positivo
 int obtenerEntero() {
     int numero; // Declaración de número entero a validar
 
@@ -64,6 +67,7 @@ int obtenerEntero() {
     }
 }
 
+// Definición de función para obtener un número decimal positivo
 double obtenerDecimal() {
     double numero; // Declaración de número con decimales a validar
 
@@ -81,11 +85,12 @@ double obtenerDecimal() {
     }
 }
 
+// Definición de función para validar entre las monedas 'CRC' o 'USD'
 std::string validarMoneda() {
     int opcion; // Opción que representa la selección de moneda
     
     do {
-        std::cout << "Seleccione el tipo de moneda:\n1. USD\n2. CRC\nOpción: ";
+        std::cout << "Seleccione el tipo de moneda:\n1. CRC\n2. USD\nOpción: ";
         std::cin >> opcion;
 
         // Validar si la opción ingresada es válida
@@ -96,9 +101,10 @@ std::string validarMoneda() {
         }
     } while (opcion != 1 && opcion != 2); // Continuar solicitando hasta obtener una opción válida
 
-    return opcion == 1 ? "USD" : "CRC"; // Retornar la moneda seleccionada por medio del operador ternario
+    return opcion == 1 ? "CRC" : "USD"; // Retornar la moneda seleccionada por medio del operador ternario
 }
 
+// Definición de función para validar el ingreso de un número de teléfono
 std::string validarTelefono() {
     std::string telefono; // String que representa el número de teléfono
     
@@ -118,6 +124,7 @@ std::string validarTelefono() {
     }
 }
 
+// Definición de función para hacer la potencia de un número
 double potencia(double n, double p) {
     double resultado = 1;
 
@@ -129,3 +136,42 @@ double potencia(double n, double p) {
     return resultado; // Retornar resultado correspondiente a la exponenciación
 }
 
+// Función para validar una respuesta de s/n
+bool validarRespuestaSN() {
+    std::string respuesta;
+
+    do {
+        std::getline(std::cin, respuesta); // Leer la línea completa
+        respuesta.erase(std::remove(respuesta.begin(), respuesta.end(), ' '), respuesta.end()); // Quitar espacios
+
+        // Validar la respuesta
+        if (respuesta == "s" || respuesta == "S") {
+            return true;
+        } else if (respuesta == "n" || respuesta == "N") {
+            return false;
+        }
+
+    } while (true);
+}
+
+
+// Función para validar si una cadena es un nombre de archivo .csv
+std::string obtenerArchivoCSV() {
+    std::string nombreArchivo; // Para almacenar el nombre del archivo ingresado
+
+    // Patrón regex para realizar la validación
+    std::regex patronCSV(R"(([^\/:*?"<>|]+)\.csv$)", std::regex_constants::icase);
+
+    do {
+        std::getline(std::cin, nombreArchivo);
+
+        // Eliminar espacios en blanco de la entrada
+        nombreArchivo.erase(remove(nombreArchivo.begin(), nombreArchivo.end(), ' '), nombreArchivo.end());
+
+        if (std::regex_match(nombreArchivo, patronCSV)) {
+            return nombreArchivo; // Retorna el nombre del archivo válido
+        } else {
+            std::cout << "Error: El nombre ingresado no corresponde a un archivo (.csv). Intente nuevamente." << std::endl;
+        }
+    } while (true); // Repite hasta que el nombre sea válido
+}
