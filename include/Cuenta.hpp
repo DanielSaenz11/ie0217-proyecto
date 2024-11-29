@@ -218,6 +218,7 @@ class Cuenta {
          * @param moneda Tipo de moneda del CDP ('CRC', 'USD')
          * @param monto Monto a depositar en el CDP.
          * @param plazoMeses Plazo del CDP en meses.
+         * @param tasaInteres Tasa de interés del CDP
          * @return `true` si la solicitud fue exitosa, `false` en caso contrario.
          */
         bool solicitarCDP(sqlite3* db, std::string &moneda, double monto, int plazoMeses, double tasaInteres);
