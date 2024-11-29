@@ -203,8 +203,6 @@ class Cuenta {
         /**
          * @brief Realiza un abono a un préstamo desde la cuenta.
          * 
-         * PENDIENTE
-         * 
          * @param db Conexión a la base de datos SQLite.
          * @param monto Monto a abonar al préstamo.
          * @return `true` si el abono fue exitoso, `false` en caso contrario.
