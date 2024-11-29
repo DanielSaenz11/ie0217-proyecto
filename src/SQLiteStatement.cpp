@@ -13,6 +13,8 @@
 #include "SQLiteStatement.hpp"
 
 #include <sqlite3.h>
+#include <iostream>
+
 
 // Definición del constructor de la clase para el SQLite stmt
 SQLiteStatement::SQLiteStatement(sqlite3* db, const std::string& query) : stmt_(nullptr) {
