@@ -322,9 +322,27 @@ Se adjunta imagen para mostrar creación de registro en la tabla `Transacciones`
 
 <div align="center">
 
-| ![*]() |
+| ![*](/images/8.2.png) |
 |:--:|
 |  |
+
+</div>
+
+Se adjuntan imagenes para demostrar que se realizó el retiro correctamente y se redujo en saldo de la cuenta:
+
+<div align="center">
+
+| ![Tabla de Cuentas antes del retiro*](/images/tablaCuentasOriginal2.png) |
+|:--:|
+| *Tabla de Cuentas antes del retiro* |
+
+</div>
+
+<div align="center">
+
+| ![Tabla de Cuentas despues del retiro*](/images/tablaCuentasNuevoRetiro.png) |
+|:--:|
+| *Tabla de Cuentas despues del retiro* |
 
 </div>
 
