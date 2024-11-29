@@ -31,7 +31,9 @@ const char* SQL_CREATE_TABLES = R"(
         segundoApellido TEXT,
         telefono TEXT
     );
-    
+
+    CREATE INDEX IF NOT EXISTS idx_cedula_clientes ON Clientes(cedula);
+
     CREATE TABLE IF NOT EXISTS Cuentas (
         idCuenta INTEGER PRIMARY KEY AUTOINCREMENT,
         idCliente INTEGER NOT NULL,
@@ -40,16 +42,21 @@ const char* SQL_CREATE_TABLES = R"(
         tasaInteres REAL NOT NULL,
         FOREIGN KEY (idCliente) REFERENCES Clientes(idCliente)
     );
-    
+
+    CREATE INDEX IF NOT EXISTS idx_idCuenta_cuentas ON Cuentas(idCuenta);
+    CREATE INDEX IF NOT EXISTS idx_idCliente_cuentas ON Cuentas(idCliente);
+
     CREATE TABLE IF NOT EXISTS CDP (
         idCDP INTEGER PRIMARY KEY AUTOINCREMENT,
         idCuenta INTEGER NOT NULL,
+        moneda TEXT NOT NULL CHECK (moneda IN ('CRC', 'USD')),
         deposito REAL NOT NULL,
         plazoMeses INTEGER NOT NULL,
         tasaInteres REAL NOT NULL,
-        fechaSolicitud TEXT NOT NULL,
         FOREIGN KEY (idCuenta) REFERENCES Cuentas(idCuenta)
     );
+
+    CREATE INDEX IF NOT EXISTS idx_idCuenta_cdp ON CDP(idCuenta);
 
     CREATE TABLE IF NOT EXISTS Transacciones (
         idTransaccion INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -61,22 +68,27 @@ const char* SQL_CREATE_TABLES = R"(
         FOREIGN KEY (idDestinatario) REFERENCES Cuentas(idCuenta)
     );
 
+    CREATE INDEX IF NOT EXISTS idx_idRemitente_transacciones ON Transacciones(idRemitente);
+    CREATE INDEX IF NOT EXISTS idx_idDestinatario_transacciones ON Transacciones(idDestinatario);
+
     CREATE TABLE IF NOT EXISTS Prestamos (
         idPrestamo INTEGER PRIMARY KEY AUTOINCREMENT,
         idCuenta INTEGER NOT NULL,
         tipo TEXT NOT NULL CHECK (tipo IN ('PER', 'PRE', 'HIP')),
+        moneda TEXT NOT NULL CHECK (moneda IN ('CRC', 'USD')),
         monto REAL NOT NULL,
         tasaInteres REAL NOT NULL,
         plazoMeses INTEGER NOT NULL,
         cuotaMensual REAL NOT NULL,
-        capitalPagado REAL NOT NULL,
-        interesesPagados REAL NOT NULL,
-        saldoRestante REAL NOT NULL,
-        fechaSolicitud TEXT NOT NULL,
-        fechaSiguientePago TEXT NOT NULL,
+        cuotasPagadas INTEGER NOT NULL DEFAULT 0,
+        capitalPagado REAL NOT NULL DEFAULT 0,
+        interesesPagados REAL NOT NULL DEFAULT 0,
         activo BOOLEAN NOT NULL DEFAULT 1,
         FOREIGN KEY (idCuenta) REFERENCES Cuentas(idCuenta)
     );
+
+    CREATE INDEX IF NOT EXISTS idx_idCuenta_prestamos ON Prestamos(idCuenta);
+    CREATE INDEX IF NOT EXISTS idx_idPrestamo_prestamos ON Prestamos(idPrestamo);
 
     CREATE TABLE IF NOT EXISTS PagoPrestamos (
         idPagoPrestamo INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -89,6 +101,7 @@ const char* SQL_CREATE_TABLES = R"(
     );
 )";
 
+
 /**
  * @brief Ejecuta un comando SQL en la base de datos.
  * 
@@ -98,14 +111,14 @@ const char* SQL_CREATE_TABLES = R"(
  * @param sql Comando SQL a ejecutar.
  * @return `void`
  */
-void ejecutarSQL(sqlite3* db, const char* sql) {
-    char* errMsg = nullptr; // Mensaje de error
-
+bool ejecutarSQL(sqlite3* db, const char* sql) {
     // Ejecución de comando SQL
-    if (sqlite3_exec(db, sql, nullptr, nullptr, &errMsg) != SQLITE_OK) {
-        std::cerr << "Error ejecutando SQL: " << errMsg << std::endl;
-        sqlite3_free(errMsg);
+    if (sqlite3_exec(db, sql, nullptr, nullptr, nullptr) != SQLITE_OK) {
+        std::cerr << "Error ejecutando la consulta SQL." << std::endl;
+        return false; // Operación fallida
     }
+
+    return true; // Operación exitosa
 }
 
 /**
@@ -121,10 +134,10 @@ void insertarDatos(sqlite3* db) {
     const char* sqlInsertarDatos = R"(
         -- Insertar datos en Clientes
         INSERT INTO Clientes (cedula, nombre, primerApellido, segundoApellido, telefono) VALUES 
-        (101010101, 'Juan', 'Perez', 'Garcia', '12345678'),
-        (202020202, 'Maria', 'Lopez', 'Fernandez', '87654321'),
-        (303030303, 'Carlos', 'Ramirez', 'Soto', '45678901'),
-        (404040404, 'Ana', 'Jimenez', 'Mora', '23456789');
+        (101010101, 'Juan', 'Perez', 'Garcia', '1234-5678'),
+        (202020202, 'Maria', 'Lopez', 'Fernandez', '8765-4321'),
+        (303030303, 'Carlos', 'Ramirez', 'Soto', '4567-8901'),
+        (404040404, 'Ana', 'Jimenez', 'Mora', '2345-6789');
 
         -- Insertar datos en Cuentas
         INSERT INTO Cuentas (idCliente, moneda, saldo, tasaInteres) VALUES 
@@ -136,10 +149,10 @@ void insertarDatos(sqlite3* db) {
         (4, 'CRC', 250000.0, 2.7);
 
         -- Insertar datos en CDP
-        INSERT INTO CDP (idCuenta, deposito, plazoMeses, tasaInteres, fechaSolicitud) VALUES
-        (1, 60000.0, 12, 2.5, '2024-01-10'),
-        (3, 120000.0, 24, 3.0, '2024-02-15'),
-        (5, 500.0, 18, 2.8, '2024-03-20');
+        INSERT INTO CDP (idCuenta, moneda, deposito, plazoMeses, tasaInteres) VALUES
+        (1, 'CRC', 60000.0, 12, 2.5),
+        (3, 'CRC', 120000.0, 24, 3.0),
+        (5, 'USD', 500.0, 18, 2.8);
 
         -- Insertar transacciones
         INSERT INTO Transacciones (idRemitente, idDestinatario, tipo, monto) VALUES 
@@ -151,9 +164,9 @@ void insertarDatos(sqlite3* db) {
         (5, NULL, 'ABO', 250.0);
 
         -- Insertar préstamos
-        INSERT INTO Prestamos (idCuenta, tipo, monto, tasaInteres, plazoMeses, cuotaMensual, capitalPagado, interesesPagados, saldoRestante, fechaSolicitud, fechaSiguientePago, activo) VALUES 
-        (1, 'PER', 100000.0, 5.0, 24, 5000.0, 10000.0, 2500.0, 87500.0, '2024-11-01', '2024-12-01', 1),
-        (5, 'HIP', 50000.0, 3.5, 120, 1500.0, 3000.0, 750.0, 46250.0, '2024-10-15', '2024-11-15', 1);
+        INSERT INTO Prestamos (idCuenta, tipo, moneda, monto, tasaInteres, plazoMeses, cuotaMensual, cuotasPagadas, capitalPagado, interesesPagados, activo) VALUES 
+        (1, 'PER', 'CRC', 100000.0, 5.0, 24, 5000.0, 2, 10000.0, 2500.0, 1),
+        (5, 'HIP', 'USD', 50000.0, 3.5, 120, 1500.0, 3, 3000.0, 750.0, 1);
 
         -- Insertar datos en PagoPrestamos
         INSERT INTO PagoPrestamos (idPrestamo, cuotaPagada, aporteCapital, aporteIntereses, saldoRestante) VALUES 
@@ -162,8 +175,14 @@ void insertarDatos(sqlite3* db) {
         (2, 1500.0, 1200.0, 300.0, 45000.0);
     )";
 
-    ejecutarSQL(db, sqlInsertarDatos); // Ejecución del comando de inserción de datos
-    std::cout << "Datos insertados exitosamente en todas las tablas." << std::endl;
+
+    // Ejecución del comando de inserción de datos
+    if (ejecutarSQL(db, sqlInsertarDatos)) {
+       std::cout << "Datos insertados exitosamente en todas las tablas." << std::endl;
+    } 
+    else {
+        std::cerr << "No se pudieron insertar los datos." << std::endl;
+    }
 }
 
 /**
@@ -183,8 +202,12 @@ int main() {
     }
 
     // Crear tablas
-    ejecutarSQL(db, SQL_CREATE_TABLES);
-    std::cout << "Tablas creadas exitosamente." << std::endl;
+    if (ejecutarSQL(db, SQL_CREATE_TABLES)) {
+        std::cout << "Tablas creadas exitosamente." << std::endl;
+    }
+    else {
+        std::cerr << "Error: No se pudieron crear las tablas correctamente." << std::endl;
+    }
 
     // Insertar datos
     insertarDatos(db);

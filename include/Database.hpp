@@ -7,8 +7,8 @@
  * 
  * @author Daniel Alberto Sáenz Obando
  * @author Rodrigo Madrigal Montes
- * @date 08/11/2024
  * @copyright MIT License
+ * @date 28/11/2024
  */
 
 #ifndef DATABASE_HPP
@@ -37,6 +37,7 @@ class Database {
          * abrir la base de datos, el constructor maneja el error apropiadamente.
          * 
          * @param dbName Nombre de la base de datos a abrir.
+         * @throws `std::runtime_error` si no se pudo crear/abrir correctamente.
          */
         Database(const std::string& dbName);
         
