@@ -463,20 +463,23 @@ void registrarCliente(sqlite3* db) {
         return;
     }
 
+    // Limpieza del buffer antes de usar getline
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
     // Ingreso de nombre
     std::cout << "Ingrese nombre: ";
     std::string nombre;
-    std::cin >> nombre;
+    std::getline(std::cin, nombre);
 
     // Ingreso de primer apellido
     std::cout << "Ingrese primer apellido: ";
     std::string primerApellido;
-    std::cin >> primerApellido;
+    std::getline(std::cin, primerApellido);
 
     // Ingreso de segundo apellido
     std::cout << "Ingrese segundo apellido: ";
     std::string segundoApellido;
-    std::cin >> segundoApellido;
+    std::getline(std::cin, segundoApellido);
 
     // Ingreso de teléfono
     std::string telefono = validarTelefono();
