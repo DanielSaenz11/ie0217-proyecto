@@ -20,7 +20,14 @@
 #include <iomanip>
 #include <string>
 
-
+/**
+ * @class CDP
+ * @brief Clase para representar un Certificado de Depósito a Plazo (CDP).
+ * 
+ * Esta clase encapsula la lógica relacionada con los CDP, permitiendo su creación,
+ * consulta y generación de reportes. Los CDP están asociados a una cuenta bancaria y tienen
+ * atributos como depósito, plazo en meses, tasa de interés y fecha de solicitud.
+ */
 class CDP {
     private:
 
