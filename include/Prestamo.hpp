@@ -19,6 +19,14 @@
 #include <string>
 #include <sqlite3.h>
 
+/**
+ * @class Prestamo
+ * @brief Clase que representa un préstamo bancario.
+ * 
+ * La clase encapsula la lógica relacionada con los préstamos, permitiendo su creación,
+ * consulta, abono y reporte. Los préstamos están asociados a cuentas bancarias y tienen
+ * atributos como monto, plazo, tasa de interés y estado.
+ */
 class Prestamo {
     private:
         /// @brief Identificador del préstamo
