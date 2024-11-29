@@ -1,5 +1,5 @@
 /**
- * @file Cuenta.cpp
+ * @file PagoPrestamo.cpp
  * @brief Implementación de la clase PagoPrestamo para gestionar los pagos a prestamos en la base de datos.
  * @details Este archivo contiene la definición del método de la clase PagoPrestamo, que permiten
  *          crear el pago o abono a un préstamo almacenado en una base de datos SQLite.
