@@ -7,8 +7,8 @@
  * 
  * @author Daniel Alberto Sáenz Obando
  * @author Rodrigo Madrigal Montes
- * @date 08/11/2024
  * @copyright MIT License
+ * @date 28/11/2024
  */
 
 #ifndef DATABASE_HPP

@@ -6,6 +6,7 @@
  *          de las opciones en los menús principales y secundarios.
  * 
  * @author Daniel Alberto Sáenz Obando
+ * @author Rodrigo Madrigal Montes
  * @copyright MIT License
  * @date 28/11/2024
  */
