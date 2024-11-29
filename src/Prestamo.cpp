@@ -450,5 +450,8 @@ ValoresPrestamo Prestamo::obtenerValoresPredeterminados(TipoPrestamo tipo, const
             return (moneda == "CRC") ? Prestamos::Colones::PRENDARIO : Prestamos::Dolares::PRENDARIO;
         case TipoPrestamo::HIPOTECARIO:
             return (moneda == "CRC") ? Prestamos::Colones::HIPOTECARIO : Prestamos::Dolares::HIPOTECARIO;
+        default:
+            // Retornar valores nulos en caso de un tipo no manejado
+            return ValoresPrestamo{0.0, 0.0, 0, 0.0};
     }
 }
