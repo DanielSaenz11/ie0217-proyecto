@@ -184,13 +184,6 @@ Se muestran las imagenes de la tabla de `CDP` antes y despues de la creación de
 
 ### Abonos a Préstamos
 - **Propios:**
-  - **Parámetros válidos:** Abono exitoso.
-
-<p align="center">
-  <img width="750" src="./images/>
-
-  __Figura X.__ xxxx.
-</p>
 
   - **Parámetros inválidos:** Manejo de errores.
 
@@ -241,17 +234,6 @@ Se muestran imagenes para demostrar que se generó un registro del abono al pré
 <div align="center">
 
 | ![*](/images/5.3.png) |
-|:--:|
-|  |
-
-</div>
-
-  - **Fondos insuficientes:** Mostrar mensaje de error.
-
-
-<div align="center">
-
-| ![*]() |
 |:--:|
 |  |
 
