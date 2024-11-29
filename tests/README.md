@@ -213,6 +213,29 @@ Se muestran las imagenes de la tabla de `CDP` antes y despues de la creación de
 
 </div>
 
+
+Se muestran imagenes para demostrar que se generó un registro del abono al préstamo en la tabla de `PagoPrestamos`:
+
+<div align="center">
+
+| ![Tabla de PagoPrestamos antes del abono*](/images/tablaPagoPrestamosOriginal.png) |
+|:--:|
+| *Tabla de PagoPrestamos antes del abono* |
+
+</div>
+
+<div align="center">
+
+| ![Tabla de PagoPrestamos despues del abono*](/images/tablaPagoPrestamosNuevoPrestamo.png) |
+|:--:|
+| *Tabla de PagoPrestamos despues del abono* |
+
+</div>
+
+
+
+</div>
+
   - **Parámetros inválidos:** Abono fallido.
 
 <div align="center">
@@ -252,6 +275,16 @@ Se muestran las imagenes de la tabla de `CDP` antes y despues de la creación de
 <div align="center">
 
 | ![*](/images/6.2.png) |
+|:--:|
+|  |
+
+</div>
+
+Se adjunta imagen para mostrar creación de registro en la tabla `Transacciones` al realizar el depósito anterior:
+
+<div align="center">
+
+| ![*](/images/tablaTransaccionesDeposito.png) |
 |:--:|
 |  |
 
@@ -336,6 +369,23 @@ Se muestran las imagenes de la tabla de `CDP` antes y despues de la creación de
 
 </div>
 
+Se muestran imagenes que demuestran que se generó exitosamente un nuevo registro en la tabla de clientes:
+
+<div align="center">
+
+| ![Tabla de Cliente antes de la creación del nuevo*](/images/tablaClientesOriginal.png) |
+|:--:|
+| *Tabla de Cliente antes de la creación del nuevo* |
+
+</div>
+
+<div align="center">
+
+| ![Tabla de Cliente despues de la creación del nuevo*](/images/tablaClienteNuevoCliente.png) |
+|:--:|
+| *Tabla de Cliente despues de la creación del nuevo* |
+
+</div>
 
 - **Iniciar sesión con cliente inexistente:** Mostrar mensaje de error.
 
@@ -376,6 +426,24 @@ Se muestran las imagenes de la tabla de `CDP` antes y despues de la creación de
 | ![*](/images/2.4.png) |
 |:--:|
 |  |
+
+</div>
+
+Se muestran imagenes para demostrar que se creó exitosamente un registro de una nueva cuenta en la tabla de Cuentas:
+
+<div align="center">
+
+| ![Tabla de Cuentas antes de la creación de la nueva*](/images/tablaCuentasOriginal.png) |
+|:--:|
+| *Tabla de Cuentas antes de la creación de la nueva* |
+
+</div>
+
+<div align="center">
+
+| ![Tabla de Cuentas despues de la creación de la nueva*](/images/tablaCuentaNuevaCuenta.png) |
+|:--:|
+| *Tabla de Cuentas despues de la creación de la nueva* |
 
 </div>
 
@@ -448,6 +516,24 @@ Se muestran las imagenes de la tabla de `CDP` antes y despues de la creación de
 
 </div>
 
+
+Se muestran imagenes que demuestran la generación de un nuevo préstamo cuando se decide que si se quiere crearlo:
+
+<div align="center">
+
+| ![Tabla de Prestamos antes de la creación del nuevo*](/images/tablaPrestamosOriginal.png) |
+|:--:|
+| *Tabla de Prestamos antes de la creación del nuevo* |
+
+</div>
+
+<div align="center">
+
+| ![Tabla de Prestamos despues de la creación del nuevo*](/images/11.6.png) |
+|:--:|
+| *Tabla de Prestamos despues de la creación del nuevo* |
+
+</div>
 
 ### Consulta de Préstamos
 - **Préstamo inexistente:** Mostrar mensaje de error.
