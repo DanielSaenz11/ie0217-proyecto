@@ -1,4 +1,16 @@
-
+/**
+ * @file Prestamo.cpp
+ * @brief Implementación de la clase PPrestamo para gestionar los prestamos en la base de datos.
+ * @details Este archivo contiene la definición del método de la clase Prestamo, que permiten
+ *          crear un préstmo, abonar al mismo, obtener dato y generar reportes de los mismos. 
+ *          Se incluyen funcionalidades para realizar las validaciones de los datos necesarios y 
+ *          el manejo de errores correspondiente. 
+ * 
+ * @author Daniel Alberto Sáenz Obando
+ * @author Rodrigo Madrigal Montes
+ * @copyright MIT License
+ * @date 28/11/2024
+ */
 
 #include "Prestamo.hpp"
 #include "auxiliares.hpp"

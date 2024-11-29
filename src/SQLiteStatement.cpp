@@ -1,4 +1,14 @@
-
+/**
+ * @file SQLiteStatement.cpp
+ * @brief Implementación de la clase SQLiteStatement para gestionar las consultas SQL en la base de datos.
+ * @details Este archivo contiene la definición del constructor y destrcutor de la clase PagoPrestamo, además de
+ *          poder obtener la consulta preparada de la misma clase. 
+ * 
+ * @author Daniel Alberto Sáenz Obando
+ * @author Rodrigo Madrigal Montes
+ * @copyright MIT License
+ * @date 28/11/2024
+ */
 
 #include "SQLiteStatement.hpp"
 
