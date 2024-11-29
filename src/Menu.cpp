@@ -19,6 +19,7 @@
 #include "constants.hpp"
 #include "CDP.hpp"
 #include <iostream>
+#include <limits>
 
 // -------------------------------- Menú principal --------------------------------
 

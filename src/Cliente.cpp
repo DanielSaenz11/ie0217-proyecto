@@ -13,7 +13,6 @@
 #include "Cliente.hpp"
 #include "SQLiteStatement.hpp"
 #include <iostream>
-#include <limits>
 
 // Constructor para inicializar un cliente con los datos proporcionados.
 Cliente::Cliente(int cedula, const std::string &nombre, const std::string &primerApellido,
