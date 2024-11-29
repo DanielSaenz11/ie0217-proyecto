@@ -559,6 +559,12 @@ void solicitarPrestamo(sqlite3* db) {
     // Mostrar valores predeterminados
     struct ValoresPrestamo valoresPrestamo = Prestamo::obtenerValoresPredeterminados(static_cast<TipoPrestamo>(tipoSeleccionado), moneda);
 
+    // Verificar que sea un struct válido
+    if (valoresPrestamo.monto == 0.0) {
+        std::cerr << "Error: Tipo de préstamo no válido" << std::endl;
+        return;
+    } 
+
     std::cout << "\nValores predeterminados para el préstamo seleccionado:" << std::endl;
     std::cout << "Monto: " << valoresPrestamo.monto << std::endl;
     std::cout << "Plazo (meses): " << valoresPrestamo.plazoMeses << std::endl;
