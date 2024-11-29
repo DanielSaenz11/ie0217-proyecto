@@ -8,6 +8,7 @@
  *          subfunciones de cada menú para realizar cada operación. 
  * 
  * @author Daniel Alberto Sáenz Obando
+ * @author Rodrigo Madrigal Montes
  * @copyright MIT License
  * @date 28/11/2024
  */
