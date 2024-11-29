@@ -1,4 +1,16 @@
-
+/**
+ * @file Cuenta.cpp
+ * @brief Implementación de la clase Cuenta para gestionar las cuentas en la base de datos.
+ * @details Este archivo contiene las definiciones de los métodos de la clase Cuenta, que permiten
+ *          crear, obtener y mostrar información de las cuentas almacenadas en una base de datos SQLite.
+ *          Se incluyen funcionalidades para realizar las validaciones de los datos y las transacciones posibles
+ *          entre las cuentas en la base de datos.
+ * 
+ * @author Daniel Alberto Sáenz Obando
+ * @author Rodrigo Madrigal Montes
+ * @copyright MIT License
+ * @date 28/11/2024
+ */
 
 #include "Cuenta.hpp"
 #include "Transaccion.hpp"

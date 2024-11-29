@@ -1,4 +1,15 @@
-
+/**
+ * @file CDP.cpp
+ * @brief Implementación de la clase CDP para gestionar Certificados de Depósito a Plazo (CDP).
+ * @details Este archivo contiene las definiciones de los métodos de la clase CDP, que permiten
+ *          crear, obtener y mostrar información de los CDPs almacenados en una base de datos SQLite.
+ *          Se incluyen funcionalidades para calcular intereses y manejar datos financieros.
+ * 
+ * @author Daniel Alberto Sáenz Obando
+ * @author Rodrigo Madrigal Montes
+ * @copyright MIT License
+ * @date 28/11/2024
+ */
 
 #include "CDP.hpp"
 #include <iostream>
