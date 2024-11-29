@@ -1,10 +1,14 @@
 /**
  * @file CDP.hpp
- * @author Rodrigo Madrigal Montes
- * @brief Archivo de declaración de los métodos para CDP
- * @version 1.0
- * @date 2024-11-07
+ * @brief Declaración de la clase CDP para gestionar certificados de depósito a plazo (CDP) en la base de datos.
+ * @details Este archivo contiene la definición de la clase CDP, incluyendo su constructor y métodos para crear 
+ *          un CDP en la base de datos y obtener información de un CDP existente. La clase maneja atributos como 
+ *          el ID del CDP, el monto del depósito, el plazo en meses, la tasa de interés y la fecha de solicitud.
  * 
+ * @authors Daniel Alberto Sáenz Obando
+ *          Rodrigo Madrigal Montes
+ * @copyright MIT License
+ * @date 28/11/2024
  */
 
 #ifndef CDP_HPP
