@@ -14,6 +14,10 @@ El repositorio pertenece al grupo 6 que contiene a los siguientes integrantes:
 </div>
 
 
+## Documentación
+
+La documentación detallada de los archivos, clases, métodos y funciones en todos los directorios de este proyecto se encuentran en el siguiente enlace de [Netlify](https://proyecto-ie0217.netlify.app/).
+
 ## Instrucciones de compilación y ejecución
 
 Para compilar los archivos de este proyecto se utilza un `Makefile`, que generará dos ejecutables: `sistemaGestionBancaria` e `iniciar_db`. Cabe mencionar que este `Makefile` funciona tanto en sistema operativo `Windows` como `Linux`, y hay dos opciones para compilar y ejecutar este proyecto:
@@ -344,14 +348,13 @@ En esta, se incluyen las tablas a continuación:
     - __Clave primaria__ `idPrestamo`: Identificador único del préstamo. Generado de forma automática por la base de datos.
     - __Clave foránea__ `idCuenta`: Identificador de la cuenta bancaria asociada al préstamo.
     - `tipo`: Tipo de préstamo (`PER`: personal, `HIP`: hipotecario, `PRE`: prendario).
+    - `moneda`: Moneda del préstamo (`USD`: dólares, `CRC`: colones).
     - `monto`: Monto de dinero prestado.
     - `tasaInteres`: Tasa de interés asociada al préstamo. Se va a manejar una tasa de interés fija para los préstamos.
     - `plazoMeses`: Plazo total en meses del préstamo.
     - `cuotaMensual`: Cuota a pagar cada mes.
     - `capitalPagado`: Monto de capital pagado del préstamo. 
     - `InteresesPagados`: Monto de intereses pagados del préstamo. 
-    - `fechaSolicitud`: Fecha en la que fue solicitado el préstamo.
-    - `fechaSiguientePago`: Fecha del siguiente pago del préstamo.
     - `activo`: Estado de actividad del préstamo (fue pagado o no).
 
 - __`PagoPrestamos`__: Tabla que guarda un registro del pago de los préstamos dentro de la entidad bancaria.
@@ -375,10 +378,10 @@ En esta, se incluyen las tablas a continuación:
 - __`CDP`__: Tabla que almacena la información de los certificados de depósito a plazo.
     - __Clave primaria__ `idCDP`: Identificador único del CDP. Generado automáticamente por la base de datos,
     - __Clave foránea__ `idCuenta`: Cuenta asociada al CDP.
+        - `moneda`: Moneda del préstamo (`USD`: dólares, `CRC`: colones).
     - `deposito`: Monto destinado para el CDP por el cliente.
     - `plazoMeses`: Plazo en meses de vigencia del CDP.
     - `tasaInteres`: Tasa de interés asociada al CDP.
-    - `fechaSolicitud`: Fecha de registro del CDP por parte del usuario.
 
 ### Flujo de la aplicación durante la ejecución
 
@@ -395,10 +398,7 @@ En cuanto al flujo del programa al momento de ejecutarse, se diseñó un diagram
 Inicialmente, al ejecutar el programa se muestra un menú que permite escoger entre las opciones solicitadas en el enunciado de modos de operación de la aplicación:
 
 1) Modo de atención al cliente
-2) Modo de préstamos bancarios
-
-> [!NOTE]
-> Lo primero que ocurre es la creación de la clase Banco, la cual contiene métodos para las operaciones posibles, así como que en su constructor, inicializa la instancia de la base de datos a utilizar.
+2) Modo de préstamos
 
 El usuario (encargado en ventanilla) escoge el tipo de modo y esto lo lleva a un submenú para cada caso. También, se presenta una opción `Salir`, si desea terminar la ejecución del programa.
 
@@ -406,38 +406,34 @@ El usuario (encargado en ventanilla) escoge el tipo de modo y esto lo lleva a un
 
 En este submenú, se realizan las operaciones solicitadas por el cliente. Primero, se pregunta el número de cédula del cliente para identificarlo en el sistema o se puede registrar un cliente. Se presentan estas dos opciones. 
 
-En el caso en que se registre un cliente, se deben preguntar la información de las columnas de la tabla `Clientes` para crear un registro nuevo: Nombre completo, cédula y teléfono.
-Posteriormente, es realiza la consulta en la base de datos para determinar si existe un usuario que coincida con el número de cédula proporcionado. En caso de que no pase, se crea un registro en la tabla `Clientes` con la información ingresada.
+En el caso en que se registre un cliente, se deben preguntar la información de las columnas de la tabla `Clientes` para crear un registro nuevo: Cédula, nombre, primer apellido, segundo apellido y teléfono.
 
-También se establece un `TRIGGER` que limita la cantidad de usuarios a 999 999 999. Entonces si se superó esa cantidad, no se permiten más inserciones de clientes.
+Posteriormente, es realiza la consulta en la base de datos para determinar si existe un usuario que coincida con el número de cédula proporcionado. En caso de que no pase, se crea un registro en la tabla `Clientes` con la información ingresada.
 
 Al terminar esta operación, se vuelve a mostrar el menú de atención al cliente.
 
 Ahora bien, en el caso de que se ingrese un cliente (por medio de `cedula`), si existe, se muestra un menú para escoger el tipo de operación que desea realizar en la cuenta. Las opciones se muestran a continuación:
 
-- __Crear cuenta__: Permite crear una cuenta asociada al cliente de un tipo de moneda.
+- __Crear nueva cuenta__: Permite crear una cuenta asociada al cliente de un tipo de moneda.
     - Solicita el tipo de moneda para crear una cuenta (`USD`, `CRC`). En caso de que ya existe una cuenta con esa divisa asociada al cliente, se muestra un mensaje que lo indica.
-    - Si no existe, se crea un registro en la base de datos para la nueva cuenta con la información dada.
+- __Acceder a cuenta existente__: Se ingresa el ID de la cuenta existente y permite ingresar si está asociada al cliente que inició sesión
 - __Ver saldo__: Solicita el identificador de una cuenta asociada al cliente para ver el saldo.
 - __Depósito__: Agregar fondos a la cuenta.
-    - Primero se indica el tipo de moneda a ingresar.
-    - Se indica el ID de la cuenta a depositar.
-    - Si no coinciden, no se puede realizar el depósito.
-    - Si coinciden, el saldo de la cuenta se aumenta y se genera un registro del movimiento.
+    - Se indica el monto a depositar, en caso de que la entrada no sea valida lanza un error.
+    - Si todo es correcto, el saldo de la cuenta se aumenta y se genera un registro del movimiento.
 - __Retiro__: Retira fondos de la cuenta.
-    - Primero se indica el tipo de moneda a retirar.
-    - Se indica el ID de la cuenta a retirar (se verifica su existencia).
-    - Si no coinciden, no se puede realizar el retiro.
-    - Si coinciden, el saldo de la cuenta se reduce por el monto indicado y se genera un registro del movimiento.
+    - Se indica el monto a retirar, en caso de que la entrada no sea valida o haya fondos insuficientes lanza un error.
+    - Si todo es correcto, el saldo de la cuenta se reduce por el monto indicado y se genera un registro del movimiento.
 - __Transferencia__: Transfiere fondos de una cuenta a otra.
     - Primero se solicita el ID de la cuenta del destinatario y existe.
     - Se verifica si ambas cuentas comparten el mismo tipo de moneda. 
     - Luego, se indica el monto a transferir y se verifica si la cuenta tiene fondos suficientes.
     - En caso de que los pasos anteriores fueran exitosos, se reduce y se aumentan los saldos de las cuentas involucradas y se genera un log del movimiento para la tabla `Transacciones`.
 - __Consultar historial__: A partir del ID de la cuenta, se muestra un historial de todos los movimientos realizados.
-- __Solicitar CDP__: Se solicita un certificado de depósito a plazo. 
-    - Se indica el monto destinado para el CDP y se verifica que existan suficientes fondos dentro de la cuenta para ello.
-    - Se escribe el plazo en meses y la tasa de interés.
+- __Certificados de Depósito a Plazo__: Se solicita un certificado de depósito a plazo. 
+    - Se la moneda del CDP que se quiere solicitar.
+    - Se proveen opciones preestablecidas dependiendo del tipo de moneda que se esté solicitando, pero el usuario siempre puede modificarlos.
+    - Si desdea modificar los datos preestablecidos se escribe el plazo en meses,  la tasa de interés y monto.
     - Se pasan los datos a la tabla `CDP` de la base de datos.
 - __Abono a préstamo__: Permite realizar un abono a un préstamo, a partir del ID del préstamo.
     - Se indica el ID del préstamo y se comprueba su existencia.
@@ -453,7 +449,7 @@ En cuanto a este submenú, se pregunta si desea solicitar o revisar un préstamo
 
 En el primer caso, de solicitar un préstamo, se muestra inicialmente los valores predeterminados de intéres, monto mensual y número de cuotas para cada uno. Luego, se pregunta si desea guardar una tabla de pagos estimados. Finalmente, se pregunta sobre la solicitud del préstamo, si se desea registrar el préstamo realmente. En caso afirmativo, se escriben los datos en la tabla `Prestamos` y se genera un log en la tabla `PagoPrestamos`.
 
-En el segundo caso, se revisa el estado de un préstamo a partir del ingreso de su ID. También, se da la opción de generar el reporte de un préstamo (cuotas pagadas, aporte total al capital e intereses abonados) en formato tabular.
+En el segundo caso, se revisa el estado de un préstamo a partir del ingreso de su ID. También, se da la opción de generar el reporte de un préstamo (cuotas pagadas, aporte total al capital e intereses abonados) en formato tabular y se da la opción de generar un archivo `.csv` con el reporte.
 
 ## Cronograma
 
