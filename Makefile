@@ -42,7 +42,7 @@ $(EXEC_MAIN)$(EXT): $(BUILD_DIR)/main.o $(OBJ_FILES)
 	$(CXX) $(CXXFLAGS) -I$(INCLUDE_DIR) $(SQLITE_INCLUDE) $(SQLITE_LIB) -o $@ $(OBJ_FILES) -lsqlite3
 
 $(EXEC_DB_INIT)$(EXT): $(BUILD_DIR)/inicio_db.o $(OBJ_FILES)
-	$(CXX) $(CXXFLAGS) $(SQLITE_INCLUDE) $(SQLITE_LIB) -o $@ -lsqlite3 utils/inicio_db.cpp
+	$(CXX) $(CXXFLAGS) $(SQLITE_INCLUDE) $(SQLITE_LIB) -o $@ utils/inicio_db.cpp -lsqlite3
 
 # Compilación de los archivos objeto
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
