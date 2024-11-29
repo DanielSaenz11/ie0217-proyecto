@@ -28,31 +28,57 @@ Se realizaron pruebas para verificar el manejo de entradas inválidas en los men
 **Resultados esperados:**  
 Los menús deben manejar correctamente entradas inválidas y guiar al usuario a ingresar datos válidos.
 
+### `menuPrincipal`
+
+<div align="center">
+
+| ![menuPrincipal*](/images/1.0.png) |
+|:--:|
+| *menuPrincipal* |
+
+</div>
+
+
 ### `menuOperacionesCliente`
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![menuOperacionesCliente*](/images/2.0.png) |
+|:--:|
+| *menuOperacionesCliente* |
+
+</div>
+
+### `menuAtencionCliente` ingreso exitoso
+
+<div align="center">
+
+| ![menuAtencionCliente exitoso*](/images/1.1.png) |
+|:--:|
+| *menuAtencionCliente exitoso* |
+
+</div>
 
 
-### `menuAtencionCliente`
+### `menuAtencionCliente` ingreso fallido
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![menuAtencionCliente fallido*](/images/1.3.png) |
+|:--:|
+| *menuAtencionCliente fallido* |
 
+</div>
 
 ### `menuPrestamos`
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![menuPrestamos*](/images/1.4.png) |
+|:--:|
+| *menuPrestamos* |
+
+</div>
 
 
 ## Pruebas de Métodos Individuales
@@ -60,78 +86,101 @@ Los menús deben manejar correctamente entradas inválidas y guiar al usuario a 
 ### Ver Saldo
 - **Caso 1:** Cuenta inexistente → Mensaje de error.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/2.1.png) |
+|:--:|
+|  |
+
+</div>
 
 
 - **Caso 2:** Cuenta existente → Mostrar saldo correctamente.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/2.2.png) |
+|:--:|
+|  |
+
+</div>
 
 
 ### Consultar Historial
-- **Caso 1:** Cuenta inexistente → Mensaje de error.
 
-<p align="center">
-  <img width="750" src="./images/>
+- **Caso** Cuenta existente → Mostrar historial de transacciones.
 
-  __Figura X.__ xxxx.
-</p>
+<div align="center">
 
+| ![*](/images/3.2.png) |
+|:--:|
+|  |
 
-- **Caso 2:** Cuenta existente → Mostrar historial de transacciones.
-
-<p align="center">
-  <img width="750" src="./images/>
-
-  __Figura X.__ xxxx.
-</p>
+</div>
 
 
 ### CDPs
+
+- **Mostrar menú de CDP:** 
+
+<div align="center">
+
+| ![*](/images/4.0.png) |
+|:--:|
+|  |
+
+</div>
+
 - **Ver CDP inexistente:** Debe mostrar un mensaje de error.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/4.1.png) |
+|:--:|
+|  |
+
+</div>
 
 
 - **Ver CDP existente:** Debe mostrar los datos del CDP.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/4.2.png) |
+|:--:|
+|  |
+
+</div>
 
 
 - **Crear CDP:**
-  - **Parámetros válidos:** Debe crear el CDP correctamente.
+  - **Parámetros válidos:** Debe crear el CDP correctamente y avisando de los errores en el formato de entrada en caso de que se de la situación.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/4.3.png) |
+|:--:|
+|  |
 
+</div>
 
-  - **Parámetros inválidos:** Debe manejar el error y mostrar el mensaje correspondiente.
+Se muestran las imagenes de la tabla de `CDP` antes y despues de la creación del CDP anterior:
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![Tabla de CDP antes de la creación del nuevo*](/images/tablaCDPsOriginal.png) |
+|:--:|
+| *Tabla de CDP antes de la creación del nuevo* |
 
+</div>
+
+<div align="center">
+
+| ![Tabla de CDP despues de la creación del nuevo*](/images/tablaCDPsNuevoCDP.png) |
+|:--:|
+| *Tabla de CDP despues de la creación del nuevo* |
+
+</div>
 
 ### Abonos a Préstamos
 - **Propios:**
@@ -145,220 +194,288 @@ Los menús deben manejar correctamente entradas inválidas y guiar al usuario a 
 
   - **Parámetros inválidos:** Manejo de errores.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/5.1.png) |
+|:--:|
+|  |
 
+</div>
 
 - **De terceros:**
   - **Parámetros válidos:** Abono exitoso.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/5.4.png) |
+|:--:|
+|  |
 
+</div>
+
+  - **Parámetros inválidos:** Abono fallido.
+
+<div align="center">
+
+| ![*](/images/5.3.png) |
+|:--:|
+|  |
+
+</div>
 
   - **Fondos insuficientes:** Mostrar mensaje de error.
 
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*]() |
+|:--:|
+|  |
+
+</div>
 
 
 ### Depósitos
 - **Cuenta inexistente:** Mostrar mensaje de error.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/6.1.png) |
+|:--:|
+|  |
+
+</div>
 
 
 - **Cuenta existente:** Depósito exitoso.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/6.2.png) |
+|:--:|
+|  |
 
+</div>
 
 
 ### Transferencias
-- **Cuenta remitente inexistente:** Mostrar mensaje de error.
-
-<p align="center">
-  <img width="750" src="./images/>
-
-  __Figura X.__ xxxx.
-</p>
-
 
 - **Cuenta destinatario inexistente:** Mostrar mensaje de error.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/7.2.png) |
+|:--:|
+|  |
+
+</div>
 
 
 - **Fondos insuficientes:** Mostrar mensaje de error.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/7.3.png) |
+|:--:|
+|  |
 
+</div>
+
+- **Transferencia exitosa:** 
+
+<div align="center">
+
+| ![*](/images/7.4.png) |
+|:--:|
+|  |
+
+</div>
 
 ### Retiros
 - **Fondos insuficientes:** Mostrar mensaje de error.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/8.1.png) |
+|:--:|
+|  |
 
-
-- **Cuenta inexistente:** Mostrar mensaje de error.
-
-<p align="center">
-  <img width="750" src="./images/>
-
-  __Figura X.__ xxxx.
-</p>
+</div>
 
 
 - **Cuenta existente:** Retiro exitoso.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*]() |
+|:--:|
+|  |
+
+</div>
 
 
 ### Atención al Cliente
 - **Registrar cliente existente:** Mostrar mensaje de error.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/9.1.png) |
+|:--:|
+|  |
+
+</div>
 
 
 - **Registrar cliente nuevo:** Registro exitoso.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/2.3.png) |
+|:--:|
+|  |
+
+</div>
 
 
 - **Iniciar sesión con cliente inexistente:** Mostrar mensaje de error.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/9.3.png) |
+|:--:|
+|  |
 
+</div>
 
 - **Iniciar sesión con cliente existente:** Inicio de sesión exitoso.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/9.4.png) |
+|:--:|
+|  |
+
+</div>
 
 
 ### Cuentas
 - **Crear cuenta con moneda existente:** Mostrar mensaje de error.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/10.1.png) |
+|:--:|
+|  |
+
+</div>
 
 - **Crear cuenta con moneda nueva:** Creación exitosa.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/2.4.png) |
+|:--:|
+|  |
+
+</div>
 
 - **Acceder a cuenta inexistente:** Mostrar mensaje de error.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/10.3.png) |
+|:--:|
+|  |
+
+</div>
 
 - **Acceder a cuenta existente:** Acceso exitoso.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/10.4.png) |
+|:--:|
+|  |
+
+</div>
 
 ### Solicitud de Préstamos
 - **Menú de tipo de préstamo:** Validación correcta de opciones.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/11.1.png) |
+|:--:|
+|  |
+
+</div>
 
 - **Generación de tabla de pago estimado:** Mostrar datos correctos.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/11.2.png) |
+|:--:|
+|  |
+
+</div>
+
+- **Generación de reporte de solicitud en formato .csv**:
+
+<div align="center">
+
+| ![*](/images/11.3.1.png) |
+|:--:|
+|  |
+
+</div>
+
+<div align="center">
+
+| ![*](/images/11.3.2.png) |
+|:--:|
+|  |
+
+</div>
 
 - **Cancelación de solicitud:** Proceso cancelado correctamente.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/11.4.png) |
+|:--:|
+|  |
+
+</div>
+
 
 ### Consulta de Préstamos
 - **Préstamo inexistente:** Mostrar mensaje de error.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/12.1.png) |
+|:--:|
+|  |
+
+</div>
 
 - **Generación de reportes en archivo .csv:** Archivo generado correctamente.
 
-<p align="center">
-  <img width="750" src="./images/>
+<div align="center">
 
-  __Figura X.__ xxxx.
-</p>
+| ![*](/images/12.2.1.png) |
+|:--:|
+|  |
 
+</div>
+
+<div align="center">
+
+| ![*](/images/12.2.2.png) |
+|:--:|
+|  |
+
+</div>
 
 
