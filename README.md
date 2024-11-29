@@ -20,9 +20,17 @@ La documentación detallada de los archivos, clases, métodos y funciones en tod
 
 ## Instrucciones de compilación y ejecución
 
-Para compilar los archivos de este proyecto se utilza un `Makefile`, que generará dos ejecutables: `sistemaGestionBancaria` e `iniciar_db`. Cabe mencionar que este `Makefile` funciona tanto en sistema operativo `Windows` como `Linux`, y hay dos opciones para compilar y ejecutar este proyecto:
+Para compilar los archivos de este proyecto se utilza un `Makefile`, que generará dos ejecutables: `sistemaGestionBancaria` e `iniciar_db`. Cabe mencionar que este `Makefile` funciona tanto en sistema operativo `Windows` como `Linux`. Además se antes de ejecutar cualquier comando deben modificarse las siguientes líneas del Makefile:
 
-### Opción de compilación 1
+```makefile
+# Directorios de SQLite
+SQLITE_INCLUDE = -I<path_to_sqlite_include>
+SQLITE_LIB = -L<path_to_sqlite_lib>
+```
+
+Estas deben cambiarse por las rutas correspondientes en la computadora del usuario para que el Makefile funcione correctamente, la primera ruta es la del directorio `include` y la segunda de la librería. Una vez hecho esto hay dos opciones para compilar y ejecutar este proyecto:
+
+### Opción de compilación y ejecución 1
 
 Para compilar y ejecutar ambos archivos se utiliza el siguiente comando:
 
@@ -52,6 +60,14 @@ Y por último se procede a ejecutar el ejecutable del programa principal con el 
 ```
 ./sistemaGestionBancaria
 ```
+
+### Opciones adicionales
+
+También es importante mencionar que existen dos comandos adicionales incluidos en el Makefile, estos son:
+
+- `make_init`: Regla para ejecutar el programa de inicialización de la base de datos
+
+- `make_run_main`: Regla para ejecutar el main del programa
 
 ## Fase 1: Investigación
 
