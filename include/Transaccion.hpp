@@ -7,8 +7,9 @@
  *          de cada transacción y su procesamiento en la base de datos.
  * 
  * @author Daniel Alberto Sáenz Obando
+ * @author Rodrigo Madrigal Montes
  * @copyright MIT License
- * @date 08/11/2024
+ * @date 28/11/2024
  */
 
 #ifndef TRANSACCION_HPP
