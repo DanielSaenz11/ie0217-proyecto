@@ -39,3 +39,6 @@ build
 
 # Doxyfile doc
 Doxyfile
+
+# Database files
+*.db
